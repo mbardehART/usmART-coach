@@ -1,0 +1,1326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.AppleSystemUIFontMonospaced'; color: #0e0e0e}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.AppleSystemUIFontMonospaced'; color: #0e0e0e; min-height: 17.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;USM Digital Coach – Prototype&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--bg: #f5f5f7;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--bg-alt: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--text: #1f1f23;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--muted: #6b6b75;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--accent: #c53b3b; /* Aurora-style red */</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--accent-soft: #f7e3e3;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--border: #dedee5;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--card-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.04);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--bg);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>header {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: sticky;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(245, 245, 247, 0.96);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>backdrop-filter: blur(10px);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 1100px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.6rem 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.brand {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.95rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.brand-dot {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at 30% 30%, #ffb3b3, #c53b3b);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav-links {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav-button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.35rem 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.85rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: background 0.15s, color 0.15s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav-button.active {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav-button:not(.active):hover {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(0, 0, 0, 0.04);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>main {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 1100px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 1.5rem auto 2.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.section {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.section.active {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hero {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--bg-alt);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow-soft);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 1.75rem 1.75rem 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hero-title {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 650;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.3rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hero-subtitle {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.95rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hero-actions {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid transparent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.55rem 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: background 0.15s, color 0.15s, border-color 0.15s,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>transform 0.05s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-primary {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-primary:hover {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #a93030;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transform: translateY(-1px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-ghost {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--accent-soft);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-ghost:hover {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent-soft);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.grid {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>@media (min-width: 720px) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.grid-3 {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>grid-template-columns: repeat(3, minmax(0, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>.grid-2 {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>grid-template-columns: repeat(2, minmax(0, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--bg-alt);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--card-radius);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 1.1rem 1.15rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow-soft);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(0, 0, 0, 0.02);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-title {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.98rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-text {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.86rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.tag {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.18rem 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(0, 0, 0, 0.035);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pill {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.2rem 0.65rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(0, 0, 0, 0.035);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.78rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid transparent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.15rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pill:hover {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: rgba(0, 0, 0, 0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pill.selected {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent-soft);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.section-title {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.15rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.25rem 0 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.section-subtitle {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.detail-panel {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem 1rem 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.detail-title {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.detail-sub {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.86rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.55rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.detail-h {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.88rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.65rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.detail-list {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding-left: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.1rem 0 0.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.86rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.detail-list li {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* Coach chat */</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-layout {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-rows: auto 1fr auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: min(70vh, 600px);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-height: 600px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-quick {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-quick button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.25rem 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-chat {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--bg-alt);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow-y: auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.msg {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 80%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.45rem 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.85rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.msg.user {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-left: auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-bottom-right-radius: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.msg.coach {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-right: auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-bottom-left-radius: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-input-row {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-input-row input {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.55rem 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.85rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coach-input-row input:focus {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* Issue wizard */</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.wizard-steps {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.wizard-step-pill {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.25rem 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255, 255, 255, 0.8);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.wizard-step-pill.active {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.checkbox-list {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.3rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.checkbox-item {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.45rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.86rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.checkbox-item input {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.18rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>textarea {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>min-height: 80px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.45rem 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.85rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>resize: vertical;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>textarea:focus {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.wizard-nav {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.muted {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.82rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.result-chip {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.25rem 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(0, 0, 0, 0.035);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.15rem 0.25rem 0.15rem 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="nav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="brand"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="brand-dot"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;USM Digital Coach&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="nav-links"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="nav-button active" data-target="home"&gt;Home&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="nav-button" data-target="explore"&gt;Explore USM&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="nav-button" data-target="coach"&gt;Ask the Coach&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="nav-button" data-target="issues"&gt;Solve Issues&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- HOME --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="home" class="section active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-title"&gt;Unified Service Management (USM)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-subtitle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>A universal operating model for any service organization — IT, HR,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Facilities, Healthcare, Government, and more.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-primary" data-target="explore"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Learn USM Basics</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-target="coach"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Ask the USM Coach</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="grid grid-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-title"&gt;Learn the model&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Explore the USM foundation, its 5 universal processes, and 8</p>
+<p class="p1"><span class="Apple-converted-space">            </span>standard workflows in one place.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-target="explore"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Open USM Explorer</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-title"&gt;Talk to the coach&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Ask questions and get clear, business-focused explanations about</p>
+<p class="p1"><span class="Apple-converted-space">            </span>USM and how it applies to your organization.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-target="coach"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Start a conversation</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-title"&gt;Solve business issues&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Describe your challenges — such as lack of control or siloed teams —</p>
+<p class="p1"><span class="Apple-converted-space">            </span>and see which USM elements can help.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-target="issues"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Start issue mapping</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- EXPLORE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="explore" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Explore Unified Service Management&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-subtitle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Browse the USM foundation, 5 processes, and 8 workflows.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 class="section-title"&gt;USM Foundation&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="grid grid-3" id="foundation-grid"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 class="section-title" style="margin-top:1.2rem;"&gt;The 5 USM Processes&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="grid grid-3" id="process-grid"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 class="section-title" style="margin-top:1.2rem;"&gt;The 8 Workflows&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="grid grid-2" id="workflow-grid"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="explore-detail" class="detail-panel" style="display:none;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- COACH --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="coach" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Ask the USM Coach&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-subtitle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Get clear answers about USM, its processes and workflows, in business</p>
+<p class="p1"><span class="Apple-converted-space">        </span>language.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="coach-layout"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="coach-quick"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost coach-suggest"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Explain USM in simple terms</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost coach-suggest"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>How does USM improve control?</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost coach-suggest"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>What are the 5 USM processes?</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="coach-chat" class="coach-chat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="msg coach"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Hi, I’m your USM Digital Coach. Ask me about the USM model, its</p>
+<p class="p1"><span class="Apple-converted-space">            </span>processes, workflows, or how it helps with issues like control,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>unification, or service quality.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="coach-input-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input</p>
+<p class="p1"><span class="Apple-converted-space">            </span>type="text"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>id="coach-input"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>placeholder="Type your question about USM..."</p>
+<p class="p1"><span class="Apple-converted-space">          </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-primary" id="coach-send"&gt;Ask&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="muted" style="margin-top:0.4rem;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>This prototype uses simple, rule-based answers based on your USM</p>
+<p class="p1"><span class="Apple-converted-space">        </span>content. Later, you can connect it to an AI backend.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- ISSUES --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="issues" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Map your challenges to USM&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-subtitle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Describe your situation and see which USM processes and workflows are</p>
+<p class="p1"><span class="Apple-converted-space">        </span>most relevant.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="wizard-steps"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="wizard-step-pill active" data-step="1"&gt;Step 1: Challenges&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="wizard-step-pill" data-step="2"&gt;Step 2: Context&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="wizard-step-pill" data-step="3"&gt;Step 3: USM Guidance&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="wizard-step-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.9rem;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>What challenges are you experiencing? (You can select more than one.)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="checkbox-list" id="challenge-list"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="detail-h" style="margin-top:0.7rem;"&gt;Optional: describe your situation&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;textarea id="issue-description" placeholder="Example: We use several different tools, leadership has no unified view, and each department works in its own way."&gt;&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="wizard-nav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-primary" id="wizard-next-1"&gt;Next&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="wizard-step-2" style="display:none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.9rem;"&gt;Where do these challenges mainly occur?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="domain-pills"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="wizard-nav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" id="wizard-back-2"&gt;Back&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-primary" id="wizard-next-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>See my USM guidance</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="wizard-step-3" style="display:none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="wizard-results" class="detail-panel"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="wizard-nav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" id="wizard-back-3"&gt;Back&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Data: simple seed content</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const foundationConcepts = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "FOUNDATION_WHAT",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>title: "What is USM?",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"USM is a unified management system for any service organization, replacing scattered frameworks with one operating model.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>type: "foundation",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>detail: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"USM (Unified Service Management) provides a single way to design, deliver, and improve services across your organization.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>whyItMatters: [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Reduces complexity by providing one model instead of many frameworks.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Supports cross-department collaboration and shared language.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Helps leadership steer services based on a clear, consistent structure."</p>
+<p class="p1"><span class="Apple-converted-space">          </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "FOUNDATION_WHY",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>title: "Why Unified?",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Different departments often use different models. USM unifies them into one way of working.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>type: "foundation",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>detail: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"A unified model avoids duplicated structures and conflicting practices between IT, HR, Facilities, and other domains.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>whyItMatters: [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Eliminates fragmentation in how services are managed.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Makes it easier to implement governance and improvement organization-wide.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Supports better control, quality, and customer experience."</p>
+<p class="p1"><span class="Apple-converted-space">          </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "FOUNDATION_PRINCIPLES",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>title: "USM Principles",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Simplify, standardize, and unify how services are managed, regardless of the domain.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>type: "foundation",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>detail: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"USM is built on a small set of principles that keep the model simple and reusable.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>whyItMatters: [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Prevents over-engineering of processes.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Focuses on reusable patterns instead of one-off solutions.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"Supports scaling from one department to the whole enterprise."</p>
+<p class="p1"><span class="Apple-converted-space">          </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const processes = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "PROC_USE",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Use Process",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>oneLine:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Manages how customers and users consume services in a consistent way.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>purpose:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"The Use process focuses on how services are requested, accessed, and experienced by customers and users.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>keyResponsibilities: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Ensure users know how to request and use services.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Capture demand and usage in a consistent way.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Provide a clear interface between users and service teams."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>supportsControl: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Makes service consumption visible and measurable.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Creates a standard experience for users across services."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "PROC_CHANGE",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Change Process",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>oneLine:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Provides a controlled way to improve and adapt services without chaos.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>purpose:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"The Change process manages improvements, adaptations, and other modifications to services and service systems.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>keyResponsibilities: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Evaluate and prioritize change proposals.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Reduce risk associated with changes.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Align change decisions with organizational goals."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>supportsControl: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Avoids uncontrolled changes that undermine stability.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Links improvement actions to clear decisions."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "PROC_RECOVER",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Recover Process",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>oneLine:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Restores service after disruptions and protects continuity.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>purpose:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"The Recover process ensures that disruptions are handled in a structured way and that services can be restored quickly.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>keyResponsibilities: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Coordinate restoration efforts after disruptions.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Balance speed of recovery with risk and quality.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Provide input to structural improvements."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>supportsControl: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Reduces downtime and uncertainty during disruptions.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Connects incident handling with long-term stability."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "PROC_CONTROL",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Control Process",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>oneLine:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Provides governance and oversight over all services based on facts.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>purpose:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"The Control process consolidates information about service performance, risk, and cost so leaders can steer effectively.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>keyResponsibilities: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Define and maintain performance and risk indicators.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Provide regular, comparable reporting across services.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Support decisions on priorities and investments."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>supportsControl: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Creates a single governance model for all services.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Aligns teams around shared performance data."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "PROC_PREVENT",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Prevent Process",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>oneLine:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Avoids future disruptions and structural issues by learning from experience.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>purpose:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"The Prevent process focuses on learning from incidents, trends, and risks to reduce future harm.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>keyResponsibilities: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Analyze patterns in incidents and problems.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Identify structural weaknesses in services.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Initiate preventive improvements."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>supportsControl: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Shifts from reactive firefighting to proactive risk reduction.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Protects continuity and service quality over time."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const workflows = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_REQUEST",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Request Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary: "Handles standard requests for services or information.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_USE"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_INCIDENT",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Incident Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary: "Restores normal service quickly after a disruption.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_RECOVER", "PROC_USE", "PROC_CONTROL"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_CHANGE",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Change Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary: "Implements approved changes in a controlled manner.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_CHANGE", "PROC_CONTROL"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_PROBLEM",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Problem Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Investigates root causes of recurring incidents and structural issues.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_PREVENT", "PROC_CHANGE"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_KNOWLEDGE",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Knowledge Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Captures and shares reusable knowledge for users and staff.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_USE", "PROC_PREVENT"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_CONFIG",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Configuration / Asset Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Keeps information about services and supporting components reliable.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_CONTROL", "PROC_RECOVER", "PROC_CHANGE"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_IDENTITY",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Identity &amp; Access Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Manages who has access to which services in a controlled way.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_USE", "PROC_CONTROL"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "WF_CONTINUITY",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Continuity / Availability Workflow",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Protects the ability of services to continue during disruptions.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>relatedProcesses: ["PROC_RECOVER", "PROC_PREVENT", "PROC_CONTROL"]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const issuePatterns = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "ISSUE_LACK_CONTROL",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Lack of control",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>challenges: ["lack_of_control", "operational_chaos", "compliance_risk"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>processes: ["PROC_CONTROL", "PROC_USE", "PROC_CHANGE"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>workflows: ["WF_CONFIG", "WF_CONTINUITY"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Your situation points to a lack of unified governance and visibility over services.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Define and publish a service catalog as a single reference.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Standardize a small set of shared KPIs across services.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Introduce regular Control reviews using comparable reports.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Align existing tools to feed the same service-level view."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "ISSUE_TOOL_FRAG",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Too many tools / fragmentation",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>challenges: ["too_many_tools", "siloed_departments"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>processes: ["PROC_CONTROL", "PROC_USE"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>workflows: ["WF_CONFIG", "WF_CHANGE"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Multiple tools and siloed practices make it hard to manage services consistently.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Use USM as the common model behind all tools.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Rationalize or integrate tools around shared workflows.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Ensure each tool supports the same USM processes."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "ISSUE_SLOW_RECOVERY",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: "Slow response and recovery",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>challenges: ["slow_recovery", "operational_chaos"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>processes: ["PROC_RECOVER", "PROC_PREVENT"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>workflows: ["WF_INCIDENT", "WF_PROBLEM", "WF_CONTINUITY"],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>summary:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Slow or chaotic recovery suggests weak incident handling and limited learning from past issues.",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Standardize the Incident workflow across teams.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Capture and review major incidents and their causes.",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Turn repeated issues into structural improvements."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const challengeOptions = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "lack_of_control", label: "Lack of control" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "too_many_tools", label: "Too many tools / fragmentation" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "siloed_departments", label: "Siloed departments" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "inconsistent_experience",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>label: "Inconsistent service experience"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "slow_recovery", label: "Slow response and recovery" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "compliance_risk", label: "Compliance &amp; audit risk" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "lack_standardization",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>label: "Lack of standardization in ways of working"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "operational_chaos", label: "Operational chaos" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ id: "high_cost", label: "High support cost" },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: "low_employee_satisfaction",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>label: "Low employee satisfaction with services"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const domainOptions = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"IT",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"HR",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"Facilities",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"Finance",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"Healthcare",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"Government",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"Enterprise-wide"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Navigation</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const sections = document.querySelectorAll(".section");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const navButtons = document.querySelectorAll(".nav-button");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const heroButtons = document.querySelectorAll(".hero [data-target]");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function showSection(id) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sections.forEach((s) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>s.classList.toggle("active", s.id === id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>navButtons.forEach((btn) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>btn.classList.toggle("active", btn.dataset.target === id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>window.scrollTo({ top: 0, behavior: "smooth" });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>navButtons.forEach((btn) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>btn.addEventListener("click", () =&gt; showSection(btn.dataset.target));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>heroButtons.forEach((btn) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>btn.addEventListener("click", () =&gt; showSection(btn.dataset.target));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Explore: render foundation, processes, workflows</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const foundationGrid = document.getElementById("foundation-grid");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const processGrid = document.getElementById("process-grid");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const workflowGrid = document.getElementById("workflow-grid");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const exploreDetail = document.getElementById("explore-detail");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderExplore() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Foundation cards</p>
+<p class="p1"><span class="Apple-converted-space">      </span>foundationGrid.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>foundationConcepts.forEach((f) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const div = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.className = "card";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-title"&gt;${f.title}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-text"&gt;${f.summary}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-explore-id="${f.id}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Learn more</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>foundationGrid.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Process cards</p>
+<p class="p1"><span class="Apple-converted-space">      </span>processGrid.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>processes.forEach((p) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const div = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.className = "card";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="tag"&gt;Process&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-title"&gt;${p.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-text"&gt;${p.oneLine}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-explore-id="${p.id}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>View details</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>processGrid.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Workflow cards</p>
+<p class="p1"><span class="Apple-converted-space">      </span>workflowGrid.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>workflows.forEach((w) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const div = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.className = "card";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="tag"&gt;Workflow&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-title"&gt;${w.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-text"&gt;${w.summary}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-ghost" data-explore-id="${w.id}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>View details</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>workflowGrid.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Attach click handler</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.getElementById("explore")</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.addEventListener("click", (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const id = event.target.dataset.exploreId;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (!id) return;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>showConceptDetail(id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function showConceptDetail(id) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let concept = foundationConcepts.find((f) =&gt; f.id === id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let typeLabel = "Concept";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!concept) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const p = processes.find((p) =&gt; p.id === id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (p) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>concept = p;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>typeLabel = "Process";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!concept) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const w = workflows.find((w) =&gt; w.id === id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (w) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>concept = w;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>typeLabel = "Workflow";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!concept) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>let html = `&lt;div class="detail-title"&gt;${concept.name || concept.title}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>html += `&lt;div class="detail-sub"&gt;Type: ${typeLabel}&lt;/div&gt;`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (concept.detail) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Summary&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="muted"&gt;${concept.detail.summary}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (concept.detail.whyItMatters) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;div class="detail-h"&gt;Why it matters&lt;/div&gt;&lt;ul class="detail-list"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>concept.detail.whyItMatters.forEach((item) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>html += `&lt;li&gt;${item}&lt;/li&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>});</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;/ul&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else if (concept.purpose) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Purpose&lt;/div&gt;&lt;p class="muted"&gt;${concept.purpose}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (concept.keyResponsibilities) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;div class="detail-h"&gt;Key responsibilities&lt;/div&gt;&lt;ul class="detail-list"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>concept.keyResponsibilities.forEach((item) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>html += `&lt;li&gt;${item}&lt;/li&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>});</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;/ul&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (concept.supportsControl) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;div class="detail-h"&gt;How this supports control &amp; unification&lt;/div&gt;&lt;ul class="detail-list"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>concept.supportsControl.forEach((item) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>html += `&lt;li&gt;${item}&lt;/li&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>});</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;/ul&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else if (concept.summary) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Summary&lt;/div&gt;&lt;p class="muted"&gt;${concept.summary}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (concept.relatedProcesses || concept.relatedProcesses === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const relNames = (concept.relatedProcesses || [])</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.map((pid) =&gt; processes.find((p) =&gt; p.id === pid)?.name)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.filter(Boolean);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (relNames.length) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;div class="detail-h"&gt;Related processes&lt;/div&gt;&lt;p class="muted"&gt;${relNames.join(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>", "</p>
+<p class="p1"><span class="Apple-converted-space">          </span>)}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>exploreDetail.innerHTML = html;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>exploreDetail.style.display = "block";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderExplore();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Coach: simple rule-based answers</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const coachChat = document.getElementById("coach-chat");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const coachInput = document.getElementById("coach-input");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const coachSend = document.getElementById("coach-send");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const coachSuggests = document.querySelectorAll(".coach-suggest");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function addMessage(text, from = "coach") {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const div = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>div.className = "msg " + from;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>div.textContent = text;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>coachChat.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>coachChat.scrollTop = coachChat.scrollHeight;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function answerQuestion(raw) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const q = raw.toLowerCase();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (q.includes("what is usm") || q.includes("explain usm")) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addMessage(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"Unified Service Management (USM) is a universal operating model for any service organization. Instead of each department inventing its own way of working, USM provides one set of processes and workflows that IT, HR, Facilities, Healthcare, and others can all use. That makes it easier to control services, unify practices, and improve the customer experience."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (q.includes("5") &amp;&amp; q.includes("process")) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const names = processes.map((p) =&gt; p.name).join(", ");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addMessage(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"USM uses five universal processes that apply to any service domain: " +</p>
+<p class="p1"><span class="Apple-converted-space">            </span>names +</p>
+<p class="p1"><span class="Apple-converted-space">            </span>". Each one plays a specific role in how services are designed, delivered, governed, and improved."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (q.includes("control")) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const p = processes.find((p) =&gt; p.id === "PROC_CONTROL");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addMessage(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"In USM, the Control process is where you regain governance and oversight. It consolidates information about service performance, risk, and cost so leaders can steer based on facts instead of anecdotes. This process is key when you feel you lack control or have fragmented reporting."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (q.includes("workflow") || q.includes("incident")) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const inc = workflows.find((w) =&gt; w.id === "WF_INCIDENT");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addMessage(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"USM defines a small set of standard workflows, such as the Incident workflow. The Incident workflow provides a consistent way to handle service disruptions: log, assess, assign, restore, and learn. Using common workflows across departments reduces chaos and speeds up recovery."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Generic fallback using processes list</p>
+<p class="p1"><span class="Apple-converted-space">      </span>addMessage(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"That’s a good question. From a USM perspective, most situations can be understood using the 5 processes and 8 workflows. As a starting point, think about which of these is most affected: " +</p>
+<p class="p1"><span class="Apple-converted-space">          </span>processes.map((p) =&gt; p.name).join(", ") +</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"."</p>
+<p class="p1"><span class="Apple-converted-space">      </span>);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>coachSend.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const text = coachInput.value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!text) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>addMessage(text, "user");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>coachInput.value = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(() =&gt; answerQuestion(text), 200);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>coachInput.addEventListener("keydown", (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (e.key === "Enter") {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>coachSend.click();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>coachSuggests.forEach((btn) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>btn.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const text = btn.textContent.trim();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addMessage(text, "user");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>answerQuestion(text);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Issue wizard</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// -------------------------------</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const challengeListDiv = document.getElementById("challenge-list");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const domainPillsDiv = document.getElementById("domain-pills");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wizardNext1 = document.getElementById("wizard-next-1");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wizardNext2 = document.getElementById("wizard-next-2");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wizardBack2 = document.getElementById("wizard-back-2");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wizardBack3 = document.getElementById("wizard-back-3");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const step1 = document.getElementById("wizard-step-1");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const step2 = document.getElementById("wizard-step-2");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const step3 = document.getElementById("wizard-step-3");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const stepPills = document.querySelectorAll(".wizard-step-pill");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wizardResults = document.getElementById("wizard-results");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const issueDescription = document.getElementById("issue-description");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let selectedChallenges = new Set();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let selectedDomains = new Set();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function setWizardStep(step) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>stepPills.forEach((p) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>p.classList.toggle(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"active",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>parseInt(p.dataset.step, 10) === step</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>step1.style.display = step === 1 ? "block" : "none";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>step2.style.display = step === 2 ? "block" : "none";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>step3.style.display = step === 3 ? "block" : "none";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Render challenges</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderChallenges() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>challengeListDiv.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>challengeOptions.forEach((c) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const row = document.createElement("label");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.className = "checkbox-item";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" value="${c.id}" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;${c.label}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const input = row.querySelector("input");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input.addEventListener("change", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (input.checked) selectedChallenges.add(c.id);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>else selectedChallenges.delete(c.id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>challengeListDiv.appendChild(row);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Render domains</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderDomains() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>domainPillsDiv.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>domainOptions.forEach((d) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const pill = document.createElement("span");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pill.className = "pill";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pill.textContent = d;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pill.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (selectedDomains.has(d)) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>selectedDomains.delete(d);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pill.classList.remove("selected");</p>
+<p class="p1"><span class="Apple-converted-space">          </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>selectedDomains.add(d);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pill.classList.add("selected");</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>domainPillsDiv.appendChild(pill);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderChallenges();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderDomains();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>wizardNext1.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setWizardStep(2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>wizardBack2.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setWizardStep(1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>wizardBack3.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setWizardStep(2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>wizardNext2.addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>generateGuidance();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setWizardStep(3);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function generateGuidance() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const challengesArr = Array.from(selectedChallenges);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const domainsArr = Array.from(selectedDomains);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const desc = issueDescription.value.trim();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const matchedIssues = issuePatterns.filter((p) =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>p.challenges.some((ch) =&gt; challengesArr.includes(ch))</p>
+<p class="p1"><span class="Apple-converted-space">      </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>let html = "";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!challengesArr.length &amp;&amp; !desc) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-title"&gt;We need a bit more input&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="muted"&gt;You didn’t select any challenges or description. Go back and add at least one challenge or a short description so we can map your situation to USM.&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>wizardResults.innerHTML = html;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>html += `&lt;div class="detail-title"&gt;Your USM-based guidance&lt;/div&gt;`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (matchedIssues.length) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="detail-sub"&gt;Based on your challenges, the following patterns are most relevant:&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>matchedIssues.forEach((m) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;span class="result-chip"&gt;${m.name}&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const processIds = new Set();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const workflowIds = new Set();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>matchedIssues.forEach((m) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>m.processes.forEach((pid) =&gt; processIds.add(pid));</p>
+<p class="p1"><span class="Apple-converted-space">          </span>m.workflows.forEach((wid) =&gt; workflowIds.add(wid));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const procNames = Array.from(processIds)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.map((id) =&gt; processes.find((p) =&gt; p.id === id)?.name)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.filter(Boolean);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const wfNames = Array.from(workflowIds)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.map((id) =&gt; workflows.find((w) =&gt; w.id === id)?.name)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.filter(Boolean);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (procNames.length) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;div class="detail-h"&gt;USM processes to focus on&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;p class="muted"&gt;${procNames.join(", ")}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (wfNames.length) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;div class="detail-h"&gt;Key workflows&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;p class="muted"&gt;${wfNames.join(", ")}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Executive summary&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="muted"&gt;${</p>
+<p class="p1"><span class="Apple-converted-space">          </span>matchedIssues[0].summary</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}&lt;/p&gt;`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Recommended first actions&lt;/div&gt;&lt;ul class="detail-list"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>matchedIssues[0].actions.forEach((a) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>html += `&lt;li&gt;${a}&lt;/li&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;/ul&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="muted"&gt;Your situation doesn’t match one of the predefined patterns yet, but it still fits within the USM model. Often, challenges relate to the Control, Use, or Change processes, and one or more of the 8 workflows.&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (domainsArr.length) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Context&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="muted"&gt;You indicated these areas: ${domainsArr.join(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>", "</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}.&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (desc) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;div class="detail-h"&gt;Your description&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html += `&lt;p class="muted"&gt;${desc}&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>html += `&lt;p class="muted" style="margin-top:0.7rem;"&gt;Next step: discuss this guidance with the USM Coach and translate it into concrete actions for your organization.&lt;/p&gt;`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>wizardResults.innerHTML = html;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
