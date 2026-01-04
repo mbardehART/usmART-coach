@@ -653,92 +653,87 @@
     ];
 
     const processes = [
-      {
-        id: "PROC_USE",
-        name: "Use Process",
-        oneLine:
-          "Manages how customers and users consume services in a consistent way.",
-        purpose:
-          "The Use process focuses on how services are requested, accessed, and experienced by customers and users.",
-        keyResponsibilities: [
-          "Ensure users know how to request and use services.",
-          "Capture demand and usage in a consistent way.",
-          "Provide a clear interface between users and service teams."
-        ],
-        supportsControl: [
-          "Makes service consumption visible and measurable.",
-          "Creates a standard experience for users across services."
-        ]
-      },
-      {
-        id: "PROC_CHANGE",
-        name: "Change Process",
-        oneLine:
-          "Provides a controlled way to improve and adapt services without chaos.",
-        purpose:
-          "The Change process manages improvements, adaptations, and other modifications to services and service systems.",
-        keyResponsibilities: [
-          "Evaluate and prioritize change proposals.",
-          "Reduce risk associated with changes.",
-          "Align change decisions with organizational goals."
-        ],
-        supportsControl: [
-          "Avoids uncontrolled changes that undermine stability.",
-          "Links improvement actions to clear decisions."
-        ]
-      },
-      {
-        id: "PROC_RECOVER",
-        name: "Recover Process",
-        oneLine:
-          "Restores service after disruptions and protects continuity.",
-        purpose:
-          "The Recover process ensures that disruptions are handled in a structured way and that services can be restored quickly.",
-        keyResponsibilities: [
-          "Coordinate restoration efforts after disruptions.",
-          "Balance speed of recovery with risk and quality.",
-          "Provide input to structural improvements."
-        ],
-        supportsControl: [
-          "Reduces downtime and uncertainty during disruptions.",
-          "Connects incident handling with long-term stability."
-        ]
-      },
-      {
-        id: "PROC_CONTROL",
-        name: "Control Process",
-        oneLine:
-          "Provides governance and oversight over all services based on facts.",
-        purpose:
-          "The Control process consolidates information about service performance, risk, and cost so leaders can steer effectively.",
-        keyResponsibilities: [
-          "Define and maintain performance and risk indicators.",
-          "Provide regular, comparable reporting across services.",
-          "Support decisions on priorities and investments."
-        ],
-        supportsControl: [
-          "Creates a single governance model for all services.",
-          "Aligns teams around shared performance data."
-        ]
-      },
-      {
-        id: "PROC_PREVENT",
-        name: "Prevent Process",
-        oneLine:
-          "Avoids future disruptions and structural issues by learning from experience.",
-        purpose:
-          "The Prevent process focuses on learning from incidents, trends, and risks to reduce future harm.",
-        keyResponsibilities: [
-          "Analyze patterns in incidents and problems.",
-          "Identify structural weaknesses in services.",
-          "Initiate preventive improvements."
-        ],
-        supportsControl: [
-          "Shifts from reactive firefighting to proactive risk reduction.",
-          "Protects continuity and service quality over time."
-        ]
-      }
-    ];
+  {
+    id: "PROC_AGREE",
+    name: "Agree Process",
+    oneLine: "Manages clear agreements and expectations about services.",
+    purpose:
+      "Agree defines and maintains the service agreements between provider and customer, so everyone knows what to expect.",
+    keyResponsibilities: [
+      "Define services and their expected outcomes.",
+      "Agree on service levels, responsibilities, and constraints.",
+      "Keep agreements consistent and comparable across services."
+    ],
+    supportsControl: [
+      "Gives leadership a single, consistent basis for steering services.",
+      "Prevents misunderstandings about what a service should deliver."
+    ]
+  },
+  {
+    id: "PROC_CHANGE",
+    name: "Change Process",
+    oneLine: "Provides a controlled way to modify services and service systems.",
+    purpose:
+      "Change manages improvements and adaptations to services so that evolution happens in a deliberate, low-risk way.",
+    keyResponsibilities: [
+      "Evaluate and prioritize proposed changes.",
+      "Assess risk and impact before implementation.",
+      "Coordinate the execution of approved changes."
+    ],
+    supportsControl: [
+      "Avoids uncontrolled changes that undermine stability.",
+      "Links every change to a clear decision and objective."
+    ]
+  },
+  {
+    id: "PROC_RECOVER",
+    name: "Recover Process",
+    oneLine: "Restores agreed service after disruptions and incidents.",
+    purpose:
+      "Recover ensures that disruptions are handled in a structured way and that services are restored as quickly and safely as possible.",
+    keyResponsibilities: [
+      "Coordinate restoration after incidents or failures.",
+      "Communicate status and expectations to stakeholders.",
+      "Feed structural issues into the Improve process."
+    ],
+    supportsControl: [
+      "Reduces downtime and uncertainty during disruptions.",
+      "Connects incident handling with long-term improvement."
+    ]
+  },
+  {
+    id: "PROC_OPERATE",
+    name: "Operate Process",
+    oneLine: "Runs the day-to-day service operations for users and customers.",
+    purpose:
+      "Operate manages the daily activities required to deliver services as agreed, across all domains and teams.",
+    keyResponsibilities: [
+      "Execute routine service tasks and monitoring.",
+      "Ensure access and usage follow the agreements.",
+      "Provide an operational view of service performance."
+    ],
+    supportsControl: [
+      "Provides factual data about how services are actually running.",
+      "Creates consistent operating patterns across service teams."
+    ]
+  },
+  {
+    id: "PROC_IMPROVE",
+    name: "Improve Process",
+    oneLine: "Drives learning, risk management, and structural improvement.",
+    purpose:
+      "Improve looks at patterns, risks, and opportunities to strengthen services over time.",
+    keyResponsibilities: [
+      "Analyze incidents, trends, and risks.",
+      "Identify structural weaknesses and opportunities.",
+      "Initiate and track improvement actions."
+    ],
+    supportsControl: [
+      "Shifts focus from firefighting to proactive risk reduction.",
+      "Ensures improvements are deliberate and traceable."
+    ]
+  }
+];
 
     const workflows = [
       {
