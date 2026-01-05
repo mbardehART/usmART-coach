@@ -421,6 +421,155 @@
       background: rgba(0, 0, 0, 0.035);
       margin: 0.15rem 0.25rem 0.15rem 0;
     }
+
+    /* --- USM process diagram --- */
+
+    .process-diagram {
+      margin: 0.5rem 0 1rem;
+      padding: 0.9rem 0.9rem 1.1rem;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid #dedee5;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .process-diagram-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+
+    .process-diagram-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .process-diagram-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .process-diagram-track {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      position: relative;
+      padding-top: 0.5rem;
+    }
+
+    .process-step {
+      flex: 1 1 80px;
+      min-width: 80px;
+      text-align: center;
+      position: relative;
+      padding: 0.4rem 0.2rem;
+    }
+
+    .process-step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 2px solid var(--accent);
+      margin: 0 auto 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .process-step-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .process-step-helper {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* --- USM workflow "train" diagram --- */
+
+    .workflow-train {
+      margin: 0.6rem 0 1.2rem;
+      padding: 0.9rem 0.9rem 1rem;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid #dedee5;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .workflow-train-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+
+    .workflow-train-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .workflow-train-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .workflow-track-wrapper {
+      position: relative;
+      padding-top: 0.9rem;
+    }
+
+    .workflow-track-line {
+      position: absolute;
+      top: 1.2rem;
+      left: 4%;
+      right: 4%;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+    }
+
+    .workflow-stations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+
+    .workflow-station {
+      flex: 1 1 70px;
+      min-width: 70px;
+      text-align: center;
+      position: relative;
+      padding-top: 0.2rem;
+    }
+
+    .workflow-station-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 2px solid var(--accent);
+      background: #fff;
+      margin: 0 auto 0.2rem;
+    }
+
+    .workflow-station-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .workflow-station-helper {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
@@ -440,6 +589,7 @@
   </header>
 
   <main>
+    <!-- HOME -->
     <section id="home" class="section active">
       <div class="hero">
         <div class="hero-title">Unified Service Management (USM)</div>
@@ -491,6 +641,7 @@
       </div>
     </section>
 
+    <!-- EXPLORE -->
     <section id="explore" class="section">
       <div class="section-title">Explore Unified Service Management</div>
       <div class="section-subtitle">
@@ -501,14 +652,107 @@
       <div class="grid grid-3" id="foundation-grid"></div>
 
       <h3 class="section-title" style="margin-top:1.2rem;">The 5 USM Processes</h3>
+
+      <div class="process-diagram">
+        <div class="process-diagram-header">
+          <div class="process-diagram-title">One reusable management system</div>
+          <div class="process-diagram-sub">
+            Agree → Change → Operate → Recover → Improve → back to Agree
+          </div>
+        </div>
+        <div class="process-diagram-track">
+          <div class="process-step">
+            <div class="process-step-circle">A</div>
+            <div class="process-step-label">Agree</div>
+            <div class="process-step-helper">Make clear service agreements</div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-circle">C</div>
+            <div class="process-step-label">Change</div>
+            <div class="process-step-helper">Modify services in a controlled way</div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-circle">O</div>
+            <div class="process-step-label">Operate</div>
+            <div class="process-step-helper">Run services day-to-day</div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-circle">R</div>
+            <div class="process-step-label">Recover</div>
+            <div class="process-step-helper">Restore service when it breaks</div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-circle">I</div>
+            <div class="process-step-label">Improve</div>
+            <div class="process-step-helper">Learn and strengthen service</div>
+          </div>
+        </div>
+      </div>
+
       <div class="grid grid-3" id="process-grid"></div>
 
       <h3 class="section-title" style="margin-top:1.2rem;">The 8 Workflows</h3>
+
+      <div class="workflow-train">
+        <div class="workflow-train-header">
+          <div class="workflow-train-title">A standard “service operations railway”</div>
+          <div class="workflow-train-sub">
+            Eight reusable workflows that every service domain can share.
+          </div>
+        </div>
+        <div class="workflow-track-wrapper">
+          <div class="workflow-track-line"></div>
+          <div class="workflow-stations">
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Request</div>
+              <div class="workflow-station-helper">Ask for services</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Incident</div>
+              <div class="workflow-station-helper">Restore when broken</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Change</div>
+              <div class="workflow-station-helper">Implement modifications</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Problem</div>
+              <div class="workflow-station-helper">Fix structural causes</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Knowledge</div>
+              <div class="workflow-station-helper">Capture & reuse know-how</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Config / Asset</div>
+              <div class="workflow-station-helper">Know what we rely on</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Identity & Access</div>
+              <div class="workflow-station-helper">Who can use what</div>
+            </div>
+            <div class="workflow-station">
+              <div class="workflow-station-dot"></div>
+              <div class="workflow-station-label">Continuity</div>
+              <div class="workflow-station-helper">Stay available</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="grid grid-2" id="workflow-grid"></div>
 
       <div id="explore-detail" class="detail-panel" style="display:none;"></div>
     </section>
 
+    <!-- COACH -->
     <section id="coach" class="section">
       <div class="section-title">Ask the USM Coach</div>
       <div class="section-subtitle">
@@ -552,6 +796,7 @@
       </p>
     </section>
 
+    <!-- ISSUES -->
     <section id="issues" class="section">
       <div class="section-title">Map your challenges to USM</div>
       <div class="section-subtitle">
@@ -653,160 +898,160 @@
     ];
 
     const processes = [
-  {
-    id: "PROC_AGREE",
-    name: "Agree Process",
-    oneLine: "Manages clear agreements and expectations about services.",
-    purpose:
-      "Agree defines and maintains the service agreements between provider and customer, so everyone knows what to expect.",
-    keyResponsibilities: [
-      "Define services and their expected outcomes.",
-      "Agree on service levels, responsibilities, and constraints.",
-      "Keep agreements consistent and comparable across services."
-    ],
-    supportsControl: [
-      "Gives leadership a single, consistent basis for steering services.",
-      "Prevents misunderstandings about what a service should deliver."
-    ]
-  },
-  {
-    id: "PROC_CHANGE",
-    name: "Change Process",
-    oneLine: "Provides a controlled way to modify services and service systems.",
-    purpose:
-      "Change manages improvements and adaptations to services so that evolution happens in a deliberate, low-risk way.",
-    keyResponsibilities: [
-      "Evaluate and prioritize proposed changes.",
-      "Assess risk and impact before implementation.",
-      "Coordinate the execution of approved changes."
-    ],
-    supportsControl: [
-      "Avoids uncontrolled changes that undermine stability.",
-      "Links every change to a clear decision and objective."
-    ]
-  },
-  {
-    id: "PROC_RECOVER",
-    name: "Recover Process",
-    oneLine: "Restores agreed service after disruptions and incidents.",
-    purpose:
-      "Recover ensures that disruptions are handled in a structured way and that services are restored as quickly and safely as possible.",
-    keyResponsibilities: [
-      "Coordinate restoration after incidents or failures.",
-      "Communicate status and expectations to stakeholders.",
-      "Feed structural issues into the Improve process."
-    ],
-    supportsControl: [
-      "Reduces downtime and uncertainty during disruptions.",
-      "Connects incident handling with long-term improvement."
-    ]
-  },
-  {
-    id: "PROC_OPERATE",
-    name: "Operate Process",
-    oneLine: "Runs the day-to-day service operations for users and customers.",
-    purpose:
-      "Operate manages the daily activities required to deliver services as agreed, across all domains and teams.",
-    keyResponsibilities: [
-      "Execute routine service tasks and monitoring.",
-      "Ensure access and usage follow the agreements.",
-      "Provide an operational view of service performance."
-    ],
-    supportsControl: [
-      "Provides factual data about how services are actually running.",
-      "Creates consistent operating patterns across service teams."
-    ]
-  },
-  {
-    id: "PROC_IMPROVE",
-    name: "Improve Process",
-    oneLine: "Drives learning, risk management, and structural improvement.",
-    purpose:
-      "Improve looks at patterns, risks, and opportunities to strengthen services over time.",
-    keyResponsibilities: [
-      "Analyze incidents, trends, and risks.",
-      "Identify structural weaknesses and opportunities.",
-      "Initiate and track improvement actions."
-    ],
-    supportsControl: [
-      "Shifts focus from firefighting to proactive risk reduction.",
-      "Ensures improvements are deliberate and traceable."
-    ]
-  }
-];
+      {
+        id: "PROC_AGREE",
+        name: "Agree Process",
+        oneLine: "Manages clear agreements and expectations about services.",
+        purpose:
+          "Agree defines and maintains the service agreements between provider and customer, so everyone knows what to expect.",
+        keyResponsibilities: [
+          "Define services and their expected outcomes.",
+          "Agree on service levels, responsibilities, and constraints.",
+          "Keep agreements consistent and comparable across services."
+        ],
+        supportsControl: [
+          "Gives leadership a single, consistent basis for steering services.",
+          "Prevents misunderstandings about what a service should deliver."
+        ]
+      },
+      {
+        id: "PROC_CHANGE",
+        name: "Change Process",
+        oneLine: "Provides a controlled way to modify services and service systems.",
+        purpose:
+          "Change manages improvements and adaptations to services so that evolution happens in a deliberate, low-risk way.",
+        keyResponsibilities: [
+          "Evaluate and prioritize proposed changes.",
+          "Assess risk and impact before implementation.",
+          "Coordinate the execution of approved changes."
+        ],
+        supportsControl: [
+          "Avoids uncontrolled changes that undermine stability.",
+          "Links every change to a clear decision and objective."
+        ]
+      },
+      {
+        id: "PROC_RECOVER",
+        name: "Recover Process",
+        oneLine: "Restores agreed service after disruptions and incidents.",
+        purpose:
+          "Recover ensures that disruptions are handled in a structured way and that services are restored as quickly and safely as possible.",
+        keyResponsibilities: [
+          "Coordinate restoration after incidents or failures.",
+          "Communicate status and expectations to stakeholders.",
+          "Feed structural issues into the Improve process."
+        ],
+        supportsControl: [
+          "Reduces downtime and uncertainty during disruptions.",
+          "Connects incident handling with long-term improvement."
+        ]
+      },
+      {
+        id: "PROC_OPERATE",
+        name: "Operate Process",
+        oneLine: "Runs the day-to-day service operations for users and customers.",
+        purpose:
+          "Operate manages the daily activities required to deliver services as agreed, across all domains and teams.",
+        keyResponsibilities: [
+          "Execute routine service tasks and monitoring.",
+          "Ensure access and usage follow the agreements.",
+          "Provide an operational view of service performance."
+        ],
+        supportsControl: [
+          "Provides factual data about how services are actually running.",
+          "Creates consistent operating patterns across service teams."
+        ]
+      },
+      {
+        id: "PROC_IMPROVE",
+        name: "Improve Process",
+        oneLine: "Drives learning, risk management, and structural improvement.",
+        purpose:
+          "Improve looks at patterns, risks, and opportunities to strengthen services over time.",
+        keyResponsibilities: [
+          "Analyze incidents, trends, and risks.",
+          "Identify structural weaknesses and opportunities.",
+          "Initiate and track improvement actions."
+        ],
+        supportsControl: [
+          "Shifts focus from firefighting to proactive risk reduction.",
+          "Ensures improvements are deliberate and traceable."
+        ]
+      }
+    ];
 
-const workflows = [
-  {
-    id: "WF_REQUEST",
-    name: "Request Workflow",
-    summary:
-      "Handles standard requests for services or information in a consistent way.",
-    relatedProcesses: ["PROC_OPERATE", "PROC_AGREE"]
-  },
-  {
-    id: "WF_INCIDENT",
-    name: "Incident Workflow",
-    summary:
-      "Restores agreed service quickly and calmly when something goes wrong.",
-    relatedProcesses: ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
-  },
-  {
-    id: "WF_CHANGE",
-    name: "Change Workflow",
-    summary:
-      "Implements modifications to services and service systems in a controlled way.",
-    relatedProcesses: ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
-  },
-  {
-    id: "WF_PROBLEM",
-    name: "Problem Workflow",
-    summary:
-      "Identifies and removes structural causes of recurring incidents and weaknesses.",
-    relatedProcesses: ["PROC_IMPROVE", "PROC_CHANGE"]
-  },
-  {
-    id: "WF_KNOWLEDGE",
-    name: "Knowledge Workflow",
-    summary:
-      "Creates, maintains, and shares reusable service knowledge for users and staff.",
-    relatedProcesses: ["PROC_OPERATE", "PROC_IMPROVE"]
-  },
-  {
-    id: "WF_CONFIG",
-    name: "Configuration / Asset Workflow",
-    summary:
-      "Keeps reliable information about services, components, assets, and their relationships.",
-    relatedProcesses: ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
-  },
-  {
-    id: "WF_IDENTITY",
-    name: "Identity & Access Workflow",
-    summary:
-      "Manages who is allowed to use which services, based on clear agreements and roles.",
-    relatedProcesses: ["PROC_AGREE", "PROC_OPERATE"]
-  },
-  {
-    id: "WF_CONTINUITY",
-    name: "Continuity / Availability Workflow",
-    summary:
-      "Protects the ability to continue service delivery during disruptions and high-risk situations.",
-    relatedProcesses: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
-  }
-];
+    const workflows = [
+      {
+        id: "WF_REQUEST",
+        name: "Request Workflow",
+        summary:
+          "Handles standard requests for services or information in a consistent way.",
+        relatedProcesses: ["PROC_OPERATE", "PROC_AGREE"]
+      },
+      {
+        id: "WF_INCIDENT",
+        name: "Incident Workflow",
+        summary:
+          "Restores agreed service quickly and calmly when something goes wrong.",
+        relatedProcesses: ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
+      },
+      {
+        id: "WF_CHANGE",
+        name: "Change Workflow",
+        summary:
+          "Implements modifications to services and service systems in a controlled way.",
+        relatedProcesses: ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
+      },
+      {
+        id: "WF_PROBLEM",
+        name: "Problem Workflow",
+        summary:
+          "Identifies and removes structural causes of recurring incidents and weaknesses.",
+        relatedProcesses: ["PROC_IMPROVE", "PROC_CHANGE"]
+      },
+      {
+        id: "WF_KNOWLEDGE",
+        name: "Knowledge Workflow",
+        summary:
+          "Creates, maintains, and shares reusable service knowledge for users and staff.",
+        relatedProcesses: ["PROC_OPERATE", "PROC_IMPROVE"]
+      },
+      {
+        id: "WF_CONFIG",
+        name: "Configuration / Asset Workflow",
+        summary:
+          "Keeps reliable information about services, components, assets, and their relationships.",
+        relatedProcesses: ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
+      },
+      {
+        id: "WF_IDENTITY",
+        name: "Identity & Access Workflow",
+        summary:
+          "Manages who is allowed to use which services, based on clear agreements and roles.",
+        relatedProcesses: ["PROC_AGREE", "PROC_OPERATE"]
+      },
+      {
+        id: "WF_CONTINUITY",
+        name: "Continuity / Availability Workflow",
+        summary:
+          "Protects the ability to continue service delivery during disruptions and high-risk situations.",
+        relatedProcesses: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
+      }
+    ];
 
     const issuePatterns = [
       {
         id: "ISSUE_LACK_CONTROL",
         name: "Lack of control",
         challenges: ["lack_of_control", "operational_chaos", "compliance_risk"],
-        processes: ["PROC_CONTROL", "PROC_USE", "PROC_CHANGE"],
+        processes: ["PROC_AGREE", "PROC_OPERATE", "PROC_IMPROVE"],
         workflows: ["WF_CONFIG", "WF_CONTINUITY"],
         summary:
           "Your situation points to a lack of unified governance and visibility over services.",
         actions: [
           "Define and publish a service catalog as a single reference.",
           "Standardize a small set of shared KPIs across services.",
-          "Introduce regular Control reviews using comparable reports.",
+          "Introduce regular Agree / Control style reviews using comparable reports.",
           "Align existing tools to feed the same service-level view."
         ]
       },
@@ -814,28 +1059,29 @@ const workflows = [
         id: "ISSUE_TOOL_FRAG",
         name: "Too many tools / fragmentation",
         challenges: ["too_many_tools", "siloed_departments"],
-        processes: ["PROC_CONTROL", "PROC_USE"],
+        processes: ["PROC_OPERATE", "PROC_AGREE", "PROC_IMPROVE"],
         workflows: ["WF_CONFIG", "WF_CHANGE"],
         summary:
           "Multiple tools and siloed practices make it hard to manage services consistently.",
         actions: [
           "Use USM as the common model behind all tools.",
           "Rationalize or integrate tools around shared workflows.",
-          "Ensure each tool supports the same USM processes."
+          "Ensure each tool supports the same USM processes and workflows."
         ]
       },
       {
         id: "ISSUE_SLOW_RECOVERY",
         name: "Slow response and recovery",
         challenges: ["slow_recovery", "operational_chaos"],
-        processes: ["PROC_RECOVER", "PROC_PREVENT"],
+        processes: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"],
         workflows: ["WF_INCIDENT", "WF_PROBLEM", "WF_CONTINUITY"],
         summary:
           "Slow or chaotic recovery suggests weak incident handling and limited learning from past issues.",
         actions: [
           "Standardize the Incident workflow across teams.",
           "Capture and review major incidents and their causes.",
-          "Turn repeated issues into structural improvements."
+          "Turn repeated issues into structural improvements.",
+          "Test recovery scenarios and feed lessons into Improve."
         ]
       }
     ];
@@ -1052,29 +1298,27 @@ const workflows = [
         addMessage(
           "USM uses five universal processes that apply to any service domain: " +
             names +
-            ". Each one plays a specific role in how services are designed, delivered, governed, and improved."
+            ". Each one plays a specific role in how services are agreed, changed, operated, recovered, and improved."
         );
         return;
       }
 
       if (q.includes("control")) {
         addMessage(
-          "In USM, the Control process is where you regain governance and oversight. It consolidates information about service performance, risk, and cost so leaders can steer based on facts instead of anecdotes. This process is key when you feel you lack control or have fragmented reporting."
+          "In USM, control comes from using the same 5 processes and 8 workflows everywhere. The Agree process clarifies expectations, Operate runs services as agreed, Recover and Improve handle disruption and learning, and Change keeps evolution deliberate. Together they give leadership one coherent management system."
         );
         return;
       }
 
       if (q.includes("workflow") || q.includes("incident")) {
         addMessage(
-          "USM defines a small set of standard workflows, such as the Incident workflow. The Incident workflow provides a consistent way to handle service disruptions: log, assess, assign, restore, and learn. Using common workflows across departments reduces chaos and speeds up recovery."
+          "USM defines a small set of standard workflows, such as the Incident workflow. The Incident workflow provides a consistent way to handle service disruptions: log, assess, assign, restore, and learn. Using common workflows like Request, Incident, Change, Problem, and Knowledge across departments reduces chaos and speeds up recovery."
         );
         return;
       }
 
       addMessage(
-        "Good question. From a USM perspective, most situations can be understood using the 5 processes and 8 workflows. As a starting point, think about which of these is most affected: " +
-          processes.map((p) => p.name).join(", ") +
-          "."
+        "Good question. From a USM perspective, most situations can be understood using the 5 processes (Agree, Change, Operate, Recover, Improve) and the 8 workflows. As a starting point, think about which process is most affected and which workflow is most in play."
       );
     }
 
@@ -1245,7 +1489,7 @@ const workflows = [
         });
         html += `</ul>`;
       } else {
-        html += `<p class="muted">Your situation doesn’t match one of the predefined patterns yet, but it still fits within the USM model. Often, challenges relate to the Control, Use, or Change processes, and one or more of the 8 workflows.</p>`;
+        html += `<p class="muted">Your situation doesn’t match one of the predefined patterns yet, but it still fits within the USM model. Often, challenges relate to the Agree, Operate, or Improve processes, and one or more of the 8 workflows.</p>`;
       }
 
       if (domainsArr.length) {
