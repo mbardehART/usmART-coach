@@ -1403,74 +1403,85 @@
     }
 
     function showConceptDetail(id) {
-      let concept = foundationConcepts.find((f) => f.id === id);
-      let typeLabel = "Concept";
+  let concept = foundationConcepts.find((f) => f.id === id);
+  let typeLabel = "Concept";
 
-      if (!concept) {
-        const p = processes.find((p) => p.id === id);
-        if (p) {
-          concept = p;
-          typeLabel = "Process";
-        }
-      }
-
-      if (!concept) {
-        const w = workflows.find((w) => w.id === id);
-        if (w) {
-          concept = w;
-          typeLabel = "Workflow";
-        }
-      }
-
-      if (!concept) return;
-
-      let html = `<div class="detail-title">${concept.name || concept.title}</div>`;
-      html += `<div class="detail-sub">Type: ${typeLabel}</div>`;
-
-      if (concept.detail) {
-        html += `<div class="detail-h">Summary</div>`;
-        html += `<p class="muted">${concept.detail.summary}</p>`;
-        if (concept.detail.whyItMatters) {
-          html += `<div class="detail-h">Why it matters</div><ul class="detail-list">`;
-          concept.detail.whyItMatters.forEach((item) => {
-            html += `<li>${item}</li>`;
-          });
-          html += `</ul>`;
-        }
-      } else if (concept.purpose) {
-        html += `<div class="detail-h">Purpose</div><p class="muted">${concept.purpose}</p>`;
-        if (concept.keyResponsibilities) {
-          html += `<div class="detail-h">Key responsibilities</div><ul class="detail-list">`;
-          concept.keyResponsibilities.forEach((item) => {
-            html += `<li>${item}</li>`;
-          });
-          html += `</ul>`;
-        }
-        if (concept.supportsControl) {
-          html += `<div class="detail-h">How this supports control & unification</div><ul class="detail-list">`;
-          concept.supportsControl.forEach((item) => {
-            html += `<li>${item}</li>`;
-          });
-          html += `</ul>`;
-        }
-      } else if (concept.summary) {
-        html += `<div class="detail-h">Summary</div><p class="muted">${concept.summary}</p>`;
-      }
-
-      if (concept.relatedProcesses) {
-        const relNames = (concept.relatedProcesses || [])
-          .map((pid) => processes.find((p) => p.id === pid)?.name)
-          .filter(Boolean);
-        if (relNames.length) {
-          html += `<div class="detail-h">Related processes</div><p class="muted">${relNames.join(
-            ", "
-          )}</p>`;
-        }
-      }
-
-      exploreDetail.innerHTML = html;
-      exploreDetail.style.display = "block";
+  if (!concept) {
+    const p = processes.find((p) => p.id === id);
+    if (p) {
+      concept = p;
+      typeLabel = "Process";
     }
+  }
+
+  if (!concept) {
+    const w = workflows.find((w) => w.id === id);
+    if (w) {
+      concept = w;
+      typeLabel = "Workflow";
+    }
+  }
+
+  if (!concept) return;
+
+  let html = `<div class="detail-title">${concept.name || concept.title}</div>`;
+  html += `<div class="detail-sub">Type: ${typeLabel}</div>`;
+
+  if (concept.detail) {
+    html += `<div class="detail-h">Summary</div>`;
+    html += `<p class="muted">${concept.detail.summary}</p>`;
+    if (concept.detail.whyItMatters) {
+      html += `<div class="detail-h">Why it matters</div><ul class="detail-list">`;
+      concept.detail.whyItMatters.forEach((item) => {
+        html += `<li>${item}</li>`;
+      });
+      html += `</ul>`;
+    }
+  } else if (concept.purpose) {
+    html += `<div class="detail-h">Purpose</div><p class="muted">${concept.purpose}</p>`;
+    if (concept.keyResponsibilities) {
+      html += `<div class="detail-h">Key responsibilities</div><ul class="detail-list">`;
+      concept.keyResponsibilities.forEach((item) => {
+        html += `<li>${item}</li>`;
+      });
+      html += `</ul>`;
+    }
+    if (concept.supportsControl) {
+      html += `<div class="detail-h">How this supports control & unification</div><ul class="detail-list">`;
+      concept.supportsControl.forEach((item) => {
+        html += `<li>${item}</li>`;
+      });
+      html += `</ul>`;
+    }
+  } else if (concept.summary) {
+    html += `<div class="detail-h">Summary</div><p class="muted">${concept.summary}</p>`;
+  }
+
+  if (concept.relatedProcesses) {
+    const relNames = (concept.relatedProcesses || [])
+      .map((pid) => processes.find((p) => p.id === pid)?.name)
+      .filter(Boolean);
+    if (relNames.length) {
+      html += `<div class="detail-h">Related processes</div><p class="muted">${relNames.join(
+        ", "
+      )}</p>`;
+    }
+  }
+
+  // Inject content
+  exploreDetail.innerHTML = html;
+  exploreDetail.style.display = "block";
+
+  // Smooth-scroll the page so the detail panel is visible
+  const headerOffset = 80; // adjust if your sticky header is taller/shorter
+  const rect = exploreDetail.getBoundingClientRect();
+  const offsetTop = rect.top + window.pageYOffset - headerOffset;
+
+  window.scrollTo({
+    top: offsetTop,
+    behavior: "smooth"
+  });
+}
 
     // ----- Coach -----
 
