@@ -423,7 +423,6 @@
     }
 
     /* --- USM process diagram --- */
-
     .process-diagram {
       margin: 0.5rem 0 1rem;
       padding: 0.9rem 0.9rem 1.1rem;
@@ -493,7 +492,6 @@
     }
 
     /* --- USM workflow "train" diagram --- */
-
     .workflow-train {
       margin: 0.6rem 0 1.2rem;
       padding: 0.9rem 0.9rem 1rem;
@@ -585,6 +583,7 @@
         <button class="nav-button" data-target="coach">Ask the Coach</button>
         <button class="nav-button" data-target="issues">Solve Issues</button>
         <button class="nav-button" data-target="service">Model a Service</button>
+        <button class="nav-button" data-target="feedback">Feedback</button>
       </div>
     </div>
   </header>
@@ -1004,12 +1003,80 @@
         </div>
       </div>
     </section>
+
+    <!-- FEEDBACK / CONTACT -->
+    <section id="feedback" class="section">
+      <div class="section-title">Feedback & interaction</div>
+      <div class="section-subtitle">
+        Share your feedback on this prototype and find ways to get in touch.
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-title">Give feedback on the USM Coach</div>
+          <div class="card-text">
+            Tell us what works well and what could be improved. Your input will
+            shape the next version of this digital coach.
+          </div>
+
+          <form id="feedback-form">
+            <div class="detail-h">Your name (optional)</div>
+            <input id="fb-name" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+
+            <div class="detail-h" style="margin-top:0.6rem;">Email (optional)</div>
+            <input id="fb-email" type="email" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+
+            <div class="detail-h" style="margin-top:0.6rem;">Role / organization (optional)</div>
+            <input id="fb-role" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+
+            <div class="detail-h" style="margin-top:0.6rem;">Your feedback</div>
+            <textarea id="fb-message" placeholder="What did you find useful? What should be clearer? What would you like to see next?"></textarea>
+
+            <div class="wizard-nav" style="justify-content:flex-start;">
+              <button class="btn btn-primary" type="submit">Send feedback</button>
+            </div>
+            <p id="feedback-thanks" class="muted" style="margin-top:0.4rem;"></p>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Interact with Aurora Red</div>
+          <div class="card-text">
+            If you want to explore USM more deeply, discuss your organization,
+            or request a workshop or coaching session, you can reach out
+            directly.
+          </div>
+          <p class="muted">
+            Replace the contact details below with your preferred email or
+            scheduling links.
+          </p>
+          <ul class="detail-list">
+            <li>
+              Email:
+              <a href="mailto:info@auroraredtechnology.com">info@auroraredtechnology.com</a>
+            </li>
+            <li>
+              Website:
+              <a href="https://auroraredtechnology.com" target="_blank" rel="noopener">
+                auroraredtechnology.com
+              </a>
+            </li>
+          </ul>
+          <p class="muted">
+            You can also invite people to contact you via LinkedIn or a
+            scheduling link (e.g. Calendly) by adding those links here.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
-    // ----- Data -----
+    const CONTENT_URL = "data/usm-content.json";
 
-    const foundationConcepts = [
+    // ------- Default data (used if JSON not found) -------
+
+    let foundationConcepts = [
       {
         id: "FOUNDATION_WHAT",
         title: "What is USM?",
@@ -1060,7 +1127,7 @@
       }
     ];
 
-    const processes = [
+    let processes = [
       {
         id: "PROC_AGREE",
         name: "Agree Process",
@@ -1143,7 +1210,7 @@
       }
     ];
 
-    const workflows = [
+    let workflows = [
       {
         id: "WF_REQUEST",
         name: "Request Workflow",
@@ -1202,7 +1269,7 @@
       }
     ];
 
-    const issuePatterns = [
+    let issuePatterns = [
       {
         id: "ISSUE_LACK_CONTROL",
         name: "Lack of control",
@@ -1217,39 +1284,10 @@
           "Introduce regular service reviews using comparable reports.",
           "Align existing tools to feed the same service-level view."
         ]
-      },
-      {
-        id: "ISSUE_TOOL_FRAG",
-        name: "Too many tools / fragmentation",
-        challenges: ["too_many_tools", "siloed_departments"],
-        processes: ["PROC_OPERATE", "PROC_AGREE", "PROC_IMPROVE"],
-        workflows: ["WF_CONFIG", "WF_CHANGE"],
-        summary:
-          "Multiple tools and siloed practices make it hard to manage services consistently.",
-        actions: [
-          "Use USM as the common structural model behind all tools.",
-          "Rationalize or integrate tools around shared workflows.",
-          "Ensure each tool supports the same USM processes and workflows."
-        ]
-      },
-      {
-        id: "ISSUE_SLOW_RECOVERY",
-        name: "Slow response and recovery",
-        challenges: ["slow_recovery", "operational_chaos"],
-        processes: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"],
-        workflows: ["WF_INCIDENT", "WF_PROBLEM", "WF_CONTINUITY"],
-        summary:
-          "Slow or chaotic recovery suggests weak incident handling and limited learning from past issues.",
-        actions: [
-          "Standardize the Incident workflow across teams.",
-          "Capture and review major incidents and their causes.",
-          "Turn repeated issues into structural improvements.",
-          "Test recovery scenarios and feed lessons into Improve."
-        ]
       }
     ];
 
-    const challengeOptions = [
+    let challengeOptions = [
       { id: "lack_of_control", label: "Lack of control" },
       { id: "too_many_tools", label: "Too many tools / fragmentation" },
       { id: "siloed_departments", label: "Siloed departments" },
@@ -1271,7 +1309,7 @@
       }
     ];
 
-    const domainOptions = [
+    let domainOptions = [
       "IT",
       "HR",
       "Facilities",
@@ -1296,7 +1334,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // Any element with data-target switches sections
     document.querySelectorAll("[data-target]").forEach((el) => {
       el.addEventListener("click", () => {
         const target = el.dataset.target;
@@ -1436,8 +1473,6 @@
       exploreDetail.style.display = "block";
     }
 
-    renderExplore();
-
     // ----- Coach -----
 
     const coachChat = document.getElementById("coach-chat");
@@ -1456,9 +1491,38 @@
     function answerQuestion(raw) {
       const q = raw.toLowerCase();
 
-      if (q.includes("what is usm") || q.includes("explain usm")) {
+      const hasUsmKeywords = [
+        "usm",
+        "service",
+        "process",
+        "workflow",
+        "incident",
+        "request",
+        "governance",
+        "agreement",
+        "change",
+        "operate",
+        "recover",
+        "improve"
+      ].some((k) => q.includes(k));
+
+      if (!hasUsmKeywords) {
         addMessage(
-          "Unified Service Management (USM) is a universal operating model for any service organization. Instead of each department inventing its own way of working, USM provides one set of processes and workflows that IT, HR, Facilities, Healthcare, Government and others can all use. That makes it easier to control services, unify practices, and improve the customer experience."
+          "I’m focused on Unified Service Management and service organizations. If you’d like, try asking your question again in terms of services, agreements, processes, or workflows, and I’ll relate it to USM."
+        );
+        return;
+      }
+
+      if (q.includes("what is usm") || (q.includes("usm") && q.includes("explain"))) {
+        addMessage(
+          "Unified Service Management (USM) is a universal management system for any service organization. It replaces scattered frameworks with one simple structure: 5 processes and 8 workflows that IT, HR, Facilities, Healthcare, Government and others can all share. The idea is: one model, many domains."
+        );
+        return;
+      }
+
+      if ((q.includes("why") || q.includes("benefit") || q.includes("value")) && q.includes("usm")) {
+        addMessage(
+          "Organizations adopt USM mainly for simplification, unification, control, and quality. Instead of each department inventing its own way of working, USM gives everyone the same management structure. That makes it easier to steer services, compare performance, reduce risk, and improve the experience for customers and users."
         );
         return;
       }
@@ -1466,29 +1530,70 @@
       if (q.includes("5") && q.includes("process")) {
         const names = processes.map((p) => p.name).join(", ");
         addMessage(
-          "USM uses five universal processes that apply to any service domain: " +
+          "USM defines five non-redundant processes that apply to any service domain: " +
             names +
-            ". Each one plays a specific role in how services are agreed, changed, operated, recovered, and improved."
+            ".\n• Agree: make and maintain clear service agreements.\n• Change: modify services in a controlled way.\n• Operate: run day-to-day service use as agreed.\n• Recover: restore service when performance drops.\n• Improve: learn from risks and results to strengthen the system."
         );
         return;
       }
 
-      if (q.includes("control")) {
+      if (q.includes("8") && q.includes("workflow")) {
+        const wfNames = workflows.map((w) => w.name).join(", ");
         addMessage(
-          "In USM, control comes from using the same 5 processes and 8 workflows everywhere. Agree clarifies expectations, Operate runs services as agreed, Recover and Improve handle disruption and learning, and Change keeps evolution deliberate. Together they give leadership one coherent management system."
+          "USM uses eight standard workflows as recurring patterns in service operations: " +
+            wfNames +
+            ". They cover how we handle requests, incidents, changes, structural problems, knowledge, configuration/asset data, identity & access, and continuity. Using these shared patterns across departments avoids everyone inventing their own ‘process set’."
         );
         return;
       }
 
-      if (q.includes("workflow") || q.includes("incident")) {
+      if (
+        (q.includes("control") || q.includes("governance")) &&
+        (q.includes("how") || q.includes("help"))
+      ) {
         addMessage(
-          "USM defines a small set of standard workflows, such as the Incident workflow. The Incident workflow provides a consistent way to handle service disruptions: log, assess, assign, restore, and learn. Using common workflows like Request, Incident, Change, Problem, and Knowledge across departments reduces chaos and speeds up recovery."
+          "USM improves control by giving leadership one coherent management system. Agreements are handled in Agree, daily work in Operate, changes in Change, disruptions in Recover, and learning in Improve. Because every department uses the same structure and workflows, reports and decisions become comparable instead of fragmented."
+        );
+        return;
+      }
+
+      if (q.includes("itil") || q.includes("iso") || q.includes("cobit")) {
+        addMessage(
+          "USM is not a replacement for ITIL, ISO, or COBIT. It is a higher-level management system that focuses on structure and coordination. Frameworks and standards sit on top as sources of practices and controls. In other words: USM provides the architecture; ITIL/ISO/COBIT provide detailed guidance that you can plug into that architecture."
+        );
+        return;
+      }
+
+      if (q.includes("service") && (q.includes("define") || q.includes("definition") || q.includes("model"))) {
+        addMessage(
+          "In USM, a service is always a combination of a facility and its support. A good service model clarifies: who is the Customer, who are the Users, what facilities (goods + actions) are made available, how they are supported, and what experience you aim for. You can use the ‘Model a Service’ section in this app as a guided canvas for that."
+        );
+        return;
+      }
+
+      if (q.includes("enterprise") || q.includes("esm") || (q.includes("across") && q.includes("departments"))) {
+        addMessage(
+          "Enterprise Service Management with USM means applying the same management system across departments such as IT, HR, Facilities, and Finance. USM does not force common tools, but it does insist on one shared set of processes and workflows. That way each domain keeps its expertise, while governance and reporting stay unified."
+        );
+        return;
+      }
+
+      if (q.includes("incident") || q.includes("outage") || q.includes("disruption")) {
+        addMessage(
+          "From a USM perspective, an incident is any event where the agreed service is not delivered. The Incident workflow provides a calm path: log → assess impact → assign → restore → capture learning. The Recover process coordinates the restoration, and Improve uses repeated incidents as input for structural change."
+        );
+        return;
+      }
+
+      if (q.includes("improve") || q.includes("continuous") || q.includes("improvement")) {
+        addMessage(
+          "USM treats improvement as a dedicated process, not an occasional project. The Improve process looks at risks, patterns, and results across all services and turns them into structural changes. That way the organization gradually becomes more resilient instead of just fixing symptoms."
         );
         return;
       }
 
       addMessage(
-        "Good question. From a USM perspective, most situations can be understood using the 5 processes (Agree, Change, Operate, Recover, Improve) and the 8 workflows. As a starting point, think about which process is most affected and which workflow pattern best matches what is happening."
+        "Good question. From a USM perspective, a helpful way to look at this is: which of the 5 processes is under pressure (Agree, Change, Operate, Recover, Improve), and which of the 8 workflows matches what is happening (for example Request, Incident, Change, or Problem)? Once you know where it sits in the model, it becomes easier to decide what to change or improve."
       );
     }
 
@@ -1581,9 +1686,6 @@
         domainPillsDiv.appendChild(pill);
       });
     }
-
-    renderChallenges();
-    renderDomains();
 
     wizardNext1.addEventListener("click", () => {
       setWizardStep(2);
@@ -1808,6 +1910,72 @@
     document.getElementById("svc-model-back").addEventListener("click", () => {
       setServiceStep(2);
     });
+
+    // ----- Feedback form -----
+
+    const feedbackForm = document.getElementById("feedback-form");
+    const feedbackThanks = document.getElementById("feedback-thanks");
+
+    if (feedbackForm) {
+      feedbackForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const ownerEmail = "info@auroraredtechnology.com"; // update to your preferred email
+        const name = document.getElementById("fb-name").value.trim() || "Someone";
+        const email = document.getElementById("fb-email").value.trim();
+        const role = document.getElementById("fb-role").value.trim();
+        const msg = document.getElementById("fb-message").value.trim();
+
+        const body =
+          "Name: " +
+          name +
+          "\nRole/Org: " +
+          (role || "n/a") +
+          "\nEmail: " +
+          (email || "n/a") +
+          "\n\nFeedback:\n" +
+          (msg || "(no message)");
+
+        const mailtoUrl =
+          "mailto:" +
+          ownerEmail +
+          "?subject=" +
+          encodeURIComponent("USM Coach feedback") +
+          "&body=" +
+          encodeURIComponent(body);
+
+        window.location.href = mailtoUrl;
+        feedbackThanks.textContent =
+          "Thank you. Your email client should open with the feedback. If it doesn’t, you can email us directly using the contact details.";
+      });
+    }
+
+    // ----- Load external JSON (if present) and then render -----
+
+    function initApp() {
+      fetch(CONTENT_URL)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!data) return;
+          if (Array.isArray(data.foundationConcepts))
+            foundationConcepts = data.foundationConcepts;
+          if (Array.isArray(data.processes)) processes = data.processes;
+          if (Array.isArray(data.workflows)) workflows = data.workflows;
+          if (Array.isArray(data.issuePatterns))
+            issuePatterns = data.issuePatterns;
+          if (Array.isArray(data.challengeOptions))
+            challengeOptions = data.challengeOptions;
+          if (Array.isArray(data.domainOptions))
+            domainOptions = data.domainOptions;
+        })
+        .catch(() => {})
+        .finally(() => {
+          renderExplore();
+          renderChallenges();
+          renderDomains();
+        });
+    }
+
+    initApp();
   </script>
 </body>
 </html>
