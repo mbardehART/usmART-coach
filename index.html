@@ -490,16 +490,55 @@
     <!-- HOME -->
     <section id="home">
       <div class="card">
-        <h2 class="section-title">Welcome</h2>
+        <h2 class="section-title">What is USM – for executives</h2>
         <p class="section-subtitle">
-          This prototype explains the Unified Service Management (USM) model in
-          clear, neutral language for any service organization.
+          Unified Service Management (USM) is a universal management system for any service organization –
+          public or private, IT or non-IT. It gives leadership <strong>one simple structure</strong> for governing
+          all services, instead of a patchwork of frameworks, tools and local practices.
         </p>
         <p style="font-size:0.9rem;">
-          Use the tabs above to explore the 5 processes, see the 8 workflows as
-          journeys across those processes, ask the digital coach simple USM
-          questions, and map your own challenges to USM.
+          USM does this by standardizing <strong>5 reusable processes</strong> (Agree, Change, Operate, Recover, Improve)
+          and <strong>8 workflows</strong> that every service domain can share. Existing frameworks (ITIL, COBIT, ISO,
+          agile practices, sector standards) can still be used – but they are now placed <em>inside</em> one
+          coherent management system.
         </p>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:0.8rem;">
+        <div class="card">
+          <h3 style="margin:0 0 0.3rem;font-size:0.95rem;">Why leaders use USM</h3>
+          <ul style="padding-left:1.1rem;margin:0;font-size:0.9rem;">
+            <li>More <strong>control</strong> over services with fewer local variants.</li>
+            <li>Organizational <strong>unification</strong>: IT, HR, Facilities, etc. talk the same language.</li>
+            <li>Clear line of sight from <strong>strategy</strong> to daily service work.</li>
+            <li>Stronger <strong>governance and compliance</strong> with simpler reporting.</li>
+            <li>Better <strong>user and citizen experience</strong> through consistent patterns.</li>
+            <li>Lower <strong>complexity and cost</strong> in processes, tools and training.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 0.3rem;font-size:0.95rem;">What this Digital Coach offers</h3>
+          <ul style="padding-left:1.1rem;margin:0;font-size:0.9rem;">
+            <li>
+              <strong>Explore USM</strong> – see the 5 processes in a simple, reusable 6-step pattern.
+            </li>
+            <li>
+              <strong>Workflows</strong> – view the 8 USM workflows as “trains” running across those processes.
+            </li>
+            <li>
+              <strong>Ask the Coach</strong> – a cautious, rule-based assistant that only answers core USM questions and
+              clearly says when it cannot answer.
+            </li>
+            <li>
+              <strong>Solve Issues</strong> – map your challenges (control, silos, risks, costs) to USM processes and workflows
+              as input for executive conversations.
+            </li>
+          </ul>
+          <p class="muted" style="margin-top:0.4rem;">
+            This is a prototype. It is meant to support understanding and structured dialogue, not to replace expert advice.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -850,27 +889,18 @@
     ];
 
     function processColor(p) {
+      const root = getComputedStyle(document.documentElement);
       switch (p) {
         case "CTM":
-          return getComputedStyle(document.documentElement).getPropertyValue(
-            "--ctm"
-          );
+          return root.getPropertyValue("--ctm");
         case "CHM":
-          return getComputedStyle(document.documentElement).getPropertyValue(
-            "--chm"
-          );
+          return root.getPropertyValue("--chm");
         case "OPS":
-          return getComputedStyle(document.documentElement).getPropertyValue(
-            "--ops"
-          );
+          return root.getPropertyValue("--ops");
         case "INC":
-          return getComputedStyle(document.documentElement).getPropertyValue(
-            "--inc"
-          );
+          return root.getPropertyValue("--inc");
         case "RIM":
-          return getComputedStyle(document.documentElement).getPropertyValue(
-            "--rim"
-          );
+          return root.getPropertyValue("--rim");
         default:
           return "#999999";
       }
@@ -936,7 +966,6 @@
         grid.appendChild(card);
       });
 
-      // Click behaviour for segments
       const segments = document.querySelectorAll(".wf-segment");
       segments.forEach((seg) => {
         seg.addEventListener("click", () => {
@@ -1052,14 +1081,12 @@
         return;
       }
 
-      // Safe fallback: be explicit that we are not going to improvise.
       coachSay(
         "This first version of the USM coach only knows a small set of patterns. I’m not confident I can answer this precisely without risking confusion, so I won’t improvise here. Try asking about: what is USM, the 5 processes, the 8 workflows, incidents, risks, or control/governance.",
         "coach"
       );
     }
 
-    // init coach
     coachSay(
       "Hi, I’m your USM Digital Coach prototype. I can only answer a small number of core USM questions, and I will say so clearly when I can’t answer.",
       "coach"
