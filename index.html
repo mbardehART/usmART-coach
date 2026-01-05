@@ -1,568 +1,1265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurora Red – USM Digital Coach</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --panel: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --muted: rgba(0, 0, 0, 0.6);
+      --primary: #c0392b;
 
-<title>Aurora Red — USM Digital Coach</title>
+      --ctm: #4a90e2;  /* Agree / CTM */
+      --chm: #f5d547;  /* Change / CHM */
+      --ops: #71c671;  /* Operate / OPS */
+      --inc: #f26c63;  /* Recover / INC */
+      --rim: #f5a623;  /* Improve / RIM */
+    }
 
-<style>
-/* ============================================================
-   Aurora Red — USM Digital Coach
-   Clean flat UI — consistent with USM tone & design
-============================================================ */
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
 
-/* ---------- Base ---------- */
-:root {
-  --bg: #fafafa;
-  --panel: #ffffff;
-  --border: rgba(0,0,0,0.08);
-  --muted: rgba(0,0,0,0.55);
-  --primary: #c0392b;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #222;
+    }
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: var(--bg);
-  color: #222;
-}
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
 
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
+    a:hover {
+      text-decoration: underline;
+    }
 
-.hidden { display:none; }
+    .hidden {
+      display: none;
+    }
 
-/* ---------- Layout ---------- */
+    /* Top bar / nav */
 
-.topbar {
-  position:sticky;
-  top:0;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  padding:0.6rem 1rem;
-  z-index:10;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1rem 0.5rem;
+      z-index: 10;
+    }
 
-.topbar h1 {
-  font-size:1rem;
-  margin:0;
-}
+    .topbar-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
 
-.nav {
-  display:flex;
-  gap:0.6rem;
-  margin-top:0.4rem;
-}
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
 
-.nav-link {
-  padding:0.4rem 0.7rem;
-  border-radius:8px;
-  border:1px solid transparent;
-  background:none;
-}
+    .nav-link {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
 
-.nav-link.active {
-  background:#fbeaea;
-  border-color:#e3bdbd;
-}
+    .nav-link.active {
+      background: #fbeaea;
+      border-color: #e3bdbd;
+    }
 
-.layout {
-  max-width: 920px;
-  margin: 1.2rem auto;
-  padding: 0 1rem 2rem;
-}
+    .nav-link:not(.active):hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
 
-/* ---------- Cards ---------- */
+    /* Layout */
 
-.card {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:0.85rem 1rem 0.9rem;
-}
+    .layout {
+      max-width: 980px;
+      margin: 1.2rem auto 2rem;
+      padding: 0 1rem;
+    }
 
-/* ---------- Explore ---------- */
+    section {
+      margin-bottom: 1.2rem;
+    }
 
-.grid {
-  display:grid;
-  gap:0.8rem;
-}
-.grid-3 { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+    }
 
-.section-title {
-  margin:0.4rem 0;
-  font-size:1.1rem;
-}
+    .section-title {
+      font-size: 1.1rem;
+      margin: 0 0 0.2rem;
+    }
 
-.section-subtitle {
-  color:var(--muted);
-  font-size:0.9rem;
-}
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0 0 0.8rem;
+    }
 
-/* ---------- Detail Panel ---------- */
+    .muted {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
 
-.detail-panel {
-  background:#fff;
-  border-radius:14px;
-  border:1px solid var(--border);
-  padding:0.9rem 1rem;
-  margin-top:0.9rem;
-}
+    /* Buttons */
 
-.detail-title {
-  font-size:1rem;
-  font-weight:600;
-}
-.detail-sub {
-  font-size:0.8rem;
-  color:var(--muted);
-}
-.detail-h {
-  margin-top:0.7rem;
-  font-size:0.85rem;
-  font-weight:600;
-}
-.detail-list { font-size:0.8rem; }
+    .btn {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: #f0f0f0;
+    }
 
-/* ---------- Process Tracks ---------- */
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
 
-.process-tracks {
-  display: grid;
-  gap: 0.8rem;
-  margin-top: 0.3rem;
-}
+    .btn-primary:hover {
+      background: #a23123;
+    }
 
-.process-track-card {
-  background: #ffffff;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  padding: 0.85rem 1rem 0.9rem;
-}
+    /* Grid */
 
-.process-track-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.5rem;
-}
+    .grid {
+      display: grid;
+      gap: 0.8rem;
+    }
 
-.process-track-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
 
-.process-track-sub {
-  font-size: 0.8rem;
-  color: var(--muted);
-}
+    /* Process tracks */
 
-.process-track-tag {
-  font-size: 0.75rem;
-  padding: 0.15rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: var(--muted);
-  white-space: nowrap;
-}
+    .process-tracks {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.2rem;
+    }
 
-.process-track-steps {
-  margin-top: 0.55rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
+    .process-track-card {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem 0.9rem;
+    }
 
-.process-step-box {
-  flex: 1 1 70px;
-  border-radius: 8px;
-  padding: 0.3rem 0.2rem 0.4rem;
-  text-align: center;
-  font-size: 0.75rem;
-}
+    .process-track-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
 
-.process-step-number {
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 0.05rem;
-}
+    .process-track-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
 
-/* Colors */
-.track-agree .process-step-box { background:#4a90e2; color:#fff; }
-.track-change .process-step-box { background:#f5d547; color:#333; }
-.track-operate .process-step-box { background:#71c671; color:#fff; }
-.track-recover .process-step-box { background:#f26c63; color:#fff; }
-.track-improve .process-step-box { background:#f5a623; color:#fff; }
+    .process-track-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
 
-/* ---------- Workflows ---------- */
+    .process-track-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
-.workflow-grid {
-  display:grid;
-  gap:1rem;
-  margin-top:1rem;
-}
+    .process-track-steps {
+      margin-top: 0.55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
 
-.wf-card {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:0.9rem 1rem;
-}
+    .process-step-box {
+      flex: 1 1 70px;
+      border-radius: 8px;
+      padding: 0.3rem 0.2rem 0.4rem;
+      text-align: center;
+      font-size: 0.75rem;
+    }
 
-.wf-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-}
+    .process-step-number {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.05rem;
+    }
 
-.wf-title { font-weight:600; }
-.wf-subtitle { color:var(--muted); font-size:0.85rem; }
-.wf-code { font-size:0.8rem; color:var(--muted); }
+    .track-agree .process-step-box {
+      background: var(--ctm);
+      color: #fff;
+    }
 
-.wf-track {
-  margin-top:0.6rem;
-  display:flex;
-  gap:0.35rem;
-  align-items:center;
-}
+    .track-change .process-step-box {
+      background: var(--chm);
+      color: #333;
+    }
 
-.wf-segment {
-  flex:1;
-  border-radius:8px;
-  padding:0.3rem;
-  color:#fff;
-  font-size:0.8rem;
-  text-align:center;
-}
+    .track-operate .process-step-box {
+      background: var(--ops);
+      color: #fff;
+    }
 
-.wf-arrow { color:var(--muted); }
+    .track-recover .process-step-box {
+      background: var(--inc);
+      color: #fff;
+    }
 
-.wf-footer {
-  margin-top:0.4rem;
-  font-size:0.75rem;
-  color:var(--muted);
-}
+    .track-improve .process-step-box {
+      background: var(--rim);
+      color: #fff;
+    }
 
-</style>
+    /* Workflows */
+
+    .workflow-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.6rem;
+    }
+
+    .wf-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+    }
+
+    .wf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.7rem;
+    }
+
+    .wf-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .wf-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .wf-code {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .wf-track {
+      margin-top: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+    }
+
+    .wf-segment {
+      flex: 1 1 60px;
+      border-radius: 8px;
+      padding: 0.3rem 0.35rem;
+      font-size: 0.78rem;
+      text-align: center;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .wf-segment:hover {
+      outline: 2px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .wf-arrow {
+      flex: 0 0 auto;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .wf-details {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 0.3rem;
+    }
+
+    .wf-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      font-size: 0.78rem;
+      margin-top: 0.4rem;
+    }
+
+    .wf-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-right: 0.25rem;
+    }
+
+    .wf-agree { background: var(--ctm); }
+    .wf-change { background: var(--chm); }
+    .wf-operate { background: var(--ops); }
+    .wf-recover { background: var(--inc); }
+    .wf-improve { background: var(--rim); }
+
+    /* Coach */
+
+    #coach-chat {
+      min-height: 260px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .coach-msg {
+      margin: 0.35rem 0;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .coach-msg.coach {
+      color: #222;
+    }
+
+    .coach-msg.user {
+      color: #8b0000;
+      font-weight: 500;
+    }
+
+    .coach-input-row {
+      margin-top: 0.6rem;
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .coach-input-row input {
+      flex: 1;
+      padding: 0.45rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .coach-input-row input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .coach-quick {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    /* Solve Issues */
+
+    .checkbox-list {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .checkbox-item input {
+      margin-top: 0.15rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin: 0.15rem 0.15rem 0 0;
+    }
+
+    .pill.selected {
+      background: #fbeaea;
+      border-color: #e3bdbd;
+      color: var(--primary);
+    }
+
+    .issues-result {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.04);
+      font-size: 0.8rem;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      resize: vertical;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Feedback */
+
+    .feedback-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.85rem;
+    }
+
+    .feedback-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .wf-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .wf-code {
+        margin-top: 0.15rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- ============================================================
-   Header + Navigation
-============================================================ -->
-<div class="topbar">
-  <h1>USM Digital Coach — Aurora Red</h1>
-
-  <div class="nav">
-    <button class="nav-link active" data-section="home">Home</button>
-    <button class="nav-link" data-section="explore">Explore USM</button>
-    <button class="nav-link" data-section="workflows">Workflows</button>
-    <button class="nav-link" data-section="coach">Ask the Coach</button>
-    <button class="nav-link" data-section="issues">Solve Issues</button>
-    <button class="nav-link" data-section="feedback">Feedback</button>
+  <div class="topbar">
+    <h1 class="topbar-title">USM Digital Coach – Aurora Red</h1>
+    <div class="nav">
+      <button class="nav-link active" data-section="home">Home</button>
+      <button class="nav-link" data-section="explore">Explore USM</button>
+      <button class="nav-link" data-section="workflows">Workflows</button>
+      <button class="nav-link" data-section="coach">Ask the Coach</button>
+      <button class="nav-link" data-section="issues">Solve Issues</button>
+      <button class="nav-link" data-section="feedback">Feedback</button>
+    </div>
   </div>
-</div>
 
-<div class="layout">
+  <div class="layout">
+    <!-- HOME -->
+    <section id="home">
+      <div class="card">
+        <h2 class="section-title">Welcome</h2>
+        <p class="section-subtitle">
+          This prototype explains the Unified Service Management (USM) model in
+          clear, neutral language for any service organization.
+        </p>
+        <p style="font-size:0.9rem;">
+          Use the tabs above to explore the 5 processes, see the 8 workflows as
+          journeys across those processes, ask the digital coach simple USM
+          questions, and map your own challenges to USM.
+        </p>
+      </div>
+    </section>
 
-<!-- ============================================================
-   HOME
-============================================================ -->
-<section id="home">
-  <div class="card">
-    <h2>Welcome</h2>
-    <p>
-      This USM Digital Coach helps explain the Unified Service Management method in
-      simple, neutral language — for any service organization.
-    </p>
-  </div>
-</section>
+    <!-- EXPLORE -->
+    <section id="explore" class="hidden">
+      <h2 class="section-title">Explore the USM Processes</h2>
+      <p class="section-subtitle">
+        USM uses 5 reusable processes: Agree (CTM), Change (CHM), Operate (OPS),
+        Recover (INC), Improve (RIM). Each has 6 typical steps.
+      </p>
 
+      <div id="process-tracks" class="process-tracks"></div>
+    </section>
 
-<!-- ============================================================
-   EXPLORE USM
-============================================================ -->
-<section id="explore" class="hidden">
+    <!-- WORKFLOWS -->
+    <section id="workflows" class="hidden">
+      <h2 class="section-title">USM Workflows</h2>
+      <p class="section-subtitle">
+        These 8 workflows are “trains” running across the 5 USM processes. Colors:
+        blue (CTM – Agree), yellow (CHM – Change), green (OPS – Operate),
+        red (INC – Recover), orange (RIM – Improve).
+      </p>
 
-  <h2 class="section-title">Explore the USM Model</h2>
-  <p class="section-subtitle">
-    Learn the 5 processes — and how services stay governable and unified.
-  </p>
-
-  <div id="process-tracks" class="process-tracks"></div>
-
-  <div id="explore-detail" class="detail-panel hidden"></div>
-</section>
-
-
-<!-- ============================================================
-   WORKFLOWS
-============================================================ -->
-<section id="workflows" class="hidden">
-  <h2 class="section-title">USM Workflows</h2>
-  <p class="section-subtitle">
-    These are the 8 standard workflows — journeys across the 5 USM processes.
-  </p>
-
-  <div id="workflow-grid" class="workflow-grid"></div>
-</section>
-
-
-<!-- ============================================================
-   COACH
-============================================================ -->
-<section id="coach" class="hidden">
-  <h2>Ask the USM Coach</h2>
-
-  <div id="coach-chat" class="card" style="min-height:280px;"></div>
-
-  <div style="margin-top:0.6rem;display:flex;gap:0.4rem;">
-    <input id="coach-input" style="flex:1;padding:0.5rem;border-radius:8px;border:1px solid var(--border);" placeholder="Type your question…" />
-    <button id="coach-send" class="nav-link">Ask</button>
-  </div>
-</section>
-
-
-<!-- ============================================================
-   ISSUES
-============================================================ -->
-<section id="issues" class="hidden">
-  <h2>Solve Issues</h2>
-  <p class="section-subtitle">
-    Coming soon — a guided wizard that links issues to USM structure.
-  </p>
-</section>
-
-
-<!-- ============================================================
-   FEEDBACK
-============================================================ -->
-<section id="feedback" class="hidden">
-  <h2>Feedback</h2>
-  <p class="section-subtitle">
-    Email feedback to:
-    <a href="mailto:info@aurora-red.com">info@aurora-red.com</a>
-  </p>
-</section>
-
-</div>
-
-
-<!-- ============================================================
-   SCRIPT
-============================================================ -->
-<script>
-
-/* ---------- NAVIGATION ---------- */
-const sections = document.querySelectorAll("section");
-const nav = document.querySelectorAll(".nav-link");
-
-function showSection(id){
-  sections.forEach(s=>s.classList.toggle("hidden",s.id!==id));
-  nav.forEach(n=>n.classList.toggle("active",n.dataset.section===id));
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-nav.forEach(btn=>btn.onclick = ()=>showSection(btn.dataset.section));
-
-
-/* ---------- PROCESS STEP MODELS ---------- */
-
-const processTracks = [
-  {
-    name:"Agree (CTM)",
-    class:"track-agree",
-    subtitle:"Establish and maintain service agreements.",
-    steps:[
-      "Identify need",
-      "Define responsibilities",
-      "Agree conditions",
-      "Formalize",
-      "Monitor",
-      "Review"
-    ]
-  },
-  {
-    name:"Change (CHM)",
-    class:"track-change",
-    subtitle:"Modify services in a controlled way.",
-    steps:[
-      "Propose",
-      "Assess risk",
-      "Approve",
-      "Plan",
-      "Implement",
-      "Verify"
-    ]
-  },
-  {
-    name:"Operate (OPS)",
-    class:"track-operate",
-    subtitle:"Run daily service use as agreed.",
-    steps:[
-      "Receive",
-      "Register",
-      "Perform",
-      "Support user",
-      "Complete",
-      "Record"
-    ]
-  },
-  {
-    name:"Recover (INC)",
-    class:"track-recover",
-    subtitle:"Restore agreed service.",
-    steps:[
-      "Detect",
-      "Assess",
-      "Prioritise",
-      "Recover",
-      "Confirm",
-      "Learn"
-    ]
-  },
-  {
-    name:"Improve (RIM)",
-    class:"track-improve",
-    subtitle:"Strengthen the system.",
-    steps:[
-      "Identify risk",
-      "Analyse",
-      "Define improvement",
-      "Approve",
-      "Implement",
-      "Validate"
-    ]
-  }
-];
-
-function renderProcessTracks(){
-  const div=document.getElementById("process-tracks");
-  div.innerHTML="";
-
-  processTracks.forEach(p=>{
-    const el=document.createElement("div");
-    el.className="process-track-card";
-    el.innerHTML=`
-      <div class="process-track-header">
-        <div>
-          <div class="process-track-name">${p.name}</div>
-          <div class="process-track-sub">${p.subtitle}</div>
+      <div class="card">
+        <strong style="font-size:0.85rem;">Legend</strong>
+        <div class="wf-legend">
+          <span><span class="wf-dot wf-agree"></span>CTM – Agree</span>
+          <span><span class="wf-dot wf-change"></span>CHM – Change</span>
+          <span><span class="wf-dot wf-operate"></span>OPS – Operate</span>
+          <span><span class="wf-dot wf-recover"></span>INC – Recover</span>
+          <span><span class="wf-dot wf-improve"></span>RIM – Improve</span>
         </div>
-        <div class="process-track-tag">6 steps</div>
+        <p class="muted" style="margin-top:0.35rem;">
+          Hover to see what each segment represents. Click a segment to show a short explanation below the workflow.
+        </p>
       </div>
-      <div class="process-track-steps ${p.class}">
-        ${p.steps.map((s,i)=>`
-          <div class="process-step-box">
-            <div class="process-step-number">${i+1}</div>
-            <div class="process-step-text">${s}</div>
-          </div>`).join("")}
+
+      <div id="workflow-grid" class="workflow-grid"></div>
+    </section>
+
+    <!-- COACH -->
+    <section id="coach" class="hidden">
+      <h2 class="section-title">Ask the USM Coach</h2>
+      <p class="section-subtitle">
+        This first version has a small “rule-based brain.” It only answers some core
+        USM questions and will clearly say when it can’t answer something to avoid confusion.
+      </p>
+
+      <div id="coach-chat" class="card"></div>
+
+      <div class="coach-quick">
+        <button class="btn" data-coach-suggest="Explain USM in simple terms">
+          Explain USM in simple terms
+        </button>
+        <button class="btn" data-coach-suggest="What are the 5 USM processes?">
+          What are the 5 USM processes?
+        </button>
+        <button class="btn" data-coach-suggest="What are the 8 USM workflows?">
+          What are the 8 USM workflows?
+        </button>
+        <button class="btn" data-coach-suggest="How does USM improve control and governance?">
+          How does USM improve control and governance?
+        </button>
       </div>
-    `;
-    div.appendChild(el);
-  });
-}
 
+      <div class="coach-input-row">
+        <input id="coach-input" placeholder="Type your question about USM…" />
+        <button id="coach-send" class="btn btn-primary">Ask</button>
+      </div>
 
-/* ---------- WORKFLOWS ---------- */
+      <p class="muted" style="margin-top:0.5rem;">
+        If a question falls outside these patterns, the coach will say it instead of
+        guessing. For more nuanced discussion, people should still talk to a human USM coach.
+      </p>
+    </section>
 
-const workflowTracks=[ /* same data as earlier — shortened description */
-  {name:"Workflow 1 – Wish to service",code:"CTM–CHM–OPS–CHM–CTM",segments:["CTM","CHM","OPS","CHM","CTM"]},
-  {name:"Workflow 2 – Change via OPS",code:"CHM–OPS–CHM",segments:["CHM","OPS","CHM"]},
-  {name:"Workflow 3 – Incident to change",code:"INC–CHM–OPS–CHM–INC",segments:["INC","CHM","OPS","CHM","INC"]},
-  {name:"Workflow 4 – Incident operational",code:"INC–OPS–INC",segments:["INC","OPS","INC"]},
-  {name:"Workflow 5 – Service request",code:"OPS",segments:["OPS"]},
-  {name:"Workflow 6 – Risk → service",code:"RIM–CTM–CHM–OPS–CHM–CTM–RIM",segments:["RIM","CTM","CHM","OPS","CHM","CTM","RIM"]},
-  {name:"Workflow 7 – Risk → change",code:"RIM–CHM–OPS–CHM–RIM",segments:["RIM","CHM","OPS","CHM","RIM"]},
-  {name:"Workflow 8 – Risk operational",code:"RIM–OPS–RIM",segments:["RIM","OPS","RIM"]}
-];
+    <!-- SOLVE ISSUES -->
+    <section id="issues" class="hidden">
+      <h2 class="section-title">Solve Issues with USM</h2>
+      <p class="section-subtitle">
+        Select your challenges and context. The wizard suggests which USM processes and workflows are most relevant.
+      </p>
 
-function color(p){
-  return p==="CTM"?"#4a90e2":
-         p==="CHM"?"#f5d547":
-         p==="OPS"?"#71c671":
-         p==="INC"?"#f26c63":
-         "#f5a623";
-}
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="margin:0 0 0.4rem;font-size:0.95rem;">1. Challenges</h3>
+          <p class="muted">You can select several.</p>
+          <div id="challenge-list" class="checkbox-list"></div>
 
-function renderWorkflows(){
-  const grid=document.getElementById("workflow-grid");
-  grid.innerHTML="";
-  workflowTracks.forEach(w=>{
-    const el=document.createElement("div");
-    el.className="wf-card";
-    el.innerHTML=`
-      <div class="wf-header">
-        <div>
-          <div class="wf-title">${w.name}</div>
-          <div class="wf-subtitle">${w.code}</div>
+          <h3 style="margin:0.8rem 0 0.3rem;font-size:0.95rem;">2. Context (optional)</h3>
+          <p class="muted">Where do these issues mainly show up?</p>
+          <div id="domain-pills"></div>
+
+          <h3 style="margin:0.8rem 0 0.3rem;font-size:0.95rem;">3. Situation (optional)</h3>
+          <textarea id="issue-notes" placeholder="Short description of your situation…"></textarea>
+
+          <button id="issues-run" class="btn btn-primary" style="margin-top:0.6rem;">
+            Show USM guidance
+          </button>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 0.4rem;font-size:0.95rem;">USM Guidance</h3>
+          <div id="issues-result" class="issues-result">
+            <p class="muted">Results will appear here.</p>
+          </div>
         </div>
       </div>
-      <div class="wf-track">
-        ${w.segments.map((p,i)=>`
-          <div class="wf-segment" style="background:${color(p)}">${p}</div>
-          ${i<w.segments.length-1?'<div class="wf-arrow">➝</div>':''}
-        `).join("")}
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="feedback" class="hidden">
+      <h2 class="section-title">Feedback & Contact</h2>
+      <p class="section-subtitle">
+        For now, feedback is handled by email.
+      </p>
+      <div class="card">
+        <p style="font-size:0.9rem;">
+          If you have suggestions, questions, or want to discuss USM in your
+          organization, you can email:
+        </p>
+        <ul class="feedback-list">
+          <li>
+            Email:
+            <a href="mailto:info@aurora-red.com">info@aurora-red.com</a>
+          </li>
+          <li>
+            Website:
+            <a href="https://auroraredtechnology.com" target="_blank" rel="noopener">
+              auroraredtechnology.com
+            </a>
+          </li>
+        </ul>
+        <p class="muted">
+          In a later version this page can collect structured feedback directly into a repository instead of email only.
+        </p>
       </div>
-    `;
-    grid.appendChild(el);
-  });
-}
+    </section>
+  </div>
 
+  <script>
+    /* ---------- NAV ---------- */
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
 
-/* ---------- COACH ---------- */
+    function showSection(id) {
+      sections.forEach((s) => s.classList.toggle("hidden", s.id !== id));
+      navLinks.forEach((b) =>
+        b.classList.toggle("active", b.dataset.section === id)
+      );
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-const chat=document.getElementById("coach-chat");
-function say(t,from="coach"){
-  const d=document.createElement("div");
-  d.textContent=t;
-  d.style.margin="0.4rem 0";
-  d.style.color=from==="coach"?"#222":"#900";
-  chat.appendChild(d);
-  chat.scrollTop=chat.scrollHeight;
-}
+    navLinks.forEach((btn) => {
+      btn.addEventListener("click", () => showSection(btn.dataset.section));
+    });
 
-say("Hi, I’m your USM Digital Coach. Ask me about USM, processes, workflows, or governance.");
+    /* ---------- PROCESS TRACKS ---------- */
+    const processTracks = [
+      {
+        name: "Agree (CTM)",
+        class: "track-agree",
+        subtitle: "Establish and maintain service agreements.",
+        steps: [
+          "Identify need / demand",
+          "Define responsibilities",
+          "Agree conditions",
+          "Formalize / record",
+          "Monitor alignment",
+          "Review & update"
+        ]
+      },
+      {
+        name: "Change (CHM)",
+        class: "track-change",
+        subtitle: "Modify services in a controlled way.",
+        steps: [
+          "Propose change",
+          "Assess impact & risk",
+          "Decide / approve",
+          "Plan change",
+          "Implement change",
+          "Verify & close"
+        ]
+      },
+      {
+        name: "Operate (OPS)",
+        class: "track-operate",
+        subtitle: "Run daily service use as agreed.",
+        steps: [
+          "Receive / detect need",
+          "Accept & register",
+          "Perform activity",
+          "Support / communicate",
+          "Complete work",
+          "Record result"
+        ]
+      },
+      {
+        name: "Recover (INC)",
+        class: "track-recover",
+        subtitle: "Restore agreed service when disrupted.",
+        steps: [
+          "Detect / report incident",
+          "Assess impact",
+          "Prioritise / allocate",
+          "Execute recovery",
+          "Confirm restore",
+          "Capture learning"
+        ]
+      },
+      {
+        name: "Improve (RIM)",
+        class: "track-improve",
+        subtitle: "Strengthen the system based on learning and risk.",
+        steps: [
+          "Identify risk / opportunity",
+          "Analyse structural cause",
+          "Define improvement",
+          "Approve & plan",
+          "Implement change",
+          "Validate improvement"
+        ]
+      }
+    ];
 
-function coachAnswer(q){
-  const t=q.toLowerCase();
+    function renderProcessTracks() {
+      const container = document.getElementById("process-tracks");
+      container.innerHTML = "";
+      processTracks.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "process-track-card";
+        card.innerHTML = `
+          <div class="process-track-header">
+            <div>
+              <div class="process-track-name">${p.name}</div>
+              <div class="process-track-sub">${p.subtitle}</div>
+            </div>
+            <div class="process-track-tag">6 steps</div>
+          </div>
+          <div class="process-track-steps ${p.class}">
+            ${p.steps
+              .map(
+                (s, i) => `
+              <div class="process-step-box">
+                <div class="process-step-number">${i + 1}</div>
+                <div class="process-step-label">${s}</div>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-  if(!["usm","service","process","workflow","incident","change","risk","request"].some(k=>t.includes(k))){
-    say("I focus on Unified Service Management. Try asking in terms of services, agreements, processes or workflows.");
-    return;
-  }
+    /* ---------- WORKFLOWS ---------- */
+    const workflowTracks = [
+      {
+        id: "WF1",
+        name: "Workflow 1 – Wish to implemented service",
+        code: "CTM–CHM–OPS–CHM–CTM",
+        segments: [
+          { process: "CTM", text: "Capture and shape the service wish." },
+          { process: "CHM", text: "Design and prepare the change." },
+          { process: "OPS", text: "Deploy and operate the service." },
+          { process: "CHM", text: "Finalize and register the change." },
+          { process: "CTM", text: "Confirm with the customer." }
+        ]
+      },
+      {
+        id: "WF2",
+        name: "Workflow 2 – Change via service request",
+        code: "CHM–OPS–CHM",
+        segments: [
+          { process: "CHM", text: "Assess and plan the change." },
+          { process: "OPS", text: "Deploy via service request." },
+          { process: "CHM", text: "Finalize and record the change." }
+        ]
+      },
+      {
+        id: "WF3",
+        name: "Workflow 3 – Incident leading to change",
+        code: "INC–CHM–OPS–CHM–INC",
+        segments: [
+          { process: "INC", text: "Recover the incident." },
+          { process: "CHM", text: "Decide on structural change." },
+          { process: "OPS", text: "Deploy agreed change." },
+          { process: "CHM", text: "Close change structurally." },
+          { process: "INC", text: "Confirm final recovery." }
+        ]
+      },
+      {
+        id: "WF4",
+        name: "Workflow 4 – Incident handled operationally",
+        code: "INC–OPS–INC",
+        segments: [
+          { process: "INC", text: "Capture and diagnose incident." },
+          { process: "OPS", text: "Execute recovery actions." },
+          { process: "INC", text: "Confirm and close incident." }
+        ]
+      },
+      {
+        id: "WF5",
+        name: "Workflow 5 – Service request",
+        code: "OPS",
+        segments: [
+          { process: "OPS", text: "Handle the service request end-to-end." }
+        ]
+      },
+      {
+        id: "WF6",
+        name: "Workflow 6 – Risk leading to new/changed service",
+        code: "RIM–CTM–CHM–OPS–CHM–CTM–RIM",
+        segments: [
+          { process: "RIM", text: "Identify and analyse risk." },
+          { process: "CTM", text: "Shape the wish to address risk." },
+          { process: "CHM", text: "Plan and design the change." },
+          { process: "OPS", text: "Deploy via operations." },
+          { process: "CHM", text: "Finalize change details." },
+          { process: "CTM", text: "Confirm with customer." },
+          { process: "RIM", text: "Evaluate remaining risk." }
+        ]
+      },
+      {
+        id: "WF7",
+        name: "Workflow 7 – Risk leading directly to change",
+        code: "RIM–CHM–OPS–CHM–RIM",
+        segments: [
+          { process: "RIM", text: "Identify and assess risk." },
+          { process: "CHM", text: "Plan the structural change." },
+          { process: "OPS", text: "Execute and run change in OPS." },
+          { process: "CHM", text: "Finalize and record change." },
+          { process: "RIM", text: "Check new risk level." }
+        ]
+      },
+      {
+        id: "WF8",
+        name: "Workflow 8 – Risk handled operationally",
+        code: "RIM–OPS–RIM",
+        segments: [
+          { process: "RIM", text: "Identify and classify risk." },
+          { process: "OPS", text: "Perform mitigation in operations." },
+          { process: "RIM", text: "Verify mitigation and residual risk." }
+        ]
+      }
+    ];
 
-  if(t.includes("what is")){
-    say("USM is a universal management system for any service organization. It provides 5 processes and 8 workflows — one shared structure across domains.");
-    return;
-  }
+    function processColor(p) {
+      switch (p) {
+        case "CTM":
+          return getComputedStyle(document.documentElement).getPropertyValue(
+            "--ctm"
+          );
+        case "CHM":
+          return getComputedStyle(document.documentElement).getPropertyValue(
+            "--chm"
+          );
+        case "OPS":
+          return getComputedStyle(document.documentElement).getPropertyValue(
+            "--ops"
+          );
+        case "INC":
+          return getComputedStyle(document.documentElement).getPropertyValue(
+            "--inc"
+          );
+        case "RIM":
+          return getComputedStyle(document.documentElement).getPropertyValue(
+            "--rim"
+          );
+        default:
+          return "#999999";
+      }
+    }
 
-  if(t.includes("5") && t.includes("process")){
-    say("The 5 processes are: Agree (CTM), Change (CHM), Operate (OPS), Recover (INC), Improve (RIM).");
-    return;
-  }
+    const processExplain = {
+      CTM: "CTM (Agree): establishing, updating or confirming agreements.",
+      CHM: "CHM (Change): deciding and coordinating structural changes.",
+      OPS: "OPS (Operate): performing daily service activities as agreed.",
+      INC: "INC (Recover): restoring service when there is a disruption.",
+      RIM: "RIM (Improve): handling risk and structural improvement."
+    };
 
-  say("From a USM perspective, consider which process is most affected: Agree, Change, Operate, Recover or Improve — and which workflow applies.");
-}
+    function renderWorkflows() {
+      const grid = document.getElementById("workflow-grid");
+      grid.innerHTML = "";
 
-document.getElementById("coach-send").onclick=()=>{
-  const v=document.getElementById("coach-input").value.trim();
-  if(!v) return;
-  say(v,"user");
-  document.getElementById("coach-input").value="";
-  coachAnswer(v);
-};
+      workflowTracks.forEach((wf, index) => {
+        const card = document.createElement("div");
+        card.className = "wf-card";
 
+        const segmentsHtml = wf.segments
+          .map(
+            (seg, i) => `
+            <div
+              class="wf-segment"
+              style="background:${processColor(seg.process)}"
+              title="${seg.text}"
+              data-wf-index="${index}"
+              data-process="${seg.process}"
+              data-text="${seg.text.replace(/"/g, "&quot;")}"
+            >
+              ${seg.process}
+            </div>
+            ${
+              i < wf.segments.length - 1
+                ? '<div class="wf-arrow">➝</div>'
+                : ""
+            }
+          `
+          )
+          .join("");
 
-/* ---------- INIT ---------- */
+        card.innerHTML = `
+          <div class="wf-header">
+            <div>
+              <div class="wf-title">${wf.name}</div>
+              <div class="wf-subtitle">${wf.code}</div>
+            </div>
+            <div class="wf-code">Processes: ${wf.code.replace(
+              /-/g,
+              " → "
+            )}</div>
+          </div>
+          <div class="wf-track">
+            ${segmentsHtml}
+          </div>
+          <div class="wf-details" id="wf-details-${index}">
+            Click a segment to see a short explanation here.
+          </div>
+        `;
 
-renderProcessTracks();
-renderWorkflows();
+        grid.appendChild(card);
+      });
 
-</script>
+      // Click behaviour for segments
+      const segments = document.querySelectorAll(".wf-segment");
+      segments.forEach((seg) => {
+        seg.addEventListener("click", () => {
+          const wfIndex = seg.dataset.wfIndex;
+          const proc = seg.dataset.process;
+          const text = seg.dataset.text;
+          const details = document.getElementById("wf-details-" + wfIndex);
+          const base = processExplain[proc] || "";
+          details.textContent =
+            (base ? base + " " : "") + (text || "Segment in this workflow.");
+        });
+      });
+    }
 
+    /* ---------- COACH ---------- */
+    const coachChat = document.getElementById("coach-chat");
+    const coachInput = document.getElementById("coach-input");
+    const coachSend = document.getElementById("coach-send");
+    const coachSuggestBtns = document.querySelectorAll("[data-coach-suggest]");
+
+    function coachSay(text, from = "coach") {
+      const div = document.createElement("div");
+      div.className = "coach-msg " + from;
+      div.textContent = text;
+      coachChat.appendChild(div);
+      coachChat.scrollTop = coachChat.scrollHeight;
+    }
+
+    function coachAnswer(raw) {
+      const q = raw.toLowerCase();
+
+      const hasUsmKeywords = [
+        "usm",
+        "service",
+        "process",
+        "workflow",
+        "incident",
+        "request",
+        "risk",
+        "governance",
+        "control",
+        "agree",
+        "operate",
+        "change",
+        "recover",
+        "improve"
+      ].some((k) => q.includes(k));
+
+      if (!hasUsmKeywords) {
+        coachSay(
+          "To avoid confusion, this prototype only answers questions in USM terms. Try asking about services, processes, workflows, agreements, incidents or risks.",
+          "coach"
+        );
+        return;
+      }
+
+      if (q.includes("what is usm") || (q.includes("usm") && q.includes("explain"))) {
+        coachSay(
+          "USM (Unified Service Management) is a universal management system for any service organization. It uses 5 reusable processes and 8 workflows as a simple, shared structure across domains like IT, HR, Facilities or Government.",
+          "coach"
+        );
+        return;
+      }
+
+      if (q.includes("5") && q.includes("process")) {
+        coachSay(
+          "USM works with 5 processes: Agree (CTM), Change (CHM), Operate (OPS), Recover (INC) and Improve (RIM). They form one management system reused in every service domain.",
+          "coach"
+        );
+        return;
+      }
+
+      if (q.includes("8") && q.includes("workflow")) {
+        coachSay(
+          "USM has 8 standard workflows that run across those 5 processes. They cover wishes, changes, incidents, requests and risks, so different domains can share the same patterns instead of inventing their own.",
+          "coach"
+        );
+        return;
+      }
+
+      if (
+        (q.includes("control") || q.includes("governance")) &&
+        (q.includes("how") || q.includes("improve") || q.includes("help"))
+      ) {
+        coachSay(
+          "USM improves control and governance by giving leadership one coherent structure: Agree for clear commitments, Change for structural decisions, Operate for daily work, Recover for disruptions and Improve for learning and risk. When everyone uses this same structure, reports and decisions become comparable instead of fragmented.",
+          "coach"
+        );
+        return;
+      }
+
+      if (q.includes("itil") || q.includes("cobit") || q.includes("iso")) {
+        coachSay(
+          "USM does not replace ITIL, COBIT or ISO. It provides the overall management system (the structure) and you can still use those frameworks as sources of good practices inside that structure.",
+          "coach"
+        );
+        return;
+      }
+
+      if (q.includes("incident") || q.includes("outage") || q.includes("disruption")) {
+        coachSay(
+          "In USM, an incident is any situation where the agreed service is not delivered. The Recover (INC) process and related workflows provide a calm, repeatable way to restore service and feed learning into improvement.",
+          "coach"
+        );
+        return;
+      }
+
+      if (q.includes("risk") || q.includes("improve") || q.includes("improvement")) {
+        coachSay(
+          "USM treats risk and improvement systematically in the Improve (RIM) process. Repeated incidents, structural weaknesses or opportunities become input for RIM, which then drives changes via Change (CHM) and deployments via Operate (OPS).",
+          "coach"
+        );
+        return;
+      }
+
+      // Safe fallback: be explicit that we are not going to improvise.
+      coachSay(
+        "This first version of the USM coach only knows a small set of patterns. I’m not confident I can answer this precisely without risking confusion, so I won’t improvise here. Try asking about: what is USM, the 5 processes, the 8 workflows, incidents, risks, or control/governance.",
+        "coach"
+      );
+    }
+
+    // init coach
+    coachSay(
+      "Hi, I’m your USM Digital Coach prototype. I can only answer a small number of core USM questions, and I will say so clearly when I can’t answer.",
+      "coach"
+    );
+
+    coachSend.addEventListener("click", () => {
+      const text = coachInput.value.trim();
+      if (!text) return;
+      coachSay(text, "user");
+      coachInput.value = "";
+      coachAnswer(text);
+    });
+
+    coachInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        coachSend.click();
+      }
+    });
+
+    coachSuggestBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.coachSuggest;
+        coachSay(text, "user");
+        coachAnswer(text);
+      });
+    });
+
+    /* ---------- SOLVE ISSUES ---------- */
+    const challengeOptions = [
+      { id: "lack_control", label: "Lack of control / no overview" },
+      { id: "too_many_tools", label: "Too many tools and dashboards" },
+      { id: "siloed_teams", label: "Siloed teams / fragmented ways of working" },
+      { id: "slow_recovery", label: "Slow incident recovery" },
+      { id: "inconsistent_experience", label: "Inconsistent user or customer experience" },
+      { id: "compliance_risk", label: "Compliance / audit risk" },
+      { id: "high_cost", label: "High support cost for services" }
+    ];
+
+    const domainOptions = [
+      "IT",
+      "HR",
+      "Facilities",
+      "Finance",
+      "Healthcare",
+      "Government",
+      "Enterprise-wide"
+    ];
+
+    const challengeToProcesses = {
+      lack_control: ["CTM", "OPS", "RIM"],
+      too_many_tools: ["CTM", "RIM"],
+      siloed_teams: ["CTM", "OPS", "CHM"],
+      slow_recovery: ["INC", "OPS", "RIM"],
+      inconsistent_experience: ["CTM", "OPS", "RIM"],
+      compliance_risk: ["CTM", "RIM"],
+      high_cost: ["OPS", "RIM", "CHM"]
+    };
+
+    const challengeToWorkflows = {
+      lack_control: ["WF1", "WF6"],
+      too_many_tools: ["WF1", "WF6", "WF7"],
+      siloed_teams: ["WF1", "WF5"],
+      slow_recovery: ["WF3", "WF4"],
+      inconsistent_experience: ["WF1", "WF5"],
+      compliance_risk: ["WF6", "WF7", "WF8"],
+      high_cost: ["WF5", "WF7"]
+    };
+
+    function renderChallenges() {
+      const list = document.getElementById("challenge-list");
+      list.innerHTML = "";
+      challengeOptions.forEach((c) => {
+        const row = document.createElement("label");
+        row.className = "checkbox-item";
+        row.innerHTML = `
+          <input type="checkbox" value="${c.id}" />
+          <span>${c.label}</span>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function renderDomains() {
+      const div = document.getElementById("domain-pills");
+      div.innerHTML = "";
+      domainOptions.forEach((d) => {
+        const pill = document.createElement("span");
+        pill.className = "pill";
+        pill.textContent = d;
+        pill.dataset.domain = d;
+        pill.addEventListener("click", () => {
+          pill.classList.toggle("selected");
+        });
+        div.appendChild(pill);
+      });
+    }
+
+    function runIssues() {
+      const selectedChallenges = Array.from(
+        document.querySelectorAll("#challenge-list input:checked")
+      ).map((i) => i.value);
+
+      const selectedDomains = Array.from(
+        document.querySelectorAll("#domain-pills .pill.selected")
+      ).map((p) => p.dataset.domain);
+
+      const notes = document.getElementById("issue-notes").value.trim();
+      const resultDiv = document.getElementById("issues-result");
+
+      if (!selectedChallenges.length && !notes) {
+        resultDiv.innerHTML =
+          '<p class="muted">Select at least one challenge or add a short description so we can relate it to USM.</p>';
+        return;
+      }
+
+      const procSet = new Set();
+      const wfSet = new Set();
+
+      selectedChallenges.forEach((ch) => {
+        (challengeToProcesses[ch] || []).forEach((p) => procSet.add(p));
+        (challengeToWorkflows[ch] || []).forEach((w) => wfSet.add(w));
+      });
+
+      let html = "";
+
+      if (selectedChallenges.length) {
+        html += `<p class="muted">You selected these challenges:</p>`;
+        selectedChallenges.forEach((ch) => {
+          const label =
+            challengeOptions.find((c) => c.id === ch)?.label || ch;
+          html += `<span class="chip">${label}</span>`;
+        });
+      }
+
+      if (selectedDomains.length) {
+        html += `<p class="muted" style="margin-top:0.6rem;">Context:</p>`;
+        selectedDomains.forEach((d) => {
+          html += `<span class="chip">${d}</span>`;
+        });
+      }
+
+      if (procSet.size) {
+        html += `<h4 style="margin-top:0.8rem;margin-bottom:0.2rem;font-size:0.9rem;">USM processes to focus on</h4>`;
+        html += `<p class="muted">`;
+        html += Array.from(procSet)
+          .map((p) => {
+            if (p === "CTM") return "CTM – Agree";
+            if (p === "CHM") return "CHM – Change";
+            if (p === "OPS") return "OPS – Operate";
+            if (p === "INC") return "INC – Recover";
+            if (p === "RIM") return "RIM – Improve";
+            return p;
+          })
+          .join(", ");
+        html += `</p>`;
+      }
+
+      if (wfSet.size) {
+        html += `<h4 style="margin-top:0.6rem;margin-bottom:0.2rem;font-size:0.9rem;">Relevant workflows</h4>`;
+        html += `<p class="muted">`;
+        const wfNamesMap = Object.fromEntries(
+          workflowTracks.map((wf) => [wf.id, wf.name])
+        );
+        html += Array.from(wfSet)
+          .map((id) => wfNamesMap[id] || id)
+          .join("; ");
+        html += `</p>`;
+      }
+
+      if (notes) {
+        html += `<h4 style="margin-top:0.6rem;margin-bottom:0.2rem;font-size:0.9rem;">Your situation</h4>`;
+        html += `<p class="muted">${notes}</p>`;
+      }
+
+      if (!procSet.size && !wfSet.size) {
+        html += `<p class="muted" style="margin-top:0.6rem;">
+          Your situation doesn’t match one of the predefined patterns yet,
+          but it still fits somewhere in the 5 processes and 8 workflows.
+          Use this as a starting point for a conversation with a USM coach
+          instead of a final diagnosis.
+        </p>`;
+      } else {
+        html += `<p class="muted" style="margin-top:0.6rem;">
+          Use these processes and workflows as a lens in your next discussion:
+          which agreements, changes, operations, recoveries or improvements are
+          actually under pressure?
+        </p>`;
+      }
+
+      resultDiv.innerHTML = html;
+    }
+
+    document.getElementById("issues-run").addEventListener("click", runIssues);
+
+    /* ---------- INIT ---------- */
+    renderProcessTracks();
+    renderWorkflows();
+    renderChallenges();
+    renderDomains();
+  </script>
 </body>
 </html>
