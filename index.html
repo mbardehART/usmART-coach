@@ -735,61 +735,64 @@
   }
 ];
 
-    const workflows = [
-      {
-        id: "WF_REQUEST",
-        name: "Request Workflow",
-        summary: "Handles standard requests for services or information.",
-        relatedProcesses: ["PROC_USE"]
-      },
-      {
-        id: "WF_INCIDENT",
-        name: "Incident Workflow",
-        summary: "Restores normal service quickly after a disruption.",
-        relatedProcesses: ["PROC_RECOVER", "PROC_USE", "PROC_CONTROL"]
-      },
-      {
-        id: "WF_CHANGE",
-        name: "Change Workflow",
-        summary: "Implements approved changes in a controlled manner.",
-        relatedProcesses: ["PROC_CHANGE", "PROC_CONTROL"]
-      },
-      {
-        id: "WF_PROBLEM",
-        name: "Problem Workflow",
-        summary:
-          "Investigates root causes of recurring incidents and structural issues.",
-        relatedProcesses: ["PROC_PREVENT", "PROC_CHANGE"]
-      },
-      {
-        id: "WF_KNOWLEDGE",
-        name: "Knowledge Workflow",
-        summary:
-          "Captures and shares reusable knowledge for users and staff.",
-        relatedProcesses: ["PROC_USE", "PROC_PREVENT"]
-      },
-      {
-        id: "WF_CONFIG",
-        name: "Configuration / Asset Workflow",
-        summary:
-          "Keeps information about services and supporting components reliable.",
-        relatedProcesses: ["PROC_CONTROL", "PROC_RECOVER", "PROC_CHANGE"]
-      },
-      {
-        id: "WF_IDENTITY",
-        name: "Identity & Access Workflow",
-        summary:
-          "Manages who has access to which services in a controlled way.",
-        relatedProcesses: ["PROC_USE", "PROC_CONTROL"]
-      },
-      {
-        id: "WF_CONTINUITY",
-        name: "Continuity / Availability Workflow",
-        summary:
-          "Protects the ability of services to continue during disruptions.",
-        relatedProcesses: ["PROC_RECOVER", "PROC_PREVENT", "PROC_CONTROL"]
-      }
-    ];
+const workflows = [
+  {
+    id: "WF_REQUEST",
+    name: "Request Workflow",
+    summary:
+      "Handles standard requests for services or information in a consistent way.",
+    relatedProcesses: ["PROC_OPERATE", "PROC_AGREE"]
+  },
+  {
+    id: "WF_INCIDENT",
+    name: "Incident Workflow",
+    summary:
+      "Restores agreed service quickly and calmly when something goes wrong.",
+    relatedProcesses: ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
+  },
+  {
+    id: "WF_CHANGE",
+    name: "Change Workflow",
+    summary:
+      "Implements modifications to services and service systems in a controlled way.",
+    relatedProcesses: ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
+  },
+  {
+    id: "WF_PROBLEM",
+    name: "Problem Workflow",
+    summary:
+      "Identifies and removes structural causes of recurring incidents and weaknesses.",
+    relatedProcesses: ["PROC_IMPROVE", "PROC_CHANGE"]
+  },
+  {
+    id: "WF_KNOWLEDGE",
+    name: "Knowledge Workflow",
+    summary:
+      "Creates, maintains, and shares reusable service knowledge for users and staff.",
+    relatedProcesses: ["PROC_OPERATE", "PROC_IMPROVE"]
+  },
+  {
+    id: "WF_CONFIG",
+    name: "Configuration / Asset Workflow",
+    summary:
+      "Keeps reliable information about services, components, assets, and their relationships.",
+    relatedProcesses: ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
+  },
+  {
+    id: "WF_IDENTITY",
+    name: "Identity & Access Workflow",
+    summary:
+      "Manages who is allowed to use which services, based on clear agreements and roles.",
+    relatedProcesses: ["PROC_AGREE", "PROC_OPERATE"]
+  },
+  {
+    id: "WF_CONTINUITY",
+    name: "Continuity / Availability Workflow",
+    summary:
+      "Protects the ability to continue service delivery during disruptions and high-risk situations.",
+    relatedProcesses: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
+  }
+];
 
     const issuePatterns = [
       {
