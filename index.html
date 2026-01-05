@@ -1,1991 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>USM Digital Coach – Prototype</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #f5f5f7;
-      --bg-alt: #ffffff;
-      --text: #1f1f23;
-      --muted: #6b6b75;
-      --accent: #c53b3b;
-      --accent-soft: #f7e3e3;
-      --border: #dedee5;
-      --card-radius: 10px;
-      --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.04);
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(245, 245, 247, 0.96);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.6rem 1.25rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .brand-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffb3b3, #c53b3b);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-button {
-      border: none;
-      background: transparent;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      color: var(--muted);
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .nav-button.active {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .nav-button:not(.active):hover {
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 1.5rem auto 2.5rem;
-      padding: 0 1.25rem;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .hero {
-      background: var(--bg-alt);
-      border-radius: 18px;
-      box-shadow: var(--shadow-soft);
-      padding: 1.75rem 1.75rem 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-title {
-      font-size: 1.6rem;
-      font-weight: 650;
-      margin-bottom: 0.3rem;
-    }
-
-    .hero-subtitle {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border-radius: 999px;
-      border: 1px solid transparent;
-      padding: 0.55rem 1.1rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: background 0.15s, color 0.15s, border-color 0.15s,
-        transform 0.05s;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: #a93030;
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--accent);
-      border-color: var(--accent-soft);
-    }
-
-    .btn-ghost:hover {
-      background: var(--accent-soft);
-    }
-
-    .grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    @media (min-width: 720px) {
-      .grid-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .grid-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .card {
-      background: var(--bg-alt);
-      border-radius: var(--card-radius);
-      padding: 1.1rem 1.15rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(0, 0, 0, 0.02);
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .card-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-
-    .card-text {
-      font-size: 0.86rem;
-      color: var(--muted);
-      flex: 1;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 0.18rem 0.5rem;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      background: rgba(0, 0, 0, 0.035);
-      color: var(--muted);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.2rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.035);
-      font-size: 0.78rem;
-      cursor: pointer;
-      border: 1px solid transparent;
-      margin: 0.15rem;
-    }
-
-    .pill:hover {
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    .pill.selected {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin: 0.25rem 0 0.5rem;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .detail-panel {
-      margin-top: 1rem;
-      padding: 1rem 1rem 0.75rem;
-      border-radius: 12px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-    }
-
-    .detail-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .detail-sub {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 0.55rem;
-    }
-
-    .detail-h {
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-top: 0.65rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .detail-list {
-      padding-left: 1.1rem;
-      margin: 0.1rem 0 0.2rem;
-      font-size: 0.86rem;
-      color: var(--muted);
-    }
-
-    .detail-list li {
-      margin-bottom: 0.1rem;
-    }
-
-    .coach-layout {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 0.75rem;
-      height: min(70vh, 600px);
-      max-height: 600px;
-    }
-
-    .coach-quick {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .coach-quick button {
-      font-size: 0.8rem;
-      padding: 0.25rem 0.7rem;
-    }
-
-    .coach-chat {
-      border-radius: 12px;
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      padding: 0.75rem;
-      overflow-y: auto;
-    }
-
-    .msg {
-      margin-bottom: 0.5rem;
-      max-width: 80%;
-      padding: 0.45rem 0.6rem;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      line-height: 1.4;
-    }
-
-    .msg.user {
-      margin-left: auto;
-      background: var(--accent);
-      color: #fff;
-      border-bottom-right-radius: 3px;
-    }
-
-    .msg.coach {
-      margin-right: auto;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 3px;
-    }
-
-    .coach-input-row {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .coach-input-row input {
-      flex: 1;
-      padding: 0.55rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-    }
-
-    .coach-input-row input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .wizard-steps {
-      display: flex;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      margin-bottom: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .wizard-step-pill {
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background: rgba(255, 255, 255, 0.8);
-    }
-
-    .wizard-step-pill.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    .checkbox-list {
-      display: grid;
-      gap: 0.3rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.45rem;
-      font-size: 0.86rem;
-    }
-
-    .checkbox-item input {
-      margin-top: 0.18rem;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 80px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      padding: 0.45rem 0.6rem;
-      font-size: 0.85rem;
-      resize: vertical;
-    }
-
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .wizard-nav {
-      margin-top: 0.9rem;
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .result-chip {
-      display: inline-flex;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      background: rgba(0, 0, 0, 0.035);
-      margin: 0.15rem 0.25rem 0.15rem 0;
-    }
-
-    /* --- USM process diagram --- */
-    .process-diagram {
-      margin: 0.5rem 0 1rem;
-      padding: 0.9rem 0.9rem 1.1rem;
-      border-radius: 14px;
-      background: #ffffff;
-      border: 1px solid #dedee5;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .process-diagram-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.4rem;
-      align-items: baseline;
-      margin-bottom: 0.6rem;
-    }
-
-    .process-diagram-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .process-diagram-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .process-diagram-track {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      position: relative;
-      padding-top: 0.5rem;
-    }
-
-    .process-step {
-      flex: 1 1 80px;
-      min-width: 80px;
-      text-align: center;
-      position: relative;
-      padding: 0.4rem 0.2rem;
-    }
-
-    .process-step-circle {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      border: 2px solid var(--accent);
-      margin: 0 auto 0.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 600;
-      background: #fff;
-    }
-
-    .process-step-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    .process-step-helper {
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    /* --- USM workflow "train" diagram --- */
-    .workflow-train {
-      margin: 0.6rem 0 1.2rem;
-      padding: 0.9rem 0.9rem 1rem;
-      border-radius: 14px;
-      background: #ffffff;
-      border: 1px solid #dedee5;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .workflow-train-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.4rem;
-      align-items: baseline;
-      margin-bottom: 0.6rem;
-    }
-
-    .workflow-train-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .workflow-train-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .workflow-track-wrapper {
-      position: relative;
-      padding-top: 0.9rem;
-    }
-
-    .workflow-track-line {
-      position: absolute;
-      top: 1.2rem;
-      left: 4%;
-      right: 4%;
-      height: 3px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-    }
-
-    .workflow-stations {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.4rem;
-    }
-
-    .workflow-station {
-      flex: 1 1 70px;
-      min-width: 70px;
-      text-align: center;
-      position: relative;
-      padding-top: 0.2rem;
-    }
-
-    .workflow-station-dot {
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      border: 2px solid var(--accent);
-      background: #fff;
-      margin: 0 auto 0.2rem;
-    }
-
-    .workflow-station-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .workflow-station-helper {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Aurora Red — USM Digital Coach</title>
+
+<style>
+/* ============================================================
+   Aurora Red — USM Digital Coach
+   Clean flat UI — consistent with USM tone & design
+============================================================ */
+
+/* ---------- Base ---------- */
+:root {
+  --bg: #fafafa;
+  --panel: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --muted: rgba(0,0,0,0.55);
+  --primary: #c0392b;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: #222;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.hidden { display:none; }
+
+/* ---------- Layout ---------- */
+
+.topbar {
+  position:sticky;
+  top:0;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:0.6rem 1rem;
+  z-index:10;
+}
+
+.topbar h1 {
+  font-size:1rem;
+  margin:0;
+}
+
+.nav {
+  display:flex;
+  gap:0.6rem;
+  margin-top:0.4rem;
+}
+
+.nav-link {
+  padding:0.4rem 0.7rem;
+  border-radius:8px;
+  border:1px solid transparent;
+  background:none;
+}
+
+.nav-link.active {
+  background:#fbeaea;
+  border-color:#e3bdbd;
+}
+
+.layout {
+  max-width: 920px;
+  margin: 1.2rem auto;
+  padding: 0 1rem 2rem;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:0.85rem 1rem 0.9rem;
+}
+
+/* ---------- Explore ---------- */
+
+.grid {
+  display:grid;
+  gap:0.8rem;
+}
+.grid-3 { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+
+.section-title {
+  margin:0.4rem 0;
+  font-size:1.1rem;
+}
+
+.section-subtitle {
+  color:var(--muted);
+  font-size:0.9rem;
+}
+
+/* ---------- Detail Panel ---------- */
+
+.detail-panel {
+  background:#fff;
+  border-radius:14px;
+  border:1px solid var(--border);
+  padding:0.9rem 1rem;
+  margin-top:0.9rem;
+}
+
+.detail-title {
+  font-size:1rem;
+  font-weight:600;
+}
+.detail-sub {
+  font-size:0.8rem;
+  color:var(--muted);
+}
+.detail-h {
+  margin-top:0.7rem;
+  font-size:0.85rem;
+  font-weight:600;
+}
+.detail-list { font-size:0.8rem; }
+
+/* ---------- Process Tracks ---------- */
+
+.process-tracks {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.process-track-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 0.85rem 1rem 0.9rem;
+}
+
+.process-track-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.process-track-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.process-track-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.process-track-tag {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.process-track-steps {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.process-step-box {
+  flex: 1 1 70px;
+  border-radius: 8px;
+  padding: 0.3rem 0.2rem 0.4rem;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.process-step-number {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.05rem;
+}
+
+/* Colors */
+.track-agree .process-step-box { background:#4a90e2; color:#fff; }
+.track-change .process-step-box { background:#f5d547; color:#333; }
+.track-operate .process-step-box { background:#71c671; color:#fff; }
+.track-recover .process-step-box { background:#f26c63; color:#fff; }
+.track-improve .process-step-box { background:#f5a623; color:#fff; }
+
+/* ---------- Workflows ---------- */
+
+.workflow-grid {
+  display:grid;
+  gap:1rem;
+  margin-top:1rem;
+}
+
+.wf-card {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:0.9rem 1rem;
+}
+
+.wf-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+
+.wf-title { font-weight:600; }
+.wf-subtitle { color:var(--muted); font-size:0.85rem; }
+.wf-code { font-size:0.8rem; color:var(--muted); }
+
+.wf-track {
+  margin-top:0.6rem;
+  display:flex;
+  gap:0.35rem;
+  align-items:center;
+}
+
+.wf-segment {
+  flex:1;
+  border-radius:8px;
+  padding:0.3rem;
+  color:#fff;
+  font-size:0.8rem;
+  text-align:center;
+}
+
+.wf-arrow { color:var(--muted); }
+
+.wf-footer {
+  margin-top:0.4rem;
+  font-size:0.75rem;
+  color:var(--muted);
+}
+
+</style>
 </head>
+
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <div class="brand-dot"></div>
-        <span>USM Digital Coach</span>
-      </div>
-      <div class="nav-links">
-        <button class="nav-button active" data-target="home">Home</button>
-        <button class="nav-button" data-target="explore">Explore USM</button>
-        <button class="nav-button" data-target="coach">Ask the Coach</button>
-        <button class="nav-button" data-target="issues">Solve Issues</button>
-        <button class="nav-button" data-target="service">Model a Service</button>
-        <button class="nav-button" data-target="feedback">Feedback</button>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <!-- HOME -->
-    <section id="home" class="section active">
-      <div class="hero">
-        <div class="hero-title">Unified Service Management (USM)</div>
-        <div class="hero-subtitle">
-          A universal operating model for any service organization — IT, HR,
-          Facilities, Healthcare, Government, and more.
-        </div>
-        <div class="hero-actions">
-          <button class="btn btn-primary" data-target="explore">
-            Learn USM Basics
-          </button>
-          <button class="btn btn-ghost" data-target="coach">
-            Ask the USM Coach
-          </button>
-          <button class="btn btn-ghost" data-target="service">
-            Model a Service
-          </button>
-        </div>
-      </div>
+<!-- ============================================================
+   Header + Navigation
+============================================================ -->
+<div class="topbar">
+  <h1>USM Digital Coach — Aurora Red</h1>
+
+  <div class="nav">
+    <button class="nav-link active" data-section="home">Home</button>
+    <button class="nav-link" data-section="explore">Explore USM</button>
+    <button class="nav-link" data-section="workflows">Workflows</button>
+    <button class="nav-link" data-section="coach">Ask the Coach</button>
+    <button class="nav-link" data-section="issues">Solve Issues</button>
+    <button class="nav-link" data-section="feedback">Feedback</button>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- ============================================================
+   HOME
+============================================================ -->
+<section id="home">
+  <div class="card">
+    <h2>Welcome</h2>
+    <p>
+      This USM Digital Coach helps explain the Unified Service Management method in
+      simple, neutral language — for any service organization.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+   EXPLORE USM
+============================================================ -->
+<section id="explore" class="hidden">
+
+  <h2 class="section-title">Explore the USM Model</h2>
+  <p class="section-subtitle">
+    Learn the 5 processes — and how services stay governable and unified.
+  </p>
+
+  <div id="process-tracks" class="process-tracks"></div>
+
+  <div id="explore-detail" class="detail-panel hidden"></div>
+</section>
+
+
+<!-- ============================================================
+   WORKFLOWS
+============================================================ -->
+<section id="workflows" class="hidden">
+  <h2 class="section-title">USM Workflows</h2>
+  <p class="section-subtitle">
+    These are the 8 standard workflows — journeys across the 5 USM processes.
+  </p>
+
+  <div id="workflow-grid" class="workflow-grid"></div>
+</section>
+
+
+<!-- ============================================================
+   COACH
+============================================================ -->
+<section id="coach" class="hidden">
+  <h2>Ask the USM Coach</h2>
+
+  <div id="coach-chat" class="card" style="min-height:280px;"></div>
+
+  <div style="margin-top:0.6rem;display:flex;gap:0.4rem;">
+    <input id="coach-input" style="flex:1;padding:0.5rem;border-radius:8px;border:1px solid var(--border);" placeholder="Type your question…" />
+    <button id="coach-send" class="nav-link">Ask</button>
+  </div>
+</section>
+
+
+<!-- ============================================================
+   ISSUES
+============================================================ -->
+<section id="issues" class="hidden">
+  <h2>Solve Issues</h2>
+  <p class="section-subtitle">
+    Coming soon — a guided wizard that links issues to USM structure.
+  </p>
+</section>
+
+
+<!-- ============================================================
+   FEEDBACK
+============================================================ -->
+<section id="feedback" class="hidden">
+  <h2>Feedback</h2>
+  <p class="section-subtitle">
+    Email feedback to:
+    <a href="mailto:info@aurora-red.com">info@aurora-red.com</a>
+  </p>
+</section>
+
+</div>
+
 
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-title">Learn the model</div>
-          <div class="card-text">
-            Explore the USM foundation, its 5 universal processes, and 8
-            standard workflows in one place.
-          </div>
-          <button class="btn btn-ghost" data-target="explore">
-            Open USM Explorer
-          </button>
-        </div>
-        <div class="card">
-          <div class="card-title">Talk to the coach</div>
-          <div class="card-text">
-            Ask questions and get clear, business-focused explanations about
-            USM and how it applies to your organization.
-          </div>
-          <button class="btn btn-ghost" data-target="coach">
-            Start a conversation
-          </button>
-        </div>
-        <div class="card">
-          <div class="card-title">Solve business issues</div>
-          <div class="card-text">
-            Describe your challenges — such as lack of control or siloed teams —
-            and see which USM elements can help.
-          </div>
-          <button class="btn btn-ghost" data-target="issues">
-            Start issue mapping
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPLORE -->
-    <section id="explore" class="section">
-      <div class="section-title">Explore Unified Service Management</div>
-      <div class="section-subtitle">
-        Browse the USM foundation, 5 processes, and 8 workflows.
-      </div>
-
-      <h3 class="section-title">USM Foundation</h3>
-      <div class="grid grid-3" id="foundation-grid"></div>
-
-      <h3 class="section-title" style="margin-top:1.2rem;">The 5 USM Processes</h3>
-
-      <div class="process-diagram">
-        <div class="process-diagram-header">
-          <div class="process-diagram-title">One reusable management system</div>
-          <div class="process-diagram-sub">
-            Agree → Change → Operate → Recover → Improve → back to Agree
-          </div>
-        </div>
-        <div class="process-diagram-track">
-          <div class="process-step">
-            <div class="process-step-circle">A</div>
-            <div class="process-step-label">Agree</div>
-            <div class="process-step-helper">Make clear service agreements</div>
-          </div>
-          <div class="process-step">
-            <div class="process-step-circle">C</div>
-            <div class="process-step-label">Change</div>
-            <div class="process-step-helper">Modify services in a controlled way</div>
-          </div>
-          <div class="process-step">
-            <div class="process-step-circle">O</div>
-            <div class="process-step-label">Operate</div>
-            <div class="process-step-helper">Run services day-to-day</div>
-          </div>
-          <div class="process-step">
-            <div class="process-step-circle">R</div>
-            <div class="process-step-label">Recover</div>
-            <div class="process-step-helper">Restore service when it breaks</div>
-          </div>
-          <div class="process-step">
-            <div class="process-step-circle">I</div>
-            <div class="process-step-label">Improve</div>
-            <div class="process-step-helper">Learn and strengthen service</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-3" id="process-grid"></div>
-
-      <h3 class="section-title" style="margin-top:1.2rem;">The 8 Workflows</h3>
-
-      <div class="workflow-train">
-        <div class="workflow-train-header">
-          <div class="workflow-train-title">A standard “service operations railway”</div>
-          <div class="workflow-train-sub">
-            Eight reusable workflows that every service domain can share.
-          </div>
-        </div>
-        <div class="workflow-track-wrapper">
-          <div class="workflow-track-line"></div>
-          <div class="workflow-stations">
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Request</div>
-              <div class="workflow-station-helper">Ask for services</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Incident</div>
-              <div class="workflow-station-helper">Restore when broken</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Change</div>
-              <div class="workflow-station-helper">Implement modifications</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Problem</div>
-              <div class="workflow-station-helper">Fix structural causes</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Knowledge</div>
-              <div class="workflow-station-helper">Reuse know-how</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Config / Asset</div>
-              <div class="workflow-station-helper">Know what we rely on</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Identity & Access</div>
-              <div class="workflow-station-helper">Who can use what</div>
-            </div>
-            <div class="workflow-station">
-              <div class="workflow-station-dot"></div>
-              <div class="workflow-station-label">Continuity</div>
-              <div class="workflow-station-helper">Stay available</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-2" id="workflow-grid"></div>
-
-      <div id="explore-detail" class="detail-panel" style="display:none;"></div>
-    </section>
-
-    <!-- COACH -->
-    <section id="coach" class="section">
-      <div class="section-title">Ask the USM Coach</div>
-      <div class="section-subtitle">
-        Get clear answers about USM, its processes and workflows, in business
-        language.
-      </div>
-
-      <div class="coach-layout">
-        <div class="coach-quick">
-          <button class="btn btn-ghost coach-suggest">
-            Explain USM in simple terms
-          </button>
-          <button class="btn btn-ghost coach-suggest">
-            How does USM improve control?
-          </button>
-          <button class="btn btn-ghost coach-suggest">
-            What are the 5 USM processes?
-          </button>
-        </div>
-
-        <div id="coach-chat" class="coach-chat">
-          <div class="msg coach">
-            Hi, I’m your USM Digital Coach. Ask me about the USM model, its
-            processes, workflows, or how it helps with issues like control,
-            unification, or service quality.
-          </div>
-        </div>
-
-        <div class="coach-input-row">
-          <input
-            type="text"
-            id="coach-input"
-            placeholder="Type your question about USM..."
-          />
-          <button class="btn btn-primary" id="coach-send">Ask</button>
-        </div>
-      </div>
-      <p class="muted" style="margin-top:0.4rem;">
-        This prototype uses simple, rule-based answers based on your USM
-        content. Later, you can connect it to an AI backend.
-      </p>
-    </section>
-
-    <!-- ISSUES -->
-    <section id="issues" class="section">
-      <div class="section-title">Map your challenges to USM</div>
-      <div class="section-subtitle">
-        Describe your situation and see which USM processes and workflows are
-        most relevant.
-      </div>
-
-      <div class="wizard-steps">
-        <div class="wizard-step-pill active" data-step="1">Step 1: Challenges</div>
-        <div class="wizard-step-pill" data-step="2">Step 2: Context</div>
-        <div class="wizard-step-pill" data-step="3">Step 3: USM Guidance</div>
-      </div>
-
-      <div id="wizard-step-1">
-        <p style="font-size:0.9rem;">
-          What challenges are you experiencing? (You can select more than one.)
-        </p>
-        <div class="checkbox-list" id="challenge-list"></div>
-
-        <p class="detail-h" style="margin-top:0.7rem;">Optional: describe your situation</p>
-        <textarea id="issue-description" placeholder="Example: We use several different tools, leadership has no unified view, and each department works in its own way."></textarea>
-
-        <div class="wizard-nav">
-          <button class="btn btn-primary" id="wizard-next-1">Next</button>
-        </div>
-      </div>
-
-      <div id="wizard-step-2" style="display:none;">
-        <p style="font-size:0.9rem;">Where do these challenges mainly occur?</p>
-        <div id="domain-pills"></div>
-
-        <div class="wizard-nav">
-          <button class="btn btn-ghost" id="wizard-back-2">Back</button>
-          <button class="btn btn-primary" id="wizard-next-2">
-            See my USM guidance
-          </button>
-        </div>
-      </div>
-
-      <div id="wizard-step-3" style="display:none;">
-        <div id="wizard-results" class="detail-panel"></div>
-        <div class="wizard-nav">
-          <button class="btn btn-ghost" id="wizard-back-3">Back</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICE MODELER -->
-    <section id="service" class="section">
-      <div class="section-title">Model a Service</div>
-      <div class="section-subtitle">
-        Use this canvas-style guide to detect, define, and model a service in a
-        way that fits USM. The questions are a simplified version of a Service
-        Model Canvas.
-      </div>
-
-      <div class="wizard-steps" style="margin-bottom:0.8rem;">
-        <div class="wizard-step-pill service-step-pill active" data-service-step="1">
-          Step 1: Detect
-        </div>
-        <div class="wizard-step-pill service-step-pill" data-service-step="2">
-          Step 2: Define
-        </div>
-        <div class="wizard-step-pill service-step-pill" data-service-step="3">
-          Step 3: Model
-        </div>
-      </div>
-
-      <!-- STEP 1: DETECT -->
-      <div id="service-step-1">
-        <p style="font-size:0.9rem;">
-          First, check whether what you have in mind behaves like a service.
-          This helps avoid modeling “things” that are actually projects,
-          products, or one-off activities.
-        </p>
-
-        <label class="detail-h">Describe your candidate service</label>
-        <textarea id="svc-desc" placeholder="Example: Online appointment booking for residents, supported by a contact center."></textarea>
-
-        <p class="detail-h" style="margin-top:0.7rem;">Quick checks</p>
-        <div class="checkbox-list">
-          <label class="checkbox-item">
-            <input type="checkbox" id="svc-has-customer" />
-            <span>There is a recognizable Customer (who is accountable for the demand).</span>
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" id="svc-has-users" />
-            <span>There are Users (who actually use the facility).</span>
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" id="svc-repeatable" />
-            <span>The service is used repeatedly over time, not just once.</span>
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" id="svc-has-outcome" />
-            <span>There is a clear outcome the Customer expects (not just internal activity).</span>
-          </label>
-        </div>
-
-        <div class="wizard-nav">
-          <button class="btn btn-primary" id="svc-detect-next">
-            Check & go to Step 2
-          </button>
-        </div>
-
-        <div id="svc-detect-result" class="detail-panel" style="display:none;margin-top:0.9rem;"></div>
-      </div>
-
-      <!-- STEP 2: DEFINE -->
-      <div id="service-step-2" style="display:none;">
-        <p style="font-size:0.9rem;">
-          Now capture the key elements of the service. This is a simplified
-          version of a USM Service Model Canvas: facilities, support, and
-          experience.
-        </p>
-
-        <div class="detail-panel">
-          <div class="detail-title">Basic identity</div>
-          <div class="detail-h">Internal name of the service</div>
-          <input id="svc-name" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-
-          <div class="detail-h" style="margin-top:0.6rem;">Customer (organization or role)</div>
-          <input id="svc-customer" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-
-          <div class="detail-h" style="margin-top:0.6rem;">Version / ID (optional)</div>
-          <input id="svc-version" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-
-          <div class="detail-h" style="margin-top:0.6rem;">Users (teams / roles)</div>
-          <input id="svc-users" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-        </div>
-
-        <div class="detail-panel" style="margin-top:0.8rem;">
-          <div class="detail-title">Facilities (what is made available)</div>
-          <p class="muted">Think in terms of goods + actions, and how they function for the user.</p>
-
-          <div class="detail-h">Goods (systems, locations, items, content)</div>
-          <textarea id="svc-goods" placeholder="Example: Portal, mobile app, kiosks, API, physical counters."></textarea>
-
-          <div class="detail-h">Actions (what the user can do)</div>
-          <textarea id="svc-actions" placeholder="Example: Create request, track status, update data, cancel bookings."></textarea>
-
-          <div class="detail-h">User restrictions (if any)</div>
-          <textarea id="svc-facility-restrictions" placeholder="Example: Residents only; certain options restricted to specific roles."></textarea>
-        </div>
-
-        <div class="detail-panel" style="margin-top:0.8rem;">
-          <div class="detail-title">Support (how the facility is supported)</div>
-          <p class="muted">Activities, agreements, and restrictions on the support side.</p>
-
-          <div class="detail-h">Support activities</div>
-          <textarea id="svc-support-activities" placeholder="Example: 1st/2nd line support, maintenance, monitoring, reporting."></textarea>
-
-          <div class="detail-h">Support agreements / constraints</div>
-          <textarea id="svc-support-agreements" placeholder="Example: Opening hours, response times, data retention, legal constraints."></textarea>
-
-          <div class="detail-h">Support restrictions</div>
-          <textarea id="svc-support-restrictions" placeholder="Example: Limited capacity in peak season, dependency on external provider."></textarea>
-        </div>
-
-        <div class="detail-panel" style="margin-top:0.8rem;">
-          <div class="detail-title">Experience</div>
-          <p class="muted">How should this service feel and perform for the user and customer?</p>
-
-          <div class="detail-h">Experience ambition</div>
-          <textarea id="svc-x-ambition" placeholder="Example: Simple, predictable, self-service first, accessible to all user groups."></textarea>
-
-          <div class="detail-h">Experience indicators (XIs)</div>
-          <textarea id="svc-x-indicators" placeholder="Example: User satisfaction, task completion rate, time to complete, complaints."></textarea>
-
-          <div class="detail-h">Experience management & improvement</div>
-          <textarea id="svc-x-management" placeholder="Example: Quarterly reviews, user panels, continuous improvement backlog."></textarea>
-        </div>
-
-        <div class="wizard-nav">
-          <button class="btn btn-ghost" id="svc-define-back">Back</button>
-          <button class="btn btn-primary" id="svc-define-next">Build service model</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: MODEL -->
-      <div id="service-step-3" style="display:none;">
-        <p style="font-size:0.9rem;">
-          This is your synthesized service model. You can use it for
-          discussions, documentation, or as input for your full Service Model
-          Canvas.
-        </p>
-
-        <div id="svc-model-summary" class="detail-panel"></div>
-
-        <p class="detail-h" style="margin-top:0.7rem;">Copyable structured view</p>
-        <textarea id="svc-model-json" readonly style="min-height:160px;"></textarea>
-
-        <p class="muted" style="margin-top:0.6rem;">
-          Tip: paste this into documents, tickets, or configuration records as
-          a concise description of the service, then refine it with your full
-          canvas template.
-        </p>
-
-        <div class="wizard-nav">
-          <button class="btn btn-ghost" id="svc-model-back">Back</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEEDBACK / CONTACT -->
-    <section id="feedback" class="section">
-      <div class="section-title">Feedback & interaction</div>
-      <div class="section-subtitle">
-        Share your feedback on this prototype and find ways to get in touch.
-      </div>
-
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="card-title">Give feedback on the USM Coach</div>
-          <div class="card-text">
-            Tell us what works well and what could be improved. Your input will
-            shape the next version of this digital coach.
-          </div>
-
-          <form id="feedback-form">
-            <div class="detail-h">Your name (optional)</div>
-            <input id="fb-name" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-
-            <div class="detail-h" style="margin-top:0.6rem;">Email (optional)</div>
-            <input id="fb-email" type="email" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-
-            <div class="detail-h" style="margin-top:0.6rem;">Role / organization (optional)</div>
-            <input id="fb-role" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
-
-            <div class="detail-h" style="margin-top:0.6rem;">Your feedback</div>
-            <textarea id="fb-message" placeholder="What did you find useful? What should be clearer? What would you like to see next?"></textarea>
-
-            <div class="wizard-nav" style="justify-content:flex-start;">
-              <button class="btn btn-primary" type="submit">Send feedback</button>
-            </div>
-            <p id="feedback-thanks" class="muted" style="margin-top:0.4rem;"></p>
-          </form>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Interact with Aurora Red</div>
-          <div class="card-text">
-            If you want to explore USM more deeply, discuss your organization,
-            or request a workshop or coaching session, you can reach out
-            directly.
-          </div>
-          <p class="muted">
-            Replace the contact details below with your preferred email or
-            scheduling links.
-          </p>
-          <ul class="detail-list">
-          <li>
-            Email: 
-            <a href="mailto:info@aurora-red.com">info@aurora-red.com</a>
-          </li>
-              Website:
-              <a href="https://auroraredtechnology.com" target="_blank" rel="noopener">
-                auroraredtechnology.com
-              </a>
-            </li>
-          </ul>
-          <p class="muted">
-            You can also invite people to contact you via LinkedIn or a
-            scheduling link (e.g. Calendly) by adding those links here.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const CONTENT_URL = "data/usm-content.json";
-
-    // ------- Default data (used if JSON not found) -------
-
-    let foundationConcepts = [
-      {
-        id: "FOUNDATION_WHAT",
-        title: "What is USM?",
-        summary:
-          "USM is a unified management system for any service organization, replacing scattered frameworks with one operating model.",
-        type: "foundation",
-        detail: {
-          summary:
-            "USM (Unified Service Management) provides a single way to design, deliver, and improve services across your organization.",
-          whyItMatters: [
-            "Reduces complexity by providing one model instead of many frameworks.",
-            "Supports cross-department collaboration and shared language.",
-            "Helps leadership steer services based on a clear, consistent structure."
-          ]
-        }
-      },
-      {
-        id: "FOUNDATION_WHY",
-        title: "Why unified?",
-        summary:
-          "Different departments often use different models. USM unifies them into one way of working.",
-        type: "foundation",
-        detail: {
-          summary:
-            "A unified model avoids duplicated structures and conflicting practices between IT, HR, Facilities, and other domains.",
-          whyItMatters: [
-            "Eliminates fragmentation in how services are managed.",
-            "Makes it easier to implement governance and improvement organization-wide.",
-            "Supports better control, quality, and customer experience."
-          ]
-        }
-      },
-      {
-        id: "FOUNDATION_PRINCIPLES",
-        title: "Principles, not practices",
-        summary:
-          "USM is built on a small set of principles that stay stable while practices and tools may change.",
-        type: "foundation",
-        detail: {
-          summary:
-            "USM provides structure and coordination; teams choose the practices and tools that fit their context.",
-          whyItMatters: [
-            "Prevents over-engineering of processes.",
-            "Focuses on reusable patterns instead of one-off solutions.",
-            "Supports scaling from one department to the whole enterprise."
-          ]
-        }
-      }
-    ];
-
-    let processes = [
-      {
-        id: "PROC_AGREE",
-        name: "Agree Process",
-        oneLine: "We make and maintain clear agreements about services.",
-        purpose:
-          "This process creates and maintains clear agreements about services — what they are, who they’re for, how they perform, and who is responsible for what.",
-        keyResponsibilities: [
-          "Define services and their intended outcomes.",
-          "Agree on service levels, responsibilities, and constraints.",
-          "Maintain agreements as context and needs change."
-        ],
-        supportsControl: [
-          "Gives leadership a consistent basis for steering all services.",
-          "Prevents misunderstandings about what a service should deliver."
-        ]
-      },
-      {
-        id: "PROC_CHANGE",
-        name: "Change Process",
-        oneLine: "We modify services in a controlled way.",
-        purpose:
-          "This process ensures that modifications to services and service systems happen in a deliberate and controlled way, rather than as accidental drift.",
-        keyResponsibilities: [
-          "Assess proposed changes and their impact.",
-          "Decide what will change and when.",
-          "Coordinate implementation and verify outcomes."
-        ],
-        supportsControl: [
-          "Avoids uncontrolled change that undermines stability.",
-          "Links change decisions to structural impact and objectives."
-        ]
-      },
-      {
-        id: "PROC_OPERATE",
-        name: "Operate Process",
-        oneLine: "We run day-to-day service use as agreed.",
-        purpose:
-          "This process ensures that day-to-day use of services runs as agreed, supporting customers and users consistently.",
-        keyResponsibilities: [
-          "Execute routine service activities.",
-          "Monitor service performance in use.",
-          "Support users in their daily work with services."
-        ],
-        supportsControl: [
-          "Provides real-world visibility into how services are running.",
-          "Creates consistent operating patterns across teams."
-        ]
-      },
-      {
-        id: "PROC_RECOVER",
-        name: "Recover Process",
-        oneLine: "We restore service when performance drops or fails.",
-        purpose:
-          "This process coordinates the restoration of service when performance drops or fails, so disruptions are handled calmly and predictably.",
-        keyResponsibilities: [
-          "Recognize and prioritize disruptions.",
-          "Coordinate restoration activities and communication.",
-          "Capture learning from events and feed it into improvement."
-        ],
-        supportsControl: [
-          "Reduces impact and uncertainty during disruptions.",
-          "Connects incident handling with structural learning."
-        ]
-      },
-      {
-        id: "PROC_IMPROVE",
-        name: "Improve Process",
-        oneLine: "We learn from risks and results to strengthen the system.",
-        purpose:
-          "This process ensures systematic learning and structural strengthening of the service organization over time.",
-        keyResponsibilities: [
-          "Analyze risks, patterns, and performance results.",
-          "Identify structural weaknesses and opportunities.",
-          "Initiate and track improvement initiatives."
-        ],
-        supportsControl: [
-          "Shifts the focus from firefighting to foresight.",
-          "Makes improvement intentional and sustainable."
-        ]
-      }
-    ];
-
-    let workflows = [
-      {
-        id: "WF_REQUEST",
-        name: "Request Workflow",
-        summary:
-          "A consistent way for people to ask for services or support — without confusion or improvisation.",
-        relatedProcesses: ["PROC_OPERATE", "PROC_AGREE"]
-      },
-      {
-        id: "WF_INCIDENT",
-        name: "Incident Workflow",
-        summary:
-          "A calm, structured way to restore agreed service when something goes wrong.",
-        relatedProcesses: ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
-      },
-      {
-        id: "WF_CHANGE",
-        name: "Change Workflow",
-        summary:
-          "A controlled way to modify services or supporting systems, so improvement doesn’t create chaos.",
-        relatedProcesses: ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
-      },
-      {
-        id: "WF_PROBLEM",
-        name: "Problem Workflow",
-        summary:
-          "A disciplined way to discover and remove structural causes of recurring issues.",
-        relatedProcesses: ["PROC_IMPROVE", "PROC_CHANGE"]
-      },
-      {
-        id: "WF_KNOWLEDGE",
-        name: "Knowledge Workflow",
-        summary:
-          "A shared approach to creating and re-using reliable service knowledge across the organization.",
-        relatedProcesses: ["PROC_OPERATE", "PROC_IMPROVE"]
-      },
-      {
-        id: "WF_CONFIG",
-        name: "Configuration / Asset Workflow",
-        summary:
-          "A way to keep trusted information about the services, resources, and relationships the organization depends on.",
-        relatedProcesses: ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
-      },
-      {
-        id: "WF_IDENTITY",
-        name: "Identity & Access Workflow",
-        summary:
-          "A consistent way to manage who can use which services — based on clear roles and agreements.",
-        relatedProcesses: ["PROC_AGREE", "PROC_OPERATE"]
-      },
-      {
-        id: "WF_CONTINUITY",
-        name: "Continuity / Availability Workflow",
-        summary:
-          "A proactive way to protect service delivery when facing risk, disruption, or uncertainty.",
-        relatedProcesses: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
-      }
-    ];
-
-    let issuePatterns = [
-      {
-        id: "ISSUE_LACK_CONTROL",
-        name: "Lack of control",
-        challenges: ["lack_of_control", "operational_chaos", "compliance_risk"],
-        processes: ["PROC_AGREE", "PROC_OPERATE", "PROC_IMPROVE"],
-        workflows: ["WF_CONFIG", "WF_CONTINUITY"],
-        summary:
-          "Your situation points to a lack of unified governance and visibility over services.",
-        actions: [
-          "Define and publish a service catalog as a single reference.",
-          "Standardize a small set of shared KPIs across services.",
-          "Introduce regular service reviews using comparable reports.",
-          "Align existing tools to feed the same service-level view."
-        ]
-      }
-    ];
-
-    let challengeOptions = [
-      { id: "lack_of_control", label: "Lack of control" },
-      { id: "too_many_tools", label: "Too many tools / fragmentation" },
-      { id: "siloed_departments", label: "Siloed departments" },
-      {
-        id: "inconsistent_experience",
-        label: "Inconsistent service experience"
-      },
-      { id: "slow_recovery", label: "Slow response and recovery" },
-      { id: "compliance_risk", label: "Compliance & audit risk" },
-      {
-        id: "lack_standardization",
-        label: "Lack of standardization in ways of working"
-      },
-      { id: "operational_chaos", label: "Operational chaos" },
-      { id: "high_cost", label: "High support cost" },
-      {
-        id: "low_employee_satisfaction",
-        label: "Low employee satisfaction with services"
-      }
-    ];
-
-    let domainOptions = [
-      "IT",
-      "HR",
-      "Facilities",
-      "Finance",
-      "Healthcare",
-      "Government",
-      "Enterprise-wide"
-    ];
-
-    // ----- Navigation -----
-
-    const sections = document.querySelectorAll(".section");
-    const navButtons = document.querySelectorAll(".nav-button");
-
-    function showSection(id) {
-      sections.forEach((s) => {
-        s.classList.toggle("active", s.id === id);
-      });
-      navButtons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.target === id);
-      });
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    document.querySelectorAll("[data-target]").forEach((el) => {
-      el.addEventListener("click", () => {
-        const target = el.dataset.target;
-        if (!target) return;
-        showSection(target);
-      });
-    });
-
-    // ----- Explore rendering -----
-
-    const foundationGrid = document.getElementById("foundation-grid");
-    const processGrid = document.getElementById("process-grid");
-    const workflowGrid = document.getElementById("workflow-grid");
-    const exploreDetail = document.getElementById("explore-detail");
-
-    function renderExplore() {
-      foundationGrid.innerHTML = "";
-      foundationConcepts.forEach((f) => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <div class="card-title">${f.title}</div>
-          <div class="card-text">${f.summary}</div>
-          <button class="btn btn-ghost" data-explore-id="${f.id}">
-            Learn more
-          </button>
-        `;
-        foundationGrid.appendChild(div);
-      });
-
-      processGrid.innerHTML = "";
-      processes.forEach((p) => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <div class="tag">Process</div>
-          <div class="card-title">${p.name}</div>
-          <div class="card-text">${p.oneLine}</div>
-          <button class="btn btn-ghost" data-explore-id="${p.id}">
-            View details
-          </button>
-        `;
-        processGrid.appendChild(div);
-      });
-
-      workflowGrid.innerHTML = "";
-      workflows.forEach((w) => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <div class="tag">Workflow</div>
-          <div class="card-title">${w.name}</div>
-          <div class="card-text">${w.summary}</div>
-          <button class="btn btn-ghost" data-explore-id="${w.id}">
-            View details
-          </button>
-        `;
-        workflowGrid.appendChild(div);
-      });
-
-      document
-        .getElementById("explore")
-        .addEventListener("click", (event) => {
-          const id = event.target.dataset.exploreId;
-          if (!id) return;
-          showConceptDetail(id);
-        });
-    }
-
-    function showConceptDetail(id) {
-  let concept = foundationConcepts.find((f) => f.id === id);
-  let typeLabel = "Concept";
-
-  if (!concept) {
-    const p = processes.find((p) => p.id === id);
-    if (p) {
-      concept = p;
-      typeLabel = "Process";
-    }
+<!-- ============================================================
+   SCRIPT
+============================================================ -->
+<script>
+
+/* ---------- NAVIGATION ---------- */
+const sections = document.querySelectorAll("section");
+const nav = document.querySelectorAll(".nav-link");
+
+function showSection(id){
+  sections.forEach(s=>s.classList.toggle("hidden",s.id!==id));
+  nav.forEach(n=>n.classList.toggle("active",n.dataset.section===id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+nav.forEach(btn=>btn.onclick = ()=>showSection(btn.dataset.section));
+
+
+/* ---------- PROCESS STEP MODELS ---------- */
+
+const processTracks = [
+  {
+    name:"Agree (CTM)",
+    class:"track-agree",
+    subtitle:"Establish and maintain service agreements.",
+    steps:[
+      "Identify need",
+      "Define responsibilities",
+      "Agree conditions",
+      "Formalize",
+      "Monitor",
+      "Review"
+    ]
+  },
+  {
+    name:"Change (CHM)",
+    class:"track-change",
+    subtitle:"Modify services in a controlled way.",
+    steps:[
+      "Propose",
+      "Assess risk",
+      "Approve",
+      "Plan",
+      "Implement",
+      "Verify"
+    ]
+  },
+  {
+    name:"Operate (OPS)",
+    class:"track-operate",
+    subtitle:"Run daily service use as agreed.",
+    steps:[
+      "Receive",
+      "Register",
+      "Perform",
+      "Support user",
+      "Complete",
+      "Record"
+    ]
+  },
+  {
+    name:"Recover (INC)",
+    class:"track-recover",
+    subtitle:"Restore agreed service.",
+    steps:[
+      "Detect",
+      "Assess",
+      "Prioritise",
+      "Recover",
+      "Confirm",
+      "Learn"
+    ]
+  },
+  {
+    name:"Improve (RIM)",
+    class:"track-improve",
+    subtitle:"Strengthen the system.",
+    steps:[
+      "Identify risk",
+      "Analyse",
+      "Define improvement",
+      "Approve",
+      "Implement",
+      "Validate"
+    ]
   }
+];
 
-  if (!concept) {
-    const w = workflows.find((w) => w.id === id);
-    if (w) {
-      concept = w;
-      typeLabel = "Workflow";
-    }
-  }
+function renderProcessTracks(){
+  const div=document.getElementById("process-tracks");
+  div.innerHTML="";
 
-  if (!concept) return;
-
-  let html = `<div class="detail-title">${concept.name || concept.title}</div>`;
-  html += `<div class="detail-sub">Type: ${typeLabel}</div>`;
-
-  if (concept.detail) {
-    html += `<div class="detail-h">Summary</div>`;
-    html += `<p class="muted">${concept.detail.summary}</p>`;
-    if (concept.detail.whyItMatters) {
-      html += `<div class="detail-h">Why it matters</div><ul class="detail-list">`;
-      concept.detail.whyItMatters.forEach((item) => {
-        html += `<li>${item}</li>`;
-      });
-      html += `</ul>`;
-    }
-  } else if (concept.purpose) {
-    html += `<div class="detail-h">Purpose</div><p class="muted">${concept.purpose}</p>`;
-    if (concept.keyResponsibilities) {
-      html += `<div class="detail-h">Key responsibilities</div><ul class="detail-list">`;
-      concept.keyResponsibilities.forEach((item) => {
-        html += `<li>${item}</li>`;
-      });
-      html += `</ul>`;
-    }
-    if (concept.supportsControl) {
-      html += `<div class="detail-h">How this supports control & unification</div><ul class="detail-list">`;
-      concept.supportsControl.forEach((item) => {
-        html += `<li>${item}</li>`;
-      });
-      html += `</ul>`;
-    }
-  } else if (concept.summary) {
-    html += `<div class="detail-h">Summary</div><p class="muted">${concept.summary}</p>`;
-  }
-
-  if (concept.relatedProcesses) {
-    const relNames = (concept.relatedProcesses || [])
-      .map((pid) => processes.find((p) => p.id === pid)?.name)
-      .filter(Boolean);
-    if (relNames.length) {
-      html += `<div class="detail-h">Related processes</div><p class="muted">${relNames.join(
-        ", "
-      )}</p>`;
-    }
-  }
-
-  // Inject content
-  exploreDetail.innerHTML = html;
-  exploreDetail.style.display = "block";
-
-  // Smooth-scroll the page so the detail panel is visible
-  const headerOffset = 80; // adjust if your sticky header is taller/shorter
-  const rect = exploreDetail.getBoundingClientRect();
-  const offsetTop = rect.top + window.pageYOffset - headerOffset;
-
-  window.scrollTo({
-    top: offsetTop,
-    behavior: "smooth"
+  processTracks.forEach(p=>{
+    const el=document.createElement("div");
+    el.className="process-track-card";
+    el.innerHTML=`
+      <div class="process-track-header">
+        <div>
+          <div class="process-track-name">${p.name}</div>
+          <div class="process-track-sub">${p.subtitle}</div>
+        </div>
+        <div class="process-track-tag">6 steps</div>
+      </div>
+      <div class="process-track-steps ${p.class}">
+        ${p.steps.map((s,i)=>`
+          <div class="process-step-box">
+            <div class="process-step-number">${i+1}</div>
+            <div class="process-step-text">${s}</div>
+          </div>`).join("")}
+      </div>
+    `;
+    div.appendChild(el);
   });
 }
 
-    // ----- Coach -----
-
-    const coachChat = document.getElementById("coach-chat");
-    const coachInput = document.getElementById("coach-input");
-    const coachSend = document.getElementById("coach-send");
-    const coachSuggests = document.querySelectorAll(".coach-suggest");
-
-    function addMessage(text, from = "coach") {
-      const div = document.createElement("div");
-      div.className = "msg " + from;
-      div.textContent = text;
-      coachChat.appendChild(div);
-      coachChat.scrollTop = coachChat.scrollHeight;
-    }
-
-    function answerQuestion(raw) {
-      const q = raw.toLowerCase();
-
-      const hasUsmKeywords = [
-        "usm",
-        "service",
-        "process",
-        "workflow",
-        "incident",
-        "request",
-        "governance",
-        "agreement",
-        "change",
-        "operate",
-        "recover",
-        "improve"
-      ].some((k) => q.includes(k));
-
-      if (!hasUsmKeywords) {
-        addMessage(
-          "I’m focused on Unified Service Management and service organizations. If you’d like, try asking your question again in terms of services, agreements, processes, or workflows, and I’ll relate it to USM."
-        );
-        return;
-      }
-
-      if (q.includes("what is usm") || (q.includes("usm") && q.includes("explain"))) {
-        addMessage(
-          "Unified Service Management (USM) is a universal management system for any service organization. It replaces scattered frameworks with one simple structure: 5 processes and 8 workflows that IT, HR, Facilities, Healthcare, Government and others can all share. The idea is: one model, many domains."
-        );
-        return;
-      }
-
-      if ((q.includes("why") || q.includes("benefit") || q.includes("value")) && q.includes("usm")) {
-        addMessage(
-          "Organizations adopt USM mainly for simplification, unification, control, and quality. Instead of each department inventing its own way of working, USM gives everyone the same management structure. That makes it easier to steer services, compare performance, reduce risk, and improve the experience for customers and users."
-        );
-        return;
-      }
-
-      if (q.includes("5") && q.includes("process")) {
-        const names = processes.map((p) => p.name).join(", ");
-        addMessage(
-          "USM defines five non-redundant processes that apply to any service domain: " +
-            names +
-            ".\n• Agree: make and maintain clear service agreements.\n• Change: modify services in a controlled way.\n• Operate: run day-to-day service use as agreed.\n• Recover: restore service when performance drops.\n• Improve: learn from risks and results to strengthen the system."
-        );
-        return;
-      }
-
-      if (q.includes("8") && q.includes("workflow")) {
-        const wfNames = workflows.map((w) => w.name).join(", ");
-        addMessage(
-          "USM uses eight standard workflows as recurring patterns in service operations: " +
-            wfNames +
-            ". They cover how we handle requests, incidents, changes, structural problems, knowledge, configuration/asset data, identity & access, and continuity. Using these shared patterns across departments avoids everyone inventing their own ‘process set’."
-        );
-        return;
-      }
-
-      if (
-        (q.includes("control") || q.includes("governance")) &&
-        (q.includes("how") || q.includes("help"))
-      ) {
-        addMessage(
-          "USM improves control by giving leadership one coherent management system. Agreements are handled in Agree, daily work in Operate, changes in Change, disruptions in Recover, and learning in Improve. Because every department uses the same structure and workflows, reports and decisions become comparable instead of fragmented."
-        );
-        return;
-      }
-
-      if (q.includes("itil") || q.includes("iso") || q.includes("cobit")) {
-        addMessage(
-          "USM is not a replacement for ITIL, ISO, or COBIT. It is a higher-level management system that focuses on structure and coordination. Frameworks and standards sit on top as sources of practices and controls. In other words: USM provides the architecture; ITIL/ISO/COBIT provide detailed guidance that you can plug into that architecture."
-        );
-        return;
-      }
-
-      if (q.includes("service") && (q.includes("define") || q.includes("definition") || q.includes("model"))) {
-        addMessage(
-          "In USM, a service is always a combination of a facility and its support. A good service model clarifies: who is the Customer, who are the Users, what facilities (goods + actions) are made available, how they are supported, and what experience you aim for. You can use the ‘Model a Service’ section in this app as a guided canvas for that."
-        );
-        return;
-      }
-
-      if (q.includes("enterprise") || q.includes("esm") || (q.includes("across") && q.includes("departments"))) {
-        addMessage(
-          "Enterprise Service Management with USM means applying the same management system across departments such as IT, HR, Facilities, and Finance. USM does not force common tools, but it does insist on one shared set of processes and workflows. That way each domain keeps its expertise, while governance and reporting stay unified."
-        );
-        return;
-      }
-
-      if (q.includes("incident") || q.includes("outage") || q.includes("disruption")) {
-        addMessage(
-          "From a USM perspective, an incident is any event where the agreed service is not delivered. The Incident workflow provides a calm path: log → assess impact → assign → restore → capture learning. The Recover process coordinates the restoration, and Improve uses repeated incidents as input for structural change."
-        );
-        return;
-      }
-
-      if (q.includes("improve") || q.includes("continuous") || q.includes("improvement")) {
-        addMessage(
-          "USM treats improvement as a dedicated process, not an occasional project. The Improve process looks at risks, patterns, and results across all services and turns them into structural changes. That way the organization gradually becomes more resilient instead of just fixing symptoms."
-        );
-        return;
-      }
-
-      addMessage(
-        "Good question. From a USM perspective, a helpful way to look at this is: which of the 5 processes is under pressure (Agree, Change, Operate, Recover, Improve), and which of the 8 workflows matches what is happening (for example Request, Incident, Change, or Problem)? Once you know where it sits in the model, it becomes easier to decide what to change or improve."
-      );
-    }
-
-    coachSend.addEventListener("click", () => {
-      const text = coachInput.value.trim();
-      if (!text) return;
-      addMessage(text, "user");
-      coachInput.value = "";
-      setTimeout(() => answerQuestion(text), 200);
-    });
-
-    coachInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        coachSend.click();
-      }
-    });
-
-    coachSuggests.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const text = btn.textContent.trim();
-        addMessage(text, "user");
-        answerQuestion(text);
-      });
-    });
-
-    // ----- Issues wizard -----
-
-    const challengeListDiv = document.getElementById("challenge-list");
-    const domainPillsDiv = document.getElementById("domain-pills");
-    const wizardNext1 = document.getElementById("wizard-next-1");
-    const wizardNext2 = document.getElementById("wizard-next-2");
-    const wizardBack2 = document.getElementById("wizard-back-2");
-    const wizardBack3 = document.getElementById("wizard-back-3");
-    const step1 = document.getElementById("wizard-step-1");
-    const step2 = document.getElementById("wizard-step-2");
-    const step3 = document.getElementById("wizard-step-3");
-    const stepPills = document.querySelectorAll(".wizard-step-pill");
-    const wizardResults = document.getElementById("wizard-results");
-    const issueDescription = document.getElementById("issue-description");
-
-    let selectedChallenges = new Set();
-    let selectedDomains = new Set();
-
-    function setWizardStep(step) {
-      stepPills.forEach((p) => {
-        p.classList.toggle(
-          "active",
-          parseInt(p.dataset.step, 10) === step
-        );
-      });
-      step1.style.display = step === 1 ? "block" : "none";
-      step2.style.display = step === 2 ? "block" : "none";
-      step3.style.display = step === 3 ? "block" : "none";
-    }
-
-    function renderChallenges() {
-      challengeListDiv.innerHTML = "";
-      challengeOptions.forEach((c) => {
-        const row = document.createElement("label");
-        row.className = "checkbox-item";
-        row.innerHTML = `
-          <input type="checkbox" value="${c.id}" />
-          <span>${c.label}</span>
-        `;
-        const input = row.querySelector("input");
-        input.addEventListener("change", () => {
-          if (input.checked) selectedChallenges.add(c.id);
-          else selectedChallenges.delete(c.id);
-        });
-        challengeListDiv.appendChild(row);
-      });
-    }
-
-    function renderDomains() {
-      domainPillsDiv.innerHTML = "";
-      domainOptions.forEach((d) => {
-        const pill = document.createElement("span");
-        pill.className = "pill";
-        pill.textContent = d;
-        pill.addEventListener("click", () => {
-          if (selectedDomains.has(d)) {
-            selectedDomains.delete(d);
-            pill.classList.remove("selected");
-          } else {
-            selectedDomains.add(d);
-            pill.classList.add("selected");
-          }
-        });
-        domainPillsDiv.appendChild(pill);
-      });
-    }
-
-    wizardNext1.addEventListener("click", () => {
-      setWizardStep(2);
-    });
-
-    wizardBack2.addEventListener("click", () => {
-      setWizardStep(1);
-    });
-
-    wizardBack3.addEventListener("click", () => {
-      setWizardStep(2);
-    });
-
-    wizardNext2.addEventListener("click", () => {
-      generateGuidance();
-      setWizardStep(3);
-    });
-
-    function generateGuidance() {
-      const challengesArr = Array.from(selectedChallenges);
-      const domainsArr = Array.from(selectedDomains);
-      const desc = issueDescription.value.trim();
-
-      const matchedIssues = issuePatterns.filter((p) =>
-        p.challenges.some((ch) => challengesArr.includes(ch))
-      );
-
-      let html = "";
-
-      if (!challengesArr.length && !desc) {
-        html += `<div class="detail-title">We need a bit more input</div>`;
-        html += `<p class="muted">You didn’t select any challenges or description. Go back and add at least one challenge or a short description so we can map your situation to USM.</p>`;
-        wizardResults.innerHTML = html;
-        return;
-      }
-
-      html += `<div class="detail-title">Your USM-based guidance</div>`;
-
-      if (matchedIssues.length) {
-        html += `<p class="detail-sub">Based on your challenges, the following patterns are most relevant:</p>`;
-        matchedIssues.forEach((m) => {
-          html += `<span class="result-chip">${m.name}</span>`;
-        });
-
-        const processIds = new Set();
-        const workflowIds = new Set();
-        matchedIssues.forEach((m) => {
-          m.processes.forEach((pid) => processIds.add(pid));
-          m.workflows.forEach((wid) => workflowIds.add(wid));
-        });
-
-        const procNames = Array.from(processIds)
-          .map((id) => processes.find((p) => p.id === id)?.name)
-          .filter(Boolean);
-        const wfNames = Array.from(workflowIds)
-          .map((id) => workflows.find((w) => w.id === id)?.name)
-          .filter(Boolean);
-
-        if (procNames.length) {
-          html += `<div class="detail-h">USM processes to focus on</div>`;
-          html += `<p class="muted">${procNames.join(", ")}</p>`;
-        }
-
-        if (wfNames.length) {
-          html += `<div class="detail-h">Key workflows</div>`;
-          html += `<p class="muted">${wfNames.join(", ")}</p>`;
-        }
-
-        html += `<div class="detail-h">Executive summary</div>`;
-        html += `<p class="muted">${matchedIssues[0].summary}</p>`;
-
-        html += `<div class="detail-h">Recommended first actions</div><ul class="detail-list">`;
-        matchedIssues[0].actions.forEach((a) => {
-          html += `<li>${a}</li>`;
-        });
-        html += `</ul>`;
-      } else {
-        html += `<p class="muted">Your situation doesn’t match one of the predefined patterns yet, but it still fits within the USM model. Often, challenges relate to the Agree, Operate, or Improve processes, and one or more of the 8 workflows.</p>`;
-      }
-
-      if (domainsArr.length) {
-        html += `<div class="detail-h">Context</div>`;
-        html += `<p class="muted">You indicated these areas: ${domainsArr.join(
-          ", "
-        )}.</p>`;
-      }
-
-      if (desc) {
-        html += `<div class="detail-h">Your description</div>`;
-        html += `<p class="muted">${desc}</p>`;
-      }
-
-      html += `<p class="muted" style="margin-top:0.7rem;">Next step: discuss this guidance with the USM Coach and translate it into concrete actions for your organization.</p>`;
-
-      wizardResults.innerHTML = html;
-    }
-
-    // ----- Service Modeler -----
-
-    const svcStepPills = document.querySelectorAll(".service-step-pill");
-    const svcStep1 = document.getElementById("service-step-1");
-    const svcStep2 = document.getElementById("service-step-2");
-    const svcStep3 = document.getElementById("service-step-3");
-    const svcDetectResult = document.getElementById("svc-detect-result");
-    const svcModelSummary = document.getElementById("svc-model-summary");
-    const svcModelJson = document.getElementById("svc-model-json");
-
-    function setServiceStep(step) {
-      svcStepPills.forEach((p) => {
-        p.classList.toggle(
-          "active",
-          parseInt(p.dataset.serviceStep, 10) === step
-        );
-      });
-      svcStep1.style.display = step === 1 ? "block" : "none";
-      svcStep2.style.display = step === 2 ? "block" : "none";
-      svcStep3.style.display = step === 3 ? "block" : "none";
-    }
-
-    document.getElementById("svc-detect-next").addEventListener("click", () => {
-      const checks = [
-        document.getElementById("svc-has-customer").checked,
-        document.getElementById("svc-has-users").checked,
-        document.getElementById("svc-repeatable").checked,
-        document.getElementById("svc-has-outcome").checked
-      ];
-      const desc = document.getElementById("svc-desc").value.trim();
-
-      let html = '<div class="detail-title">Detection result</div>';
-      if (checks.filter(Boolean).length >= 3) {
-        html += `<p class="muted">This looks like a service: it has a Customer, Users, a repeated pattern, and an expected outcome. USM is a good fit for modeling and managing it.</p>`;
-      } else {
-        html += `<p class="muted">Some basic service characteristics are missing or unclear. You can still continue to Step 2, but you may want to refine what you are modeling (service vs. project vs. product).</p>`;
-      }
-
-      if (desc) {
-        html += `<div class="detail-h">Your description</div><p class="muted">${desc}</p>`;
-      }
-
-      svcDetectResult.innerHTML = html;
-      svcDetectResult.style.display = "block";
-      setServiceStep(2);
-    });
-
-    document.getElementById("svc-define-back").addEventListener("click", () => {
-      setServiceStep(1);
-    });
-
-    document.getElementById("svc-define-next").addEventListener("click", () => {
-      const model = {
-        basic: {
-          name: document.getElementById("svc-name").value.trim(),
-          customer: document.getElementById("svc-customer").value.trim(),
-          version: document.getElementById("svc-version").value.trim(),
-          users: document.getElementById("svc-users").value.trim()
-        },
-        facilities: {
-          goods: document.getElementById("svc-goods").value.trim(),
-          actions: document.getElementById("svc-actions").value.trim(),
-          restrictions:
-            document.getElementById("svc-facility-restrictions").value.trim()
-        },
-        support: {
-          activities:
-            document.getElementById("svc-support-activities").value.trim(),
-          agreements:
-            document.getElementById("svc-support-agreements").value.trim(),
-          restrictions:
-            document.getElementById("svc-support-restrictions").value.trim()
-        },
-        experience: {
-          ambition: document.getElementById("svc-x-ambition").value.trim(),
-          indicators: document.getElementById("svc-x-indicators").value.trim(),
-          management: document
-            .getElementById("svc-x-management")
-            .value.trim()
-        }
-      };
-
-      let html = "";
-      html += `<div class="detail-title">${model.basic.name || "Your service model"}</div>`;
-      html += `<div class="detail-sub">Customer: ${
-        model.basic.customer || "not yet specified"
-      } | Users: ${model.basic.users || "not yet specified"}</div>`;
-
-      html += `<div class="detail-h">Facilities (what is made available)</div>`;
-      html += `<p class="muted"><strong>Goods:</strong> ${
-        model.facilities.goods || "not yet specified"
-      }<br/><strong>Actions:</strong> ${
-        model.facilities.actions || "not yet specified"
-      }<br/><strong>User restrictions:</strong> ${
-        model.facilities.restrictions || "not yet specified"
-      }</p>`;
-
-      html += `<div class="detail-h">Support (how it is enabled)</div>`;
-      html += `<p class="muted"><strong>Activities:</strong> ${
-        model.support.activities || "not yet specified"
-      }<br/><strong>Agreements / constraints:</strong> ${
-        model.support.agreements || "not yet specified"
-      }<br/><strong>Support restrictions:</strong> ${
-        model.support.restrictions || "not yet specified"
-      }</p>`;
-
-      html += `<div class="detail-h">Experience</div>`;
-      html += `<p class="muted"><strong>Ambition:</strong> ${
-        model.experience.ambition || "not yet specified"
-      }<br/><strong>Indicators (XIs):</strong> ${
-        model.experience.indicators || "not yet specified"
-      }<br/><strong>Management & improvement:</strong> ${
-        model.experience.management || "not yet specified"
-      }</p>`;
-
-      if (model.basic.version) {
-        html += `<p class="muted" style="margin-top:0.4rem;">Version / ID: ${model.basic.version}</p>`;
-      }
-
-      svcModelSummary.innerHTML = html;
-      svcModelJson.value = JSON.stringify(model, null, 2);
-      setServiceStep(3);
-    });
-
-    document.getElementById("svc-model-back").addEventListener("click", () => {
-      setServiceStep(2);
-    });
-
-    // ----- Feedback form -----
-
-    const feedbackForm = document.getElementById("feedback-form");
-    const feedbackThanks = document.getElementById("feedback-thanks");
-
-    if (feedbackForm) {
-      feedbackForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const ownerEmail = "info@aurora-red.com"; // update to your preferred email
-        const name = document.getElementById("fb-name").value.trim() || "Someone";
-        const email = document.getElementById("fb-email").value.trim();
-        const role = document.getElementById("fb-role").value.trim();
-        const msg = document.getElementById("fb-message").value.trim();
-
-        const body =
-          "Name: " +
-          name +
-          "\nRole/Org: " +
-          (role || "n/a") +
-          "\nEmail: " +
-          (email || "n/a") +
-          "\n\nFeedback:\n" +
-          (msg || "(no message)");
-
-        const mailtoUrl =
-          "mailto:" +
-          ownerEmail +
-          "?subject=" +
-          encodeURIComponent("USM Coach feedback") +
-          "&body=" +
-          encodeURIComponent(body);
-
-        window.location.href = mailtoUrl;
-        feedbackThanks.textContent =
-          "Thank you. Your email client should open with the feedback. If it doesn’t, you can email us directly using the contact details.";
-      });
-    }
-
-    // ----- Load external JSON (if present) and then render -----
-
-    function initApp() {
-      fetch(CONTENT_URL)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((data) => {
-          if (!data) return;
-          if (Array.isArray(data.foundationConcepts))
-            foundationConcepts = data.foundationConcepts;
-          if (Array.isArray(data.processes)) processes = data.processes;
-          if (Array.isArray(data.workflows)) workflows = data.workflows;
-          if (Array.isArray(data.issuePatterns))
-            issuePatterns = data.issuePatterns;
-          if (Array.isArray(data.challengeOptions))
-            challengeOptions = data.challengeOptions;
-          if (Array.isArray(data.domainOptions))
-            domainOptions = data.domainOptions;
-        })
-        .catch(() => {})
-        .finally(() => {
-          renderExplore();
-          renderChallenges();
-          renderDomains();
-        });
-    }
-
-    initApp();
-  </script>
+
+/* ---------- WORKFLOWS ---------- */
+
+const workflowTracks=[ /* same data as earlier — shortened description */
+  {name:"Workflow 1 – Wish to service",code:"CTM–CHM–OPS–CHM–CTM",segments:["CTM","CHM","OPS","CHM","CTM"]},
+  {name:"Workflow 2 – Change via OPS",code:"CHM–OPS–CHM",segments:["CHM","OPS","CHM"]},
+  {name:"Workflow 3 – Incident to change",code:"INC–CHM–OPS–CHM–INC",segments:["INC","CHM","OPS","CHM","INC"]},
+  {name:"Workflow 4 – Incident operational",code:"INC–OPS–INC",segments:["INC","OPS","INC"]},
+  {name:"Workflow 5 – Service request",code:"OPS",segments:["OPS"]},
+  {name:"Workflow 6 – Risk → service",code:"RIM–CTM–CHM–OPS–CHM–CTM–RIM",segments:["RIM","CTM","CHM","OPS","CHM","CTM","RIM"]},
+  {name:"Workflow 7 – Risk → change",code:"RIM–CHM–OPS–CHM–RIM",segments:["RIM","CHM","OPS","CHM","RIM"]},
+  {name:"Workflow 8 – Risk operational",code:"RIM–OPS–RIM",segments:["RIM","OPS","RIM"]}
+];
+
+function color(p){
+  return p==="CTM"?"#4a90e2":
+         p==="CHM"?"#f5d547":
+         p==="OPS"?"#71c671":
+         p==="INC"?"#f26c63":
+         "#f5a623";
+}
+
+function renderWorkflows(){
+  const grid=document.getElementById("workflow-grid");
+  grid.innerHTML="";
+  workflowTracks.forEach(w=>{
+    const el=document.createElement("div");
+    el.className="wf-card";
+    el.innerHTML=`
+      <div class="wf-header">
+        <div>
+          <div class="wf-title">${w.name}</div>
+          <div class="wf-subtitle">${w.code}</div>
+        </div>
+      </div>
+      <div class="wf-track">
+        ${w.segments.map((p,i)=>`
+          <div class="wf-segment" style="background:${color(p)}">${p}</div>
+          ${i<w.segments.length-1?'<div class="wf-arrow">➝</div>':''}
+        `).join("")}
+      </div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+
+/* ---------- COACH ---------- */
+
+const chat=document.getElementById("coach-chat");
+function say(t,from="coach"){
+  const d=document.createElement("div");
+  d.textContent=t;
+  d.style.margin="0.4rem 0";
+  d.style.color=from==="coach"?"#222":"#900";
+  chat.appendChild(d);
+  chat.scrollTop=chat.scrollHeight;
+}
+
+say("Hi, I’m your USM Digital Coach. Ask me about USM, processes, workflows, or governance.");
+
+function coachAnswer(q){
+  const t=q.toLowerCase();
+
+  if(!["usm","service","process","workflow","incident","change","risk","request"].some(k=>t.includes(k))){
+    say("I focus on Unified Service Management. Try asking in terms of services, agreements, processes or workflows.");
+    return;
+  }
+
+  if(t.includes("what is")){
+    say("USM is a universal management system for any service organization. It provides 5 processes and 8 workflows — one shared structure across domains.");
+    return;
+  }
+
+  if(t.includes("5") && t.includes("process")){
+    say("The 5 processes are: Agree (CTM), Change (CHM), Operate (OPS), Recover (INC), Improve (RIM).");
+    return;
+  }
+
+  say("From a USM perspective, consider which process is most affected: Agree, Change, Operate, Recover or Improve — and which workflow applies.");
+}
+
+document.getElementById("coach-send").onclick=()=>{
+  const v=document.getElementById("coach-input").value.trim();
+  if(!v) return;
+  say(v,"user");
+  document.getElementById("coach-input").value="";
+  coachAnswer(v);
+};
+
+
+/* ---------- INIT ---------- */
+
+renderProcessTracks();
+renderWorkflows();
+
+</script>
+
 </body>
 </html>
