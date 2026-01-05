@@ -584,6 +584,7 @@
         <button class="nav-button" data-target="explore">Explore USM</button>
         <button class="nav-button" data-target="coach">Ask the Coach</button>
         <button class="nav-button" data-target="issues">Solve Issues</button>
+        <button class="nav-button" data-target="service">Model a Service</button>
       </div>
     </div>
   </header>
@@ -603,6 +604,9 @@
           </button>
           <button class="btn btn-ghost" data-target="coach">
             Ask the USM Coach
+          </button>
+          <button class="btn btn-ghost" data-target="service">
+            Model a Service
           </button>
         </div>
       </div>
@@ -726,7 +730,7 @@
             <div class="workflow-station">
               <div class="workflow-station-dot"></div>
               <div class="workflow-station-label">Knowledge</div>
-              <div class="workflow-station-helper">Capture & reuse know-how</div>
+              <div class="workflow-station-helper">Reuse know-how</div>
             </div>
             <div class="workflow-station">
               <div class="workflow-station-dot"></div>
@@ -843,9 +847,168 @@
         </div>
       </div>
     </section>
+
+    <!-- SERVICE MODELER -->
+    <section id="service" class="section">
+      <div class="section-title">Model a Service</div>
+      <div class="section-subtitle">
+        Use this canvas-style guide to detect, define, and model a service in a
+        way that fits USM. The questions are a simplified version of a Service
+        Model Canvas.
+      </div>
+
+      <div class="wizard-steps" style="margin-bottom:0.8rem;">
+        <div class="wizard-step-pill service-step-pill active" data-service-step="1">
+          Step 1: Detect
+        </div>
+        <div class="wizard-step-pill service-step-pill" data-service-step="2">
+          Step 2: Define
+        </div>
+        <div class="wizard-step-pill service-step-pill" data-service-step="3">
+          Step 3: Model
+        </div>
+      </div>
+
+      <!-- STEP 1: DETECT -->
+      <div id="service-step-1">
+        <p style="font-size:0.9rem;">
+          First, check whether what you have in mind behaves like a service.
+          This helps avoid modeling “things” that are actually projects,
+          products, or one-off activities.
+        </p>
+
+        <label class="detail-h">Describe your candidate service</label>
+        <textarea id="svc-desc" placeholder="Example: Online appointment booking for residents, supported by a contact center."></textarea>
+
+        <p class="detail-h" style="margin-top:0.7rem;">Quick checks</p>
+        <div class="checkbox-list">
+          <label class="checkbox-item">
+            <input type="checkbox" id="svc-has-customer" />
+            <span>There is a recognizable Customer (who is accountable for the demand).</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="svc-has-users" />
+            <span>There are Users (who actually use the facility).</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="svc-repeatable" />
+            <span>The service is used repeatedly over time, not just once.</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="svc-has-outcome" />
+            <span>There is a clear outcome the Customer expects (not just internal activity).</span>
+          </label>
+        </div>
+
+        <div class="wizard-nav">
+          <button class="btn btn-primary" id="svc-detect-next">
+            Check & go to Step 2
+          </button>
+        </div>
+
+        <div id="svc-detect-result" class="detail-panel" style="display:none;margin-top:0.9rem;"></div>
+      </div>
+
+      <!-- STEP 2: DEFINE -->
+      <div id="service-step-2" style="display:none;">
+        <p style="font-size:0.9rem;">
+          Now capture the key elements of the service. This is a simplified
+          version of a USM Service Model Canvas: facilities, support, and
+          experience.
+        </p>
+
+        <div class="detail-panel">
+          <div class="detail-title">Basic identity</div>
+          <div class="detail-h">Internal name of the service</div>
+          <input id="svc-name" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+
+          <div class="detail-h" style="margin-top:0.6rem;">Customer (organization or role)</div>
+          <input id="svc-customer" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+
+          <div class="detail-h" style="margin-top:0.6rem;">Version / ID (optional)</div>
+          <input id="svc-version" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+
+          <div class="detail-h" style="margin-top:0.6rem;">Users (teams / roles)</div>
+          <input id="svc-users" type="text" style="width:100%;padding:0.4rem;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;" />
+        </div>
+
+        <div class="detail-panel" style="margin-top:0.8rem;">
+          <div class="detail-title">Facilities (what is made available)</div>
+          <p class="muted">Think in terms of goods + actions, and how they function for the user.</p>
+
+          <div class="detail-h">Goods (systems, locations, items, content)</div>
+          <textarea id="svc-goods" placeholder="Example: Portal, mobile app, kiosks, API, physical counters."></textarea>
+
+          <div class="detail-h">Actions (what the user can do)</div>
+          <textarea id="svc-actions" placeholder="Example: Create request, track status, update data, cancel bookings."></textarea>
+
+          <div class="detail-h">User restrictions (if any)</div>
+          <textarea id="svc-facility-restrictions" placeholder="Example: Residents only; certain options restricted to specific roles."></textarea>
+        </div>
+
+        <div class="detail-panel" style="margin-top:0.8rem;">
+          <div class="detail-title">Support (how the facility is supported)</div>
+          <p class="muted">Activities, agreements, and restrictions on the support side.</p>
+
+          <div class="detail-h">Support activities</div>
+          <textarea id="svc-support-activities" placeholder="Example: 1st/2nd line support, maintenance, monitoring, reporting."></textarea>
+
+          <div class="detail-h">Support agreements / constraints</div>
+          <textarea id="svc-support-agreements" placeholder="Example: Opening hours, response times, data retention, legal constraints."></textarea>
+
+          <div class="detail-h">Support restrictions</div>
+          <textarea id="svc-support-restrictions" placeholder="Example: Limited capacity in peak season, dependency on external provider."></textarea>
+        </div>
+
+        <div class="detail-panel" style="margin-top:0.8rem;">
+          <div class="detail-title">Experience</div>
+          <p class="muted">How should this service feel and perform for the user and customer?</p>
+
+          <div class="detail-h">Experience ambition</div>
+          <textarea id="svc-x-ambition" placeholder="Example: Simple, predictable, self-service first, accessible to all user groups."></textarea>
+
+          <div class="detail-h">Experience indicators (XIs)</div>
+          <textarea id="svc-x-indicators" placeholder="Example: User satisfaction, task completion rate, time to complete, complaints."></textarea>
+
+          <div class="detail-h">Experience management & improvement</div>
+          <textarea id="svc-x-management" placeholder="Example: Quarterly reviews, user panels, continuous improvement backlog."></textarea>
+        </div>
+
+        <div class="wizard-nav">
+          <button class="btn btn-ghost" id="svc-define-back">Back</button>
+          <button class="btn btn-primary" id="svc-define-next">Build service model</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: MODEL -->
+      <div id="service-step-3" style="display:none;">
+        <p style="font-size:0.9rem;">
+          This is your synthesized service model. You can use it for
+          discussions, documentation, or as input for your full Service Model
+          Canvas.
+        </p>
+
+        <div id="svc-model-summary" class="detail-panel"></div>
+
+        <p class="detail-h" style="margin-top:0.7rem;">Copyable structured view</p>
+        <textarea id="svc-model-json" readonly style="min-height:160px;"></textarea>
+
+        <p class="muted" style="margin-top:0.6rem;">
+          Tip: paste this into documents, tickets, or configuration records as
+          a concise description of the service, then refine it with your full
+          canvas template.
+        </p>
+
+        <div class="wizard-nav">
+          <button class="btn btn-ghost" id="svc-model-back">Back</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
+    // ----- Data -----
+
     const foundationConcepts = [
       {
         id: "FOUNDATION_WHAT",
@@ -865,7 +1028,7 @@
       },
       {
         id: "FOUNDATION_WHY",
-        title: "Why Unified?",
+        title: "Why unified?",
         summary:
           "Different departments often use different models. USM unifies them into one way of working.",
         type: "foundation",
@@ -881,13 +1044,13 @@
       },
       {
         id: "FOUNDATION_PRINCIPLES",
-        title: "USM Principles",
+        title: "Principles, not practices",
         summary:
-          "Simplify, standardize, and unify how services are managed, regardless of the domain.",
+          "USM is built on a small set of principles that stay stable while practices and tools may change.",
         type: "foundation",
         detail: {
           summary:
-            "USM is built on a small set of principles that keep the model simple and reusable.",
+            "USM provides structure and coordination; teams choose the practices and tools that fit their context.",
           whyItMatters: [
             "Prevents over-engineering of processes.",
             "Focuses on reusable patterns instead of one-off solutions.",
@@ -901,81 +1064,81 @@
       {
         id: "PROC_AGREE",
         name: "Agree Process",
-        oneLine: "Manages clear agreements and expectations about services.",
+        oneLine: "We make and maintain clear agreements about services.",
         purpose:
-          "Agree defines and maintains the service agreements between provider and customer, so everyone knows what to expect.",
+          "This process creates and maintains clear agreements about services — what they are, who they’re for, how they perform, and who is responsible for what.",
         keyResponsibilities: [
-          "Define services and their expected outcomes.",
+          "Define services and their intended outcomes.",
           "Agree on service levels, responsibilities, and constraints.",
-          "Keep agreements consistent and comparable across services."
+          "Maintain agreements as context and needs change."
         ],
         supportsControl: [
-          "Gives leadership a single, consistent basis for steering services.",
+          "Gives leadership a consistent basis for steering all services.",
           "Prevents misunderstandings about what a service should deliver."
         ]
       },
       {
         id: "PROC_CHANGE",
         name: "Change Process",
-        oneLine: "Provides a controlled way to modify services and service systems.",
+        oneLine: "We modify services in a controlled way.",
         purpose:
-          "Change manages improvements and adaptations to services so that evolution happens in a deliberate, low-risk way.",
+          "This process ensures that modifications to services and service systems happen in a deliberate and controlled way, rather than as accidental drift.",
         keyResponsibilities: [
-          "Evaluate and prioritize proposed changes.",
-          "Assess risk and impact before implementation.",
-          "Coordinate the execution of approved changes."
+          "Assess proposed changes and their impact.",
+          "Decide what will change and when.",
+          "Coordinate implementation and verify outcomes."
         ],
         supportsControl: [
-          "Avoids uncontrolled changes that undermine stability.",
-          "Links every change to a clear decision and objective."
-        ]
-      },
-      {
-        id: "PROC_RECOVER",
-        name: "Recover Process",
-        oneLine: "Restores agreed service after disruptions and incidents.",
-        purpose:
-          "Recover ensures that disruptions are handled in a structured way and that services are restored as quickly and safely as possible.",
-        keyResponsibilities: [
-          "Coordinate restoration after incidents or failures.",
-          "Communicate status and expectations to stakeholders.",
-          "Feed structural issues into the Improve process."
-        ],
-        supportsControl: [
-          "Reduces downtime and uncertainty during disruptions.",
-          "Connects incident handling with long-term improvement."
+          "Avoids uncontrolled change that undermines stability.",
+          "Links change decisions to structural impact and objectives."
         ]
       },
       {
         id: "PROC_OPERATE",
         name: "Operate Process",
-        oneLine: "Runs the day-to-day service operations for users and customers.",
+        oneLine: "We run day-to-day service use as agreed.",
         purpose:
-          "Operate manages the daily activities required to deliver services as agreed, across all domains and teams.",
+          "This process ensures that day-to-day use of services runs as agreed, supporting customers and users consistently.",
         keyResponsibilities: [
-          "Execute routine service tasks and monitoring.",
-          "Ensure access and usage follow the agreements.",
-          "Provide an operational view of service performance."
+          "Execute routine service activities.",
+          "Monitor service performance in use.",
+          "Support users in their daily work with services."
         ],
         supportsControl: [
-          "Provides factual data about how services are actually running.",
-          "Creates consistent operating patterns across service teams."
+          "Provides real-world visibility into how services are running.",
+          "Creates consistent operating patterns across teams."
+        ]
+      },
+      {
+        id: "PROC_RECOVER",
+        name: "Recover Process",
+        oneLine: "We restore service when performance drops or fails.",
+        purpose:
+          "This process coordinates the restoration of service when performance drops or fails, so disruptions are handled calmly and predictably.",
+        keyResponsibilities: [
+          "Recognize and prioritize disruptions.",
+          "Coordinate restoration activities and communication.",
+          "Capture learning from events and feed it into improvement."
+        ],
+        supportsControl: [
+          "Reduces impact and uncertainty during disruptions.",
+          "Connects incident handling with structural learning."
         ]
       },
       {
         id: "PROC_IMPROVE",
         name: "Improve Process",
-        oneLine: "Drives learning, risk management, and structural improvement.",
+        oneLine: "We learn from risks and results to strengthen the system.",
         purpose:
-          "Improve looks at patterns, risks, and opportunities to strengthen services over time.",
+          "This process ensures systematic learning and structural strengthening of the service organization over time.",
         keyResponsibilities: [
-          "Analyze incidents, trends, and risks.",
+          "Analyze risks, patterns, and performance results.",
           "Identify structural weaknesses and opportunities.",
-          "Initiate and track improvement actions."
+          "Initiate and track improvement initiatives."
         ],
         supportsControl: [
-          "Shifts focus from firefighting to proactive risk reduction.",
-          "Ensures improvements are deliberate and traceable."
+          "Shifts the focus from firefighting to foresight.",
+          "Makes improvement intentional and sustainable."
         ]
       }
     ];
@@ -985,56 +1148,56 @@
         id: "WF_REQUEST",
         name: "Request Workflow",
         summary:
-          "Handles standard requests for services or information in a consistent way.",
+          "A consistent way for people to ask for services or support — without confusion or improvisation.",
         relatedProcesses: ["PROC_OPERATE", "PROC_AGREE"]
       },
       {
         id: "WF_INCIDENT",
         name: "Incident Workflow",
         summary:
-          "Restores agreed service quickly and calmly when something goes wrong.",
+          "A calm, structured way to restore agreed service when something goes wrong.",
         relatedProcesses: ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
       },
       {
         id: "WF_CHANGE",
         name: "Change Workflow",
         summary:
-          "Implements modifications to services and service systems in a controlled way.",
+          "A controlled way to modify services or supporting systems, so improvement doesn’t create chaos.",
         relatedProcesses: ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
       },
       {
         id: "WF_PROBLEM",
         name: "Problem Workflow",
         summary:
-          "Identifies and removes structural causes of recurring incidents and weaknesses.",
+          "A disciplined way to discover and remove structural causes of recurring issues.",
         relatedProcesses: ["PROC_IMPROVE", "PROC_CHANGE"]
       },
       {
         id: "WF_KNOWLEDGE",
         name: "Knowledge Workflow",
         summary:
-          "Creates, maintains, and shares reusable service knowledge for users and staff.",
+          "A shared approach to creating and re-using reliable service knowledge across the organization.",
         relatedProcesses: ["PROC_OPERATE", "PROC_IMPROVE"]
       },
       {
         id: "WF_CONFIG",
         name: "Configuration / Asset Workflow",
         summary:
-          "Keeps reliable information about services, components, assets, and their relationships.",
+          "A way to keep trusted information about the services, resources, and relationships the organization depends on.",
         relatedProcesses: ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
       },
       {
         id: "WF_IDENTITY",
         name: "Identity & Access Workflow",
         summary:
-          "Manages who is allowed to use which services, based on clear agreements and roles.",
+          "A consistent way to manage who can use which services — based on clear roles and agreements.",
         relatedProcesses: ["PROC_AGREE", "PROC_OPERATE"]
       },
       {
         id: "WF_CONTINUITY",
         name: "Continuity / Availability Workflow",
         summary:
-          "Protects the ability to continue service delivery during disruptions and high-risk situations.",
+          "A proactive way to protect service delivery when facing risk, disruption, or uncertainty.",
         relatedProcesses: ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
       }
     ];
@@ -1051,7 +1214,7 @@
         actions: [
           "Define and publish a service catalog as a single reference.",
           "Standardize a small set of shared KPIs across services.",
-          "Introduce regular Agree / Control style reviews using comparable reports.",
+          "Introduce regular service reviews using comparable reports.",
           "Align existing tools to feed the same service-level view."
         ]
       },
@@ -1064,7 +1227,7 @@
         summary:
           "Multiple tools and siloed practices make it hard to manage services consistently.",
         actions: [
-          "Use USM as the common model behind all tools.",
+          "Use USM as the common structural model behind all tools.",
           "Rationalize or integrate tools around shared workflows.",
           "Ensure each tool supports the same USM processes and workflows."
         ]
@@ -1118,9 +1281,10 @@
       "Enterprise-wide"
     ];
 
+    // ----- Navigation -----
+
     const sections = document.querySelectorAll(".section");
     const navButtons = document.querySelectorAll(".nav-button");
-    const heroButtons = document.querySelectorAll(".hero [data-target]");
 
     function showSection(id) {
       sections.forEach((s) => {
@@ -1132,12 +1296,16 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    navButtons.forEach((btn) => {
-      btn.addEventListener("click", () => showSection(btn.dataset.target));
+    // Any element with data-target switches sections
+    document.querySelectorAll("[data-target]").forEach((el) => {
+      el.addEventListener("click", () => {
+        const target = el.dataset.target;
+        if (!target) return;
+        showSection(target);
+      });
     });
-    heroButtons.forEach((btn) => {
-      btn.addEventListener("click", () => showSection(btn.dataset.target));
-    });
+
+    // ----- Explore rendering -----
 
     const foundationGrid = document.getElementById("foundation-grid");
     const processGrid = document.getElementById("process-grid");
@@ -1253,7 +1421,7 @@
         html += `<div class="detail-h">Summary</div><p class="muted">${concept.summary}</p>`;
       }
 
-      if (concept.relatedProcesses || concept.relatedProcesses === 0) {
+      if (concept.relatedProcesses) {
         const relNames = (concept.relatedProcesses || [])
           .map((pid) => processes.find((p) => p.id === pid)?.name)
           .filter(Boolean);
@@ -1269,6 +1437,8 @@
     }
 
     renderExplore();
+
+    // ----- Coach -----
 
     const coachChat = document.getElementById("coach-chat");
     const coachInput = document.getElementById("coach-input");
@@ -1288,7 +1458,7 @@
 
       if (q.includes("what is usm") || q.includes("explain usm")) {
         addMessage(
-          "Unified Service Management (USM) is a universal operating model for any service organization. Instead of each department inventing its own way of working, USM provides one set of processes and workflows that IT, HR, Facilities, Healthcare, and others can all use. That makes it easier to control services, unify practices, and improve the customer experience."
+          "Unified Service Management (USM) is a universal operating model for any service organization. Instead of each department inventing its own way of working, USM provides one set of processes and workflows that IT, HR, Facilities, Healthcare, Government and others can all use. That makes it easier to control services, unify practices, and improve the customer experience."
         );
         return;
       }
@@ -1305,7 +1475,7 @@
 
       if (q.includes("control")) {
         addMessage(
-          "In USM, control comes from using the same 5 processes and 8 workflows everywhere. The Agree process clarifies expectations, Operate runs services as agreed, Recover and Improve handle disruption and learning, and Change keeps evolution deliberate. Together they give leadership one coherent management system."
+          "In USM, control comes from using the same 5 processes and 8 workflows everywhere. Agree clarifies expectations, Operate runs services as agreed, Recover and Improve handle disruption and learning, and Change keeps evolution deliberate. Together they give leadership one coherent management system."
         );
         return;
       }
@@ -1318,7 +1488,7 @@
       }
 
       addMessage(
-        "Good question. From a USM perspective, most situations can be understood using the 5 processes (Agree, Change, Operate, Recover, Improve) and the 8 workflows. As a starting point, think about which process is most affected and which workflow is most in play."
+        "Good question. From a USM perspective, most situations can be understood using the 5 processes (Agree, Change, Operate, Recover, Improve) and the 8 workflows. As a starting point, think about which process is most affected and which workflow pattern best matches what is happening."
       );
     }
 
@@ -1344,6 +1514,8 @@
         answerQuestion(text);
       });
     });
+
+    // ----- Issues wizard -----
 
     const challengeListDiv = document.getElementById("challenge-list");
     const domainPillsDiv = document.getElementById("domain-pills");
@@ -1508,6 +1680,134 @@
 
       wizardResults.innerHTML = html;
     }
+
+    // ----- Service Modeler -----
+
+    const svcStepPills = document.querySelectorAll(".service-step-pill");
+    const svcStep1 = document.getElementById("service-step-1");
+    const svcStep2 = document.getElementById("service-step-2");
+    const svcStep3 = document.getElementById("service-step-3");
+    const svcDetectResult = document.getElementById("svc-detect-result");
+    const svcModelSummary = document.getElementById("svc-model-summary");
+    const svcModelJson = document.getElementById("svc-model-json");
+
+    function setServiceStep(step) {
+      svcStepPills.forEach((p) => {
+        p.classList.toggle(
+          "active",
+          parseInt(p.dataset.serviceStep, 10) === step
+        );
+      });
+      svcStep1.style.display = step === 1 ? "block" : "none";
+      svcStep2.style.display = step === 2 ? "block" : "none";
+      svcStep3.style.display = step === 3 ? "block" : "none";
+    }
+
+    document.getElementById("svc-detect-next").addEventListener("click", () => {
+      const checks = [
+        document.getElementById("svc-has-customer").checked,
+        document.getElementById("svc-has-users").checked,
+        document.getElementById("svc-repeatable").checked,
+        document.getElementById("svc-has-outcome").checked
+      ];
+      const desc = document.getElementById("svc-desc").value.trim();
+
+      let html = '<div class="detail-title">Detection result</div>';
+      if (checks.filter(Boolean).length >= 3) {
+        html += `<p class="muted">This looks like a service: it has a Customer, Users, a repeated pattern, and an expected outcome. USM is a good fit for modeling and managing it.</p>`;
+      } else {
+        html += `<p class="muted">Some basic service characteristics are missing or unclear. You can still continue to Step 2, but you may want to refine what you are modeling (service vs. project vs. product).</p>`;
+      }
+
+      if (desc) {
+        html += `<div class="detail-h">Your description</div><p class="muted">${desc}</p>`;
+      }
+
+      svcDetectResult.innerHTML = html;
+      svcDetectResult.style.display = "block";
+      setServiceStep(2);
+    });
+
+    document.getElementById("svc-define-back").addEventListener("click", () => {
+      setServiceStep(1);
+    });
+
+    document.getElementById("svc-define-next").addEventListener("click", () => {
+      const model = {
+        basic: {
+          name: document.getElementById("svc-name").value.trim(),
+          customer: document.getElementById("svc-customer").value.trim(),
+          version: document.getElementById("svc-version").value.trim(),
+          users: document.getElementById("svc-users").value.trim()
+        },
+        facilities: {
+          goods: document.getElementById("svc-goods").value.trim(),
+          actions: document.getElementById("svc-actions").value.trim(),
+          restrictions:
+            document.getElementById("svc-facility-restrictions").value.trim()
+        },
+        support: {
+          activities:
+            document.getElementById("svc-support-activities").value.trim(),
+          agreements:
+            document.getElementById("svc-support-agreements").value.trim(),
+          restrictions:
+            document.getElementById("svc-support-restrictions").value.trim()
+        },
+        experience: {
+          ambition: document.getElementById("svc-x-ambition").value.trim(),
+          indicators: document.getElementById("svc-x-indicators").value.trim(),
+          management: document
+            .getElementById("svc-x-management")
+            .value.trim()
+        }
+      };
+
+      let html = "";
+      html += `<div class="detail-title">${model.basic.name || "Your service model"}</div>`;
+      html += `<div class="detail-sub">Customer: ${
+        model.basic.customer || "not yet specified"
+      } | Users: ${model.basic.users || "not yet specified"}</div>`;
+
+      html += `<div class="detail-h">Facilities (what is made available)</div>`;
+      html += `<p class="muted"><strong>Goods:</strong> ${
+        model.facilities.goods || "not yet specified"
+      }<br/><strong>Actions:</strong> ${
+        model.facilities.actions || "not yet specified"
+      }<br/><strong>User restrictions:</strong> ${
+        model.facilities.restrictions || "not yet specified"
+      }</p>`;
+
+      html += `<div class="detail-h">Support (how it is enabled)</div>`;
+      html += `<p class="muted"><strong>Activities:</strong> ${
+        model.support.activities || "not yet specified"
+      }<br/><strong>Agreements / constraints:</strong> ${
+        model.support.agreements || "not yet specified"
+      }<br/><strong>Support restrictions:</strong> ${
+        model.support.restrictions || "not yet specified"
+      }</p>`;
+
+      html += `<div class="detail-h">Experience</div>`;
+      html += `<p class="muted"><strong>Ambition:</strong> ${
+        model.experience.ambition || "not yet specified"
+      }<br/><strong>Indicators (XIs):</strong> ${
+        model.experience.indicators || "not yet specified"
+      }<br/><strong>Management & improvement:</strong> ${
+        model.experience.management || "not yet specified"
+      }</p>`;
+
+      if (model.basic.version) {
+        html += `<p class="muted" style="margin-top:0.4rem;">Version / ID: ${model.basic.version}</p>`;
+      }
+
+      svcModelSummary.innerHTML = html;
+      svcModelJson.value = JSON.stringify(model, null, 2);
+      setServiceStep(3);
+    });
+
+    document.getElementById("svc-model-back").addEventListener("click", () => {
+      setServiceStep(2);
+    });
   </script>
 </body>
 </html>
