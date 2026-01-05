@@ -1,0 +1,179 @@
+{
+  "foundationConcepts": [
+    {
+      "id": "FOUNDATION_WHAT",
+      "title": "What is USM?",
+      "summary": "USM is a unified management system for any service organization, replacing scattered frameworks with one operating model.",
+      "type": "foundation",
+      "detail": {
+        "summary": "USM (Unified Service Management) provides a single way to design, deliver, and improve services across your organization.",
+        "whyItMatters": [
+          "Reduces complexity by providing one model instead of many frameworks.",
+          "Supports cross-department collaboration and shared language.",
+          "Helps leadership steer services based on a clear, consistent structure."
+        ]
+      }
+    },
+    {
+      "id": "FOUNDATION_WHY",
+      "title": "Why unified?",
+      "summary": "Different departments often use different models. USM unifies them into one way of working.",
+      "type": "foundation",
+      "detail": {
+        "summary": "A unified model avoids duplicated structures and conflicting practices between IT, HR, Facilities, and other domains.",
+        "whyItMatters": [
+          "Eliminates fragmentation in how services are managed.",
+          "Makes it easier to implement governance and improvement organization-wide.",
+          "Supports better control, quality, and customer experience."
+        ]
+      }
+    },
+    {
+      "id": "FOUNDATION_PRINCIPLES",
+      "title": "Principles, not practices",
+      "summary": "USM is built on a small set of principles that stay stable while practices and tools may change.",
+      "type": "foundation",
+      "detail": {
+        "summary": "USM provides structure and coordination; teams choose the practices and tools that fit their context.",
+        "whyItMatters": [
+          "Prevents over-engineering of processes.",
+          "Focuses on reusable patterns instead of one-off solutions.",
+          "Supports scaling from one department to the whole enterprise."
+        ]
+      }
+    }
+  ],
+
+  "processes": [
+    {
+      "id": "PROC_AGREE",
+      "name": "Agree Process",
+      "oneLine": "We make and maintain clear agreements about services.",
+      "purpose": "This process creates and maintains clear agreements about services — what they are, who they’re for, how they perform, and who is responsible for what.",
+      "keyResponsibilities": [
+        "Define services and their intended outcomes.",
+        "Agree on service levels, responsibilities, and constraints.",
+        "Maintain agreements as context and needs change."
+      ],
+      "supportsControl": [
+        "Gives leadership a consistent basis for steering all services.",
+        "Prevents misunderstandings about what a service should deliver."
+      ]
+    },
+    {
+      "id": "PROC_CHANGE",
+      "name": "Change Process",
+      "oneLine": "We modify services in a controlled way.",
+      "purpose": "This process ensures that modifications to services and service systems happen in a deliberate and controlled way, rather than as accidental drift.",
+      "keyResponsibilities": [
+        "Assess proposed changes and their impact.",
+        "Decide what will change and when.",
+        "Coordinate implementation and verify outcomes."
+      ],
+      "supportsControl": [
+        "Avoids uncontrolled change that undermines stability.",
+        "Links change decisions to structural impact and objectives."
+      ]
+    },
+    {
+      "id": "PROC_OPERATE",
+      "name": "Operate Process",
+      "oneLine": "We run day-to-day service use as agreed.",
+      "purpose": "This process ensures that day-to-day use of services runs as agreed, supporting customers and users consistently.",
+      "keyResponsibilities": [
+        "Execute routine service activities.",
+        "Monitor service performance in use.",
+        "Support users in their daily work with services."
+      ],
+      "supportsControl": [
+        "Provides real-world visibility into how services are running.",
+        "Creates consistent operating patterns across teams."
+      ]
+    },
+    {
+      "id": "PROC_RECOVER",
+      "name": "Recover Process",
+      "oneLine": "We restore service when performance drops or fails.",
+      "purpose": "This process coordinates the restoration of service when performance drops or fails, so disruptions are handled calmly and predictably.",
+      "keyResponsibilities": [
+        "Recognize and prioritize disruptions.",
+        "Coordinate restoration activities and communication.",
+        "Capture learning from events and feed it into improvement."
+      ],
+      "supportsControl": [
+        "Reduces impact and uncertainty during disruptions.",
+        "Connects incident handling with structural learning."
+      ]
+    },
+    {
+      "id": "PROC_IMPROVE",
+      "name": "Improve Process",
+      "oneLine": "We learn from risks and results to strengthen the system.",
+      "purpose": "This process ensures systematic learning and structural strengthening of the service organization over time.",
+      "keyResponsibilities": [
+        "Analyze risks, patterns, and performance results.",
+        "Identify structural weaknesses and opportunities.",
+        "Initiate and track improvement initiatives."
+      ],
+      "supportsControl": [
+        "Shifts the focus from firefighting to foresight.",
+        "Makes improvement intentional and sustainable."
+      ]
+    }
+  ],
+
+  "workflows": [
+    {
+      "id": "WF_REQUEST",
+      "name": "Request Workflow",
+      "summary": "A consistent way for people to ask for services or support — without confusion or improvisation.",
+      "relatedProcesses": ["PROC_OPERATE", "PROC_AGREE"]
+    },
+    {
+      "id": "WF_INCIDENT",
+      "name": "Incident Workflow",
+      "summary": "A calm, structured way to restore agreed service when something goes wrong.",
+      "relatedProcesses": ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
+    },
+    {
+      "id": "WF_CHANGE",
+      "name": "Change Workflow",
+      "summary": "A controlled way to modify services or supporting systems, so improvement doesn’t create chaos.",
+      "relatedProcesses": ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
+    },
+    {
+      "id": "WF_PROBLEM",
+      "name": "Problem Workflow",
+      "summary": "A disciplined way to discover and remove structural causes of recurring issues.",
+      "relatedProcesses": ["PROC_IMPROVE", "PROC_CHANGE"]
+    },
+    {
+      "id": "WF_KNOWLEDGE",
+      "name": "Knowledge Workflow",
+      "summary": "A shared approach to creating and re-using reliable service knowledge across the organization.",
+      "relatedProcesses": ["PROC_OPERATE", "PROC_IMPROVE"]
+    },
+    {
+      "id": "WF_CONFIG",
+      "name": "Configuration / Asset Workflow",
+      "summary": "A way to keep trusted information about the services, resources, and relationships the organization depends on.",
+      "relatedProcesses": ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
+    },
+    {
+      "id": "WF_IDENTITY",
+      "name": "Identity & Access Workflow",
+      "summary": "A consistent way to manage who can use which services — based on clear roles and agreements.",
+      "relatedProcesses": ["PROC_AGREE", "PROC_OPERATE"]
+    },
+    {
+      "id": "WF_CONTINUITY",
+      "name": "Continuity / Availability Workflow",
+      "summary": "A proactive way to protect service delivery when facing risk, disruption, or uncertainty.",
+      "relatedProcesses": ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
+    }
+  ],
+
+  "issuePatterns": [],
+  "challengeOptions": [],
+  "domainOptions": []
+}
