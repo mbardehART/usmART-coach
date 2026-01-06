@@ -1,0 +1,12 @@
+title: Aurora Red Technology
+description: Unified Service Management (USM) and service excellence consulting
+baseurl: "" # leave empty if this is a user/organization site; set to "/repo-name" if project site
+url: "https://<your-username>.github.io"
+
+theme: minima
+
+# Optional: simple navigation
+header_pages:
+  - index.md
+  - services/usm.md
+  - usm/knowledge-hub.md
