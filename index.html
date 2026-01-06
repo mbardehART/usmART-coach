@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aurora Red — USM Coaching & Services</title>
+<title>USM Coaching & Advisory</title>
 
 <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
 
@@ -58,6 +58,12 @@ img {
   padding:15px;
   margin:10px 0 25px 0;
   background:#fafafa;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.1);
 }
 
 footer {
@@ -70,7 +76,41 @@ footer {
 
 .lang-note {
   font-size: 13px;
-  color:#666;
+  color:#cfd8e3;
+  margin-top:6px;
+}
+
+.lang-switch {
+  margin-top:15px;
+}
+
+.lang-switch button {
+  border:1px solid #fff;
+  background:transparent;
+  color:#fff;
+  padding:6px 10px;
+  margin:0 4px;
+  border-radius:16px;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.lang-switch button.active {
+  background:#fff;
+  color:#0a2b4d;
+}
+
+/* simple RTL adjustment */
+body[dir="rtl"] main {
+  direction: rtl;
+  text-align: right;
+}
+
+body[dir="rtl"] h2 {
+  border-left:none;
+  border-right:5px solid #0a2b4d;
+  padding-left:0;
+  padding-right:10px;
 }
 </style>
 
@@ -79,34 +119,41 @@ footer {
 <body>
 
 <header>
-  <h1>USM Coaching & Advisory</h1>
-  <p>Practical guidance for Service Management Excellence</p>
-  <p class="lang-note">
-    Default language: English (MSA available — فارسی — العربية)
+  <h1 data-i18n="header-title">USM Coaching & Advisory</h1>
+  <p data-i18n="header-tagline">Practical guidance for Service Management Excellence</p>
+  <p class="lang-note" data-i18n="lang-note">
+    Default language: English (Farsi & Arabic available)
   </p>
+
+  <div class="lang-switch">
+    <button data-lang="en" class="active">EN</button>
+    <button data-lang="fa">فارسی</button>
+    <button data-lang="ar">العربية</button>
+  </div>
 </header>
 
 <main>
 
 <section id="intro">
-  <h2>About USM</h2>
+  <h2 data-i18n="intro-title">About USM</h2>
 
-  <p>
-    Unified Service Management (USM) is a method that enables service organizations to structure, standardize, and continuously improve
-    the way services are delivered — using one universal management system that applies across all domains.
+  <p data-i18n="intro-p1">
+    Unified Service Management (USM) is a method that enables service organizations to structure, standardize, and continuously
+    improve the way services are delivered — using one universal management system that applies across all domains.
   </p>
 
-  <p>
-    USM focuses on PEOPLE, PROCESS, and TECHNOLOGY — and provides repeatable ways to convert customer needs into predictable results.
+  <p data-i18n="intro-p2">
+    USM focuses on people, processes, and technology — and provides repeatable ways to convert customer needs into predictable, high-quality results.
   </p>
 </section>
 
 
 <section id="decision-tree">
-  <h2>USM Workflow Decision Tree</h2>
+  <h2 data-i18n="decision-title">USM Workflow Decision Tree</h2>
 
-  <p>
-    This decision model selects the correct workflow based on whether the trigger is reactive or proactive — and whether it requires recovery or change.
+  <p data-i18n="decision-p1">
+    This decision model helps you select the correct workflow based on whether the trigger is reactive or proactive, and whether it
+    relates to an agreement, a failure, or an action.
   </p>
 
   <img src="assets/images/usm/USM%20workflow%20Decision%20tree%20.png"
@@ -119,10 +166,11 @@ footer {
 
 
 <section id="overview">
-  <h2>USM Process & Workflow Model</h2>
+  <h2 data-i18n="overview-title">USM Process &amp; Workflow Model</h2>
 
-  <p>
-    All USM workflows follow the same structured logic — enabling clarity, repeatability, and measurable outcomes.
+  <p data-i18n="overview-p1">
+    All USM workflows follow the same structured logic — enabling clarity, repeatability, and measurable outcomes
+    across every service domain.
   </p>
 
   <img
@@ -134,10 +182,11 @@ footer {
 
 
 <section id="workflows">
-  <h2>The 8 USM Workflows</h2>
+  <h2 data-i18n="workflows-title">The 8 USM Workflows</h2>
 
-  <p>Each workflow follows numeric, color-coded process steps.</p>
-
+  <p data-i18n="workflows-p1">
+    Each workflow is color-coded and numbered. Together they cover every reactive and proactive interaction with your customers.
+  </p>
 
   <div class="card">
     <h3>Workflow 1 — Agreement Update / Issue</h3>
@@ -184,13 +233,13 @@ footer {
 
 
 <section id="contact">
-  <h2>Contact</h2>
+  <h2 data-i18n="contact-title">Contact</h2>
 
   <p>
     📩 <strong>info@aurora-red.com</strong>
   </p>
 
-  <p>
+  <p data-i18n="contact-p1">
     We welcome feedback, collaboration, and coaching inquiries.
   </p>
 </section>
@@ -199,8 +248,98 @@ footer {
 
 
 <footer>
-  Aurora Red Technology LLC — USM Coaching & Services
+  <span data-i18n="footer-text">
+    Aurora Red Technology LLC — USM Coaching &amp; Services
+  </span>
 </footer>
+
+<script>
+// --- simple i18n dictionary ---
+const i18n = {
+  en: {
+    "header-title": "USM Coaching & Advisory",
+    "header-tagline": "Practical guidance for Service Management Excellence",
+    "lang-note": "Default language: English (Farsi & Arabic available)",
+    "intro-title": "About USM",
+    "intro-p1": "Unified Service Management (USM) is a method that enables service organizations to structure, standardize, and continuously improve the way services are delivered — using one universal management system that applies across all domains.",
+    "intro-p2": "USM focuses on people, processes, and technology — and provides repeatable ways to convert customer needs into predictable, high-quality results.",
+    "decision-title": "USM Workflow Decision Tree",
+    "decision-p1": "This decision model helps you select the correct workflow based on whether the trigger is reactive or proactive, and whether it relates to an agreement, a failure, or an action.",
+    "overview-title": "USM Process & Workflow Model",
+    "overview-p1": "All USM workflows follow the same structured logic — enabling clarity, repeatability, and measurable outcomes across every service domain.",
+    "workflows-title": "The 8 USM Workflows",
+    "workflows-p1": "Each workflow is color-coded and numbered. Together they cover every reactive and proactive interaction with your customers.",
+    "contact-title": "Contact",
+    "contact-p1": "We welcome feedback, collaboration, and coaching inquiries.",
+    "footer-text": "Aurora Red Technology LLC — USM Coaching & Services"
+  },
+  fa: {
+    "header-title": "کوچینگ و مشاوره USM",
+    "header-tagline": "راهنمای عملی برای تعالی در مدیریت خدمات",
+    "lang-note": "زبان پیش‌فرض: انگلیسی (فارسی و عربی نیز در دسترس هستند)",
+    "intro-title": "درباره USM",
+    "intro-p1": "USM یا مدیریت یکپارچه خدمات روشی است که به سازمان‌های خدماتی کمک می‌کند شیوه‌ ارائه‌ خدمات خود را ساختاردهی، استانداردسازی و به‌طور مستمر بهبود دهند؛ با استفاده از یک سیستم مدیریت واحد که در همه دامنه‌ها قابل استفاده است.",
+    "intro-p2": "USM بر سه بُعد انسان، فرایند و فناوری تمرکز می‌کند و راه‌های تکرارپذیری برای تبدیل نیازهای مشتری به نتایج قابل پیش‌بینی و باکیفیت فراهم می‌سازد.",
+    "decision-title": "درخت تصمیم جریان‌های کاری USM",
+    "decision-p1": "این مدل تصمیم‌گیری کمک می‌کند براساس این‌که محرک واکنشی است یا پیش‌گیرانه و این‌که به توافق، نقص، یا اقدام مربوط می‌شود، جریان کاری درست را انتخاب کنید.",
+    "overview-title": "مدل فرایند و جریان‌های کاری USM",
+    "overview-p1": "همه جریان‌های کاری USM از یک منطق ساخت‌یافته پیروی می‌کنند؛ که شفافیت، تکرارپذیری و سنجش‌پذیری عملکرد را در تمام حوزه‌های خدماتی ممکن می‌سازد.",
+    "workflows-title": "هشت جریان کاری USM",
+    "workflows-p1": "هر جریان کاری با رنگ و شماره مشخص شده است و در کنار هم همه تعاملات واکنشی و پیش‌گیرانه با مشتریان را پوشش می‌دهند.",
+    "contact-title": "تماس",
+    "contact-p1": "برای بازخورد، همکاری و درخواست کوچینگ خوشحال می‌شویم با ما در تماس باشید.",
+    "footer-text": "Aurora Red Technology LLC — کوچینگ و خدمات USM"
+  },
+  ar: {
+    "header-title": "الاستشارات والتدريب على USM",
+    "header-tagline": "إرشاد عملي للتميّز في إدارة الخدمات",
+    "lang-note": "اللغة الافتراضية: الإنجليزية (يتوفر الفارسية والعربية أيضًا)",
+    "intro-title": "حول USM",
+    "intro-p1": "إدارة الخدمات الموحدة (USM) هي منهج يساعد منظمات الخدمات على تنظيم وتوحيد وتحسين طريقة تقديم الخدمات باستمرار، باستخدام نظام إدارة واحد يمكن تطبيقه في جميع المجالات.",
+    "intro-p2": "تركّز USM على الأشخاص والعمليات والتقنية، وتوفّر طرقًا متكررة لتحويل احتياجات العميل إلى نتائج متوقعة وعالية الجودة.",
+    "decision-title": "شجرة قرار مسارات العمل في USM",
+    "decision-p1": "تساعدك هذه الشجرة على اختيار مسار العمل المناسب حسب ما إذا كان المحفّز تفاعليًا أم استباقيًا، وما إذا كان يتعلق باتفاقية أو عطل أو إجراء.",
+    "overview-title": "نموذج العمليات ومسارات العمل في USM",
+    "overview-p1": "تتبع جميع مسارات العمل في USM نفس المنطق المنظّم، مما يسهّل الوضوح والتكرار وقياس الأداء في كل مجالات الخدمة.",
+    "workflows-title": "مسارات العمل الثمانية في USM",
+    "workflows-p1": "كل مسار عمل ملوَّن ومرقّم، ومعًا تغطي جميع التفاعلات التفاعلية والاستباقية مع عملائك.",
+    "contact-title": "التواصل",
+    "contact-p1": "نرحّب بأي ملاحظات أو شراكات أو طلبات تدريب.",
+    "footer-text": "Aurora Red Technology LLC — التدريب وخدمات USM"
+  }
+};
+
+function setLanguage(lang) {
+  const dict = i18n[lang] || i18n.en;
+
+  document.documentElement.lang = lang;
+  document.body.setAttribute("dir", (lang === "fa" || lang === "ar") ? "rtl" : "ltr");
+
+  document.title = dict["header-title"] || "USM Coaching & Advisory";
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key]) {
+      el.textContent = dict[key];
+    }
+  });
+
+  // button state
+  document.querySelectorAll(".lang-switch button").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
+}
+
+document.querySelectorAll(".lang-switch button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const lang = btn.getAttribute("data-lang");
+    setLanguage(lang);
+  });
+});
+
+// initial language
+setLanguage("en");
+</script>
 
 </body>
 </html>
