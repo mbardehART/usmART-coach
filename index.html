@@ -1,520 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>usmART Coach – Unified Service Management in Practice</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="usmART Coach helps organizations adopt the Unified Service Management (USM) method with practical coaching, training, and implementation support." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurora Red — USM Coaching & Services</title>
 
-  <style>
-    :root {
-      --blue: #4A90E2;   /* AGREE */
-      --yellow: #F8E81C; /* CHANGE */
-      --red: #D0021B;    /* RECOVER */
-      --green: #7ED321;  /* OPERATE */
-      --orange: #F5A623; /* IMPROVE / RISK */
-      --bg: #0b1020;
-      --bg-soft: #151a2b;
-      --text: #f5f5f7;
-      --muted: #a3a7b7;
-      --accent: #ff7a45;
-      --card-radius: 18px;
-    }
+<link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
 
-    * {
-      box-sizing: border-box;
-    }
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  color: #222;
+  background:#ffffff;
+}
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #2b3560 0, #050814 55%, #02030a 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
+header {
+  background:#0a2b4d;
+  color:#fff;
+  padding:40px 20px;
+  text-align:center;
+}
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+header h1 {
+  margin:0 0 10px 0;
+  font-size:32px;
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+main {
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(5,6,12,0.95), rgba(5,6,12,0.4));
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
+section {
+  margin:50px 0;
+}
 
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
+h2 {
+  color:#0a2b4d;
+  border-left:5px solid #0a2b4d;
+  padding-left:10px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+img {
+  max-width:100%;
+  height:auto;
+  margin:20px 0;
+  border-radius:6px;
+  border:1px solid #ddd;
+}
 
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: conic-gradient(from 200deg,
-        var(--blue),
-        var(--yellow),
-        var(--green),
-        var(--orange),
-        var(--red),
-        var(--blue)
-      );
-      box-shadow: 0 0 18px rgba(255,255,255,0.25);
-    }
+.card {
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:15px;
+  margin:10px 0 25px 0;
+  background:#fafafa;
+}
 
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
+footer {
+  margin-top:50px;
+  padding:20px;
+  text-align:center;
+  background:#0a2b4d;
+  color:white;
+}
 
-    .brand-text span:last-child {
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--muted);
-    }
+.lang-note {
+  font-size: 13px;
+  color:#666;
+}
+</style>
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 18px;
-      margin: 0;
-      padding: 0;
-      font-size: 14px;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
-    }
-
-    nav a:hover {
-      color: #ffffff;
-      border-bottom-color: var(--accent);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
-
-    /* HERO */
-
-    #hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-      padding: 40px 0 30px;
-    }
-
-    @media (max-width: 900px) {
-      #hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-kicker {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-size: clamp(30px, 4vw, 40px);
-      line-height: 1.1;
-      margin: 0 0 12px;
-    }
-
-    .hero-highlight {
-      background: linear-gradient(120deg, var(--blue), var(--yellow), var(--green));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 32rem;
-      margin-bottom: 20px;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-      font-size: 11px;
-    }
-
-    .hero-badge {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(8,10,20,0.85);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-badge span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #32d296;
-      box-shadow: 0 0 8px #32d296;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #ffba45);
-      color: #000;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
-
-    .btn-ghost {
-      background: rgba(10,12,24,0.9);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .hero-footnote {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .hero-panel {
-      border-radius: var(--card-radius);
-      background: radial-gradient(circle at top left,
-       rgba(255,255,255,0.08),
-       rgba(9,12,26,0.98));
-      padding: 18px 18px 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
-      font-size: 12px;
-    }
-
-    .hero-panel h3 {
-      margin-top: 0;
-      font-size: 14px;
-    }
-
-    .mini-tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 12px 0;
-    }
-
-    .mini-tag {
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(8,10,22,0.9);
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(4,7,20,0.95);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .pill span.block {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-    }
-
-    .pill .ctm { background: var(--blue); }
-    .pill .chm { background: var(--yellow); }
-    .pill .inc { background: var(--red); }
-    .pill .ops { background: var(--green); }
-    .pill .rim { background: var(--orange); }
-
-    /* SECTIONS */
-
-    section {
-      margin-top: 40px;
-      padding: 30px 20px;
-      border-radius: var(--card-radius);
-      background: rgba(9,12,26,0.9);
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    section h2 {
-      margin-top: 0;
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    section p {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .two-column {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 900px) {
-      section {
-        padding: 24px 16px;
-      }
-      .two-column {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .checklist {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0 0;
-      font-size: 14px;
-    }
-
-    .checklist li {
-      margin-bottom: 6px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .checklist li::before {
-      content: "✓";
-      color: #32d296;
-      font-weight: bold;
-      margin-top: 1px;
-    }
-
-    .pill-row-soft {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 11px;
-    }
-
-    .pill-soft {
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-      color: var(--muted);
-    }
-
-    .section-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .note {
-      font-style: italic;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .image-block {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .image-block img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.55);
-    }
-
-    footer {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 30px 20px 50px;
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-    }
-  </style>
 </head>
+
 <body>
-  <header>
-    <div class="nav-inner">
-      <div class="brand">
-        <div class="brand-mark"></div>
-        <div class="brand-text">
-          <span>usmART coach</span>
-          <span>Unified Service Management in practice</span>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">USM in a nutshell</a></li>
-          <li><a href="#processes">Processes & Workflows</a></li>
-          <li><a href="#engagements">How we work</a></li>
-          <li><a href="#contact">Connect</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <!-- HERO -->
-    <section id="hero">
-      <div>
-        <div class="hero-kicker">From frameworks to one simple method</div>
-        <h1 class="hero-title">
-          Make service management
-          <span class="hero-highlight">simple, visual, and human</span>
-        </h1>
-        <p class="hero-subtitle">
-          usmART coach helps you translate the Unified Service Management (USM) method
-          into daily practice – across IT, facilities, HR, and more. One architecture,
-          one language, many teams.
-        </p>
+<header>
+  <h1>USM Coaching & Advisory</h1>
+  <p>Practical guidance for Service Management Excellence</p>
+  <p class="lang-note">
+    Default language: English (MSA available — فارسی — العربية)
+  </p>
+</header>
 
-        <div class="hero-badges">
-          <div class="hero-badge">
-            <span class="dot"></span>
-            <span>Real-life coaching &amp; implementation</span>
-          </div>
-          <div class="hero-badge">
-            USM + ITIL, COBIT, ISO – aligned, not competing
-          </div>
-        </div>
+<main>
 
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            Schedule a conversation
-          </button>
-          <button class="btn btn-ghost" onclick="document.getElementById('processes').scrollIntoView({behavior:'smooth'})">
-            See the USM engine
-          </button>
-        </div>
+<section id="intro">
+  <h2>About USM</h2>
 
-        <div class="hero-footnote">
-          30+ years of international experience in service &amp; operations – now distilled into one practical method.
-        </div>
-      </div>
+  <p>
+    Unified Service Management (USM) is a method that enables service organizations to structure, standardize, and continuously improve
+    the way services are delivered — using one universal management system that applies across all domains.
+  </p>
 
-      <div class="hero-panel">
-        <h3>The USM engine in one glance</h3>
-        <p>
-          Every service organization, no matter the domain, can be managed with
-          <strong>5 processes</strong> and <strong>8 workflows</strong>.
-        </p>
+  <p>
+    USM focuses on PEOPLE, PROCESS, and TECHNOLOGY — and provides repeatable ways to convert customer needs into predictable results.
+  </p>
+</section>
 
-        <div class="pill-row">
-          <div class="pill"><span class="block ctm"></span>AGREE (CTM)</div>
-          <div class="pill"><span class="block chm"></span>CHANGE (CHM)</div>
-          <div class="pill"><span class="block inc"></span>RECOVER (INC)</div>
-          <div class="pill"><span class="block ops"></span>OPERATE (OPS)</div>
-          <div class="pill"><span class="block rim"></span>IMPROVE (RIM)</div>
-        </div>
 
-        <div class="mini-tag-row">
-          <div class="mini-tag">Domain separation &amp; governance</div>
-          <div class="mini-tag">Standardized workflows</div>
-          <div class="mini-tag">Tool-independent architecture</div>
-        </div>
+<section id="decision-tree">
+  <h2>USM Workflow Decision Tree</h2>
 
-        <p class="note">
-          We don’t start with tools or org charts. We start with the universal management
-          system that can support all of them.
-        </p>
-      </div>
-    </section>
+  <p>
+    This decision model selects the correct workflow based on whether the trigger is reactive or proactive — and whether it requires recovery or change.
+  </p>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-tag">USM in a nutshell</div>
-      <h2>What is USM – and why does it feel different?</h2>
-      <div class="two-column">
-        <div>
-          <p>
-            Unified Service Management (USM) is an <strong>enterprise service management architecture</strong>.
-            It gives you one simple way to design, run, and improve services – whether you manage
-            applications, buildings, HR, or a shared service center.
-          </p>
-          <ul class="checklist">
-            <li>Replaces dozens of overlapping “best practices” with one coherent method</li>
-            <li>Works with ITIL, COBIT, ISO, Lean, Agile, DevOps – it doesn’t fight them</li>
-            <li>Uses a small, visual language (5 processes, 8 workflows) that everyone can learn</li>
-            <li>Supports governance, sourcing, and shared service centers out of the box</li>
-          </ul>
-        </div>
-        <div>
-          <p>
-            As your coach, I help you:
-          </p>
-          <ul class="checklist">
-            <li>Translate the book and theory into your real-world environment</li>
-            <li>Align leaders, teams, and tools around a single management system</li>
-            <li>Build routines that survive reorganizations, new tools, and new frameworks</li>
-          </ul>
-          <div class="pill-row-soft">
-            <div class="pill-soft">Architecture &amp; governance</div>
-            <div class="pill-soft">OCM &amp; change enablement</div>
-            <div class="pill-soft">Process &amp; workflow design</div>
-            <div class="pill-soft">Tool selection &amp; configuration
+  <img src="assets/images/usm/USM%20workflow%20Decision%20tree%20.png"
+       alt="USM Workflow Decision Tree">
+
+  <img src="assets/images/usm/USM%20workflow%20decision%20tree%20detail.png"
+       alt="USM Workflow Decision Tree Detail">
+</section>
+
+
+
+<section id="overview">
+  <h2>USM Process & Workflow Model</h2>
+
+  <p>
+    All USM workflows follow the same structured logic — enabling clarity, repeatability, and measurable outcomes.
+  </p>
+
+  <img
+    src="assets/images/usm/USM%20workflows%20.png"
+    alt="USM Processes and Workflows Overview"
+  >
+</section>
+
+
+
+<section id="workflows">
+  <h2>The 8 USM Workflows</h2>
+
+  <p>Each workflow follows numeric, color-coded process steps.</p>
+
+
+  <div class="card">
+    <h3>Workflow 1 — Agreement Update / Issue</h3>
+    <img src="assets/images/usm/USM%20Workflow%201%20subway%20map.png" alt="Workflow 1 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 2 — Action Requiring Change</h3>
+    <img src="assets/images/usm/USM%20workflow%202%20subway%20map.png" alt="Workflow 2 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 3 — Failure Requiring Change</h3>
+    <img src="assets/images/usm/USM%20workflow%203%20subway%20map.png" alt="Workflow 3 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 4 — Failure Recovery</h3>
+    <img src="assets/images/usm/USM%20workflow%204%20subway%20map.png" alt="Workflow 4 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 5 — Action (No Change)</h3>
+    <img src="assets/images/usm/USM%20workflow%205%20subway%20map.png" alt="Workflow 5 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 6 — Wish Assessment</h3>
+    <img src="assets/images/usm/USM%20workflow%206%20subway%20map.png" alt="Workflow 6 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 7 — Proactive Change</h3>
+    <img src="assets/images/usm/USM%20workflow%207%20subway%20map.png" alt="Workflow 7 subway map">
+  </div>
+
+  <div class="card">
+    <h3>Workflow 8 — Service Request</h3>
+    <img src="assets/images/usm/USM%20workflow%208%20subway%20map.png" alt="Workflow 8 subway map">
+  </div>
+
+</section>
+
+
+
+<section id="contact">
+  <h2>Contact</h2>
+
+  <p>
+    📩 <strong>info@aurora-red.com</strong>
+  </p>
+
+  <p>
+    We welcome feedback, collaboration, and coaching inquiries.
+  </p>
+</section>
+
+</main>
+
+
+<footer>
+  Aurora Red Technology LLC — USM Coaching & Services
+</footer>
+
+</body>
+</html>
