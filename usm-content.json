@@ -1,51 +1,253 @@
 {
-  "siteTitle": "Aurora Red Technology – USM",
-  "home": {
-    "title": "Unified Service Management (USM)",
-    "lead": "A universal method to bring simplicity and control to any service organization.",
-    "introParagraphs": [
-      "USM provides one simple management system for all services – IT, facilities, HR, and more.",
-      "This site captures what USM is, why it matters, and how to start using it."
-    ]
+  "site": {
+    "title": "USM ART Coach",
+    "subtitle": "Unified Service Management made practical",
+    "tagline": "From framework overload to one simple, reusable method for every service organization."
   },
   "chapters": [
     {
-      "id": "chapter-7",
+      "id": "ch1",
+      "title": "Chapter 1 – Why USM?",
+      "tagline": "From scattered best practices to one simple, reusable method.",
+      "summary": "Explains why service organizations struggle with many overlapping frameworks and tools, and introduces USM as a simple, universal management method for any service provider.",
+      "audience": "Executives, service owners, transformation leads.",
+      "keyPoints": [
+        "Most organizations are overloaded with frameworks (ITIL, COBIT, ISO, Lean, Agile) but still lack consistent execution.",
+        "USM focuses on a small, universal set of processes and workflows instead of hundreds of practices.",
+        "The same management system can be used in IT, HR, Facilities, Telecom, Municipalities, etc.",
+        "USM is architecture-first: one clear structure; practices and tools plug into that structure.",
+        "Goal: service and customer excellence with less complexity, lower cost, and more control."
+      ],
+      "examples": [
+        "An IT department runs ITIL, a facilities team uses its own FM standard, HR has its own processes – everyone works differently, making shared services and reporting painful.",
+        "A CIO wants one way of working across all service units; USM becomes the common language and architecture."
+      ]
+    },
+    {
+      "id": "ch2",
+      "title": "Chapter 2 – Principles & Architecture",
+      "tagline": "A small set of principles that make service delivery predictable.",
+      "summary": "Introduces the core principles of USM and the enterprise service management architecture (ESMA) that underpins every service organization.",
+      "audience": "Architects, senior managers, method/quality owners.",
+      "keyPoints": [
+        "USM is built on a handful of business principles (e.g., structure systems by segmenting them; the customer determines quality; standardization enables control).",
+        "The Enterprise Service Management Architecture (ESMA) gives a generic blueprint for any service organization.",
+        "USM separates WHAT (architecture, principles) from HOW (local practices and tools).",
+        "A single Enterprise Service Management System (ESMS) can satisfy multiple standards (ISO, COBIT, etc.) at once.",
+        "Value is co-created: services enable customer activities; quality is defined from the customer’s perspective."
+      ],
+      "examples": [
+        "A municipality uses USM principles to design one service system for IT, Facilities, and HR, even though each uses different tools.",
+        "A hospital wants to meet ISO 27001 and ISO 20000; instead of separate projects, they build one USM-based management system and map both standards onto it."
+      ]
+    },
+    {
+      "id": "ch3",
+      "title": "Chapter 3 – Service & Value",
+      "tagline": "Understanding services, value co-creation, and customer experience.",
+      "summary": "Defines what a service really is, how value is co-created, and why a customer-driven mindset is essential for modern service organizations.",
+      "audience": "Anyone who talks to customers, designs services, or owns SLAs.",
+      "keyPoints": [
+        "Service = a means of enabling customer activities and outcomes, not just a product or system.",
+        "Value is co-created: provider + customer both have roles in achieving outcomes.",
+        "USM uses Service-Dominant (S-D) logic: focus on use and outcomes, not just technology.",
+        "Customer experience (CX/UX) is shaped by all interactions across workflows and touchpoints.",
+        "A clear service catalog and meaningful agreements (SAs/SLAs/OLAs/UCs) are key instruments."
+      ],
+      "examples": [
+        "Instead of saying “we provide servers,” the provider defines a service like “Reliable Clinical Application Hosting” with clear outcomes and responsibilities.",
+        "A railway operator focuses on ‘on-time departure’ as a customer outcome; IT, facilities and operations all contribute via their services."
+      ]
+    },
+    {
+      "id": "ch4",
+      "title": "Chapter 4 – People, Roles & Profiles",
+      "tagline": "From job titles to clear tasks, authorities and responsibilities (TAR).",
+      "summary": "Describes how to structure roles, profiles, and responsibilities so that everyone knows what they must do in the management system.",
+      "audience": "HR, line managers, process/workflow owners, PMO/SMO.",
+      "keyPoints": [
+        "USM separates people, roles, functions, and profiles to avoid confusion.",
+        "TAR (Tasks, Authorities, Responsibilities) must be balanced; you cannot hold someone responsible without giving them authority.",
+        "Profiles (like Service Manager, Process Manager, Coordinator, Operator) can be reused across teams and domains.",
+        "The managed infrastructure register (MIR) also stores profiles and their relations to processes and workflows.",
+        "A matrix organization emerges where profiles act on processes, independent of the org chart."
+      ],
+      "examples": [
+        "A ‘Change Manager’ is clarified into two profiles: Change Coordinator (line coordination) and Process Manager CHM (designs and governs the change process).",
+        "An organization maps all key profiles to USM processes and discovers overlaps and gaps in responsibilities."
+      ]
+    },
+    {
+      "id": "ch5",
+      "title": "Chapter 5 – The USM Process Model",
+      "tagline": "Five universal processes, eight workflows – that’s all you need.",
+      "summary": "Defines the five generic USM processes and the eight workflows that organize all service management activities in a non-redundant way.",
+      "audience": "Process owners, architects, tool admins, team leads.",
+      "keyPoints": [
+        "USM uses 5 processes: CTM (Agree), CHM (Change), INC (Recover), OPS (Operate), RIM (Improve).",
+        "All service management work is handled via 8 workflows (wishes, changes, incidents, service requests, etc.).",
+        "The process model is pure and non-redundant – no overlapping activities in multiple processes.",
+        "Workflows cross processes and teams, creating an integrated view of how services are delivered.",
+        "Every call in the system follows a simple pattern: accept → classify → handle → evaluate/close."
+      ],
+      "examples": [
+        "A ‘New Employee Onboarding’ request triggers a workflow that uses CTM (agreements), CHM (changes like access setup), OPS (daily tasks), and RIM (improvement feedback) in one flow.",
+        "An incident on a critical system is handled via the INC workflow, but might trigger CHM (permanent fix) and RIM (risk reduction)."
+      ]
+    },
+    {
+      "id": "ch6",
+      "title": "Chapter 6 – Managed Infrastructure (MIR)",
+      "tagline": "Your single source of truth for services, assets, people, and documents.",
+      "summary": "Explains the Managed Infrastructure Register (MIR) as the central, structured record of all facilities and management system components needed to deliver services.",
+      "audience": "Tool owners, asset/config managers, architects, auditors.",
+      "keyPoints": [
+        "MIR = the complete set of managed infrastructure components (MICs): services, assets, documents, profiles, workflows, tools, etc.",
+        "Everything that matters for control and repeatability is a MIC and is stored or referenced in the MIR.",
+        "Changes to MICs are controlled via CHM, ensuring traceability and impact analysis.",
+        "The MIR is broader than a classic CMDB – it includes non-technical components like procedures, agreements, training plans.",
+        "A good MIR enables better reporting, risk management, and standardization."
+      ],
+      "examples": [
+        "A standard change model, a laptop build template, and a service agreement are all MICs; they live in the MIR and are changed via CHM.",
+        "During an audit, the organization quickly shows how a security policy (MIC) links to services, assets, and workflows in the MIR."
+      ]
+    },
+    {
+      "id": "ch7",
       "title": "Chapter 7 – The Service Organization",
-      "shortSummary": "How to structure a service organization: governance, domain separation, matrix organization, teams, and the service desk.",
+      "tagline": "How to structure teams, roles, and responsibilities for control.",
+      "summary": "Shows how to design the service organization so that governance, structure, separation of duties, and standardization all support reliable service delivery.",
+      "audience": "Executives, service management leaders, HR, architects.",
       "keyPoints": [
-        "Mission, vision, core values, strategy, goals, and policy set direction.",
-        "Governance creates the environment; management runs the day-to-day.",
-        "Strategic, tactical, and operational levels are linked through planning & control.",
-        "Domain separation: specifying vs realizing to improve control and assurance.",
-        "Standardization and process/workflow-based working increase predictability.",
-        "RACI and clear profiles connect people to processes.",
-        "Service desk as SPOC; self-service and standardization shift work left.",
-        "Watch out for drama triangles and shadow services."
+        "Mission, core values, vision, strategy, goals, and objectives must be aligned and translated into concrete policy.",
+        "Governance sets the rules and oversight; management runs the day-to-day within that frame.",
+        "Planning & control works on three levels: strategic (aim), tactical (set up), operational (execute).",
+        "Separation of duties is critical: specify vs realize, process management vs line management.",
+        "USM assumes a matrix organization where teams use the same processes and workflows, regardless of hierarchy.",
+        "Standardization and domain separation provide assurance; drama triangles and shadow services are signals of organizational imbalance."
+      ],
+      "examples": [
+        "IT splits functional management (requirements, SLAs, business liaison) from technical management (infrastructure & apps), with clear interfaces and USM workflows between them.",
+        "A business unit bypasses the internal IT service and buys its own SaaS tools – USM identifies this as a ‘shadow service’ and addresses the root-cause: broken trust and unclear service design."
       ]
     },
     {
-      "id": "chapter-8",
+      "id": "ch8",
       "title": "Chapter 8 – Technology Resources",
-      "shortSummary": "What tools and templates a service organization needs, including the SDC tool and MIR.",
+      "tagline": "Tools should follow the method – not the other way around.",
+      "summary": "Describes the tooling landscape for service organizations and what a USM-compatible service delivery coordination (SDC) tool must be able to do.",
+      "audience": "Tool owners, CIO/CTO, procurement, architects.",
       "keyPoints": [
-        "Tools support coordination (workflows + MIR) and execution (task-specific tools).",
-        "Service Delivery Coordination (SDC) tool manages calls and workflows.",
-        "Managed Infrastructure Register (MIR) stores all managed components and relationships.",
-        "ERP strategy (all-in-one) vs Best-of-Breed (modular, API-connected)."
+        "Resources include SDC/service desk tools, MIR tools, knowledge bases, PPM, reporting, monitoring, and domain-specific system management tools.",
+        "Two main strategies: ERP (all-in-one suite) vs Best-of-Breed (specialized tools integrated by APIs).",
+        "USM favors strong workflow support and an integrated MIR over monolithic tool coverage.",
+        "A USM-ready SDC tool must support all 8 workflows, templates, integral planning, and an integrated MIR.",
+        "Non-automated tools (templates, forms, documents) are still important and should be treated as MICs."
+      ],
+      "examples": [
+        "A facilities organization switches from several disconnected tools to one workflow-centric SDC tool plus a few specialized point solutions connected via APIs.",
+        "A service desk tool is redesigned to use USM workflows: each request type corresponds to a template that pre-assigns tasks, teams, and timings."
       ]
     },
     {
-      "id": "chapter-9",
+      "id": "ch9",
       "title": "Chapter 9 – Deploying USM",
-      "shortSummary": "How to introduce USM in practice using improvement sprints and change management.",
+      "tagline": "Turning USM from a book into your daily way of working.",
+      "summary": "Provides a practical deployment protocol for implementing USM in a step-by-step, agile way, aligned with organizational change management.",
+      "audience": "Project/program managers, internal change leads, USM coaches.",
       "keyPoints": [
-        "USM can be deployed top-down, bottom-up, or both.",
-        "Use phases: intake, planning, set-up, improvement sprints, routine phase.",
-        "Internal project manager + optional USM coach + tool expert lead the work.",
-        "Organizational change management is crucial: attitude, behavior, culture.",
-        "USM works well with Agile, DevOps, Lean, and Design Thinking."
+        "USM deployment is a learning process: the goal is self-sufficiency, not dependency on external consultants.",
+        "Typical phases: intake → planning → set-up → first improvement sprint → further sprints → transfer to standing organization.",
+        "A project structure with a project board, internal project manager, and (optional) USM coach guides the change.",
+        "Improvement sprints integrate people, processes, technology, and services – always in small, manageable steps.",
+        "USM is compatible with Agile, DevOps, Lean, Design Thinking, and other improvement techniques.",
+        "The USM Panel keeps continuous improvement alive after the project ends."
+      ],
+      "examples": [
+        "An internal project manager leads a 6-month USM deployment with quarterly sprints, each delivering visible changes to workflows and tooling.",
+        "After the project, an operator-level USM Panel meets monthly to surface issues; process managers translate them into RIM items and CHM changes."
       ]
+    },
+    {
+      "id": "epilogue",
+      "title": "Epilogue – The House You Built",
+      "tagline": "USM as your sustainable management ‘engine’.",
+      "summary": "Reflects on USM as a simple but robust way to architect and run service organizations, like building a house with a solid foundation and reusable components.",
+      "audience": "Everyone who wants the ‘big picture’ of USM.",
+      "keyPoints": [
+        "USM is not new theory; it’s a practical synthesis of proven management principles in a very simple structure.",
+        "You build your management system like a house: foundation (principles), structure (processes/workflows), installations (tools), furniture (practices).",
+        "Once the fundament is in place, you can redesign rooms and furniture without rebuilding the house.",
+        "USM works for any service organization and supports shared service centers and standardization across domains.",
+        "Using USM, you can meet multiple standards and frameworks with one coherent management system."
+      ],
+      "examples": [
+        "A company merges IT, HR, and Facilities into an interdisciplinary SSC using one USM-based SDC tool and one set of workflows.",
+        "An organization uses USM as the underlying management system and maps ISO, COBIT, and local regulations on top, instead of running separate initiatives."
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "USM",
+      "definition": "Unified Service Management – a simple, universal method to design and run service organizations using five processes and eight workflows."
+    },
+    {
+      "term": "ESMA",
+      "definition": "Enterprise Service Management Architecture – the generic blueprint for how any service organization should be structured."
+    },
+    {
+      "term": "ESMS",
+      "definition": "Enterprise Service Management System – the concrete management system (processes, roles, tools, MIR) built using USM."
+    },
+    {
+      "term": "CTM",
+      "definition": "Contract/Agree Management process – making and managing agreements with customers and suppliers."
+    },
+    {
+      "term": "CHM",
+      "definition": "Change Management process – preparing, assessing, authorizing, and implementing changes."
+    },
+    {
+      "term": "INC",
+      "definition": "Incident/Recover Management process – restoring normal service when something goes wrong."
+    },
+    {
+      "term": "OPS",
+      "definition": "Operations Management process – executing planned, repetitive operational activities."
+    },
+    {
+      "term": "RIM",
+      "definition": "Risk/Improve Management process – identifying risks, prioritizing improvements, and following them up."
+    },
+    {
+      "term": "MIR",
+      "definition": "Managed Infrastructure Register – the controlled record of all managed infrastructure components (MICs): services, assets, documents, roles, workflows, tools, etc."
+    },
+    {
+      "term": "SDC tool",
+      "definition": "Service Delivery Coordination tool (often called a service desk tool) that manages workflows, calls, and the MIR."
+    },
+    {
+      "term": "SA / SLA / OLA / UC",
+      "definition": "Service Agreement / Service Level Agreement / Operational Level Agreement / Underpinning Contract – different types of agreements that define expectations and responsibilities."
+    },
+    {
+      "term": "SSC / iSSC",
+      "definition": "Shared Service Center / interdisciplinary Shared Service Center – merged support organizations that deliver services to multiple business units, possibly across domains."
+    },
+    {
+      "term": "Shadow Services",
+      "definition": "Unofficial services created by internal customers when they bypass the official provider, leading to duplication, risk and inefficiency."
+    },
+    {
+      "term": "Drama Triangle",
+      "definition": "A problematic three-way relationship (e.g., customer–provider–provider) where conflicting interests and poor coordination harm overall service performance."
+    },
+    {
+      "term": "Best-of-Breed",
+      "definition": "Tooling strategy where you select the best specialized tools for each function and integrate them, instead of using one big ERP suite."
     }
   ]
 }
