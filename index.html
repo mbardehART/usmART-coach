@@ -2,45 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>USM ART Coach – Unified Service Management</title>
+  <title>usmART Coach – Unified Service Management in Practice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="USM ART Coach – a practical, visual guide to Unified Service Management for all service organizations."
-  />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <meta name="description" content="usmART Coach helps organizations adopt the Unified Service Management (USM) method with practical coaching, training, and implementation support." />
+
   <style>
     :root {
-      --bg: #050816;
-      --bg-alt: #0b1020;
-      --card: #111827;
-      --accent: #f97316;
-      --accent-soft: rgba(249, 115, 22, 0.16);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.3);
-      --radius-lg: 1.25rem;
-      --radius-xl: 1.75rem;
-      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.85);
-      --shadow-subtle: 0 14px 40px rgba(15, 23, 42, 0.7);
-      --transition-fast: 150ms ease-out;
-
-      /* Process colors */
-      --color-ctm: #38bdf8; /* sky */
-      --color-chm: #a855f7; /* purple */
-      --color-inc: #fb923c; /* orange */
-      --color-ops: #22c55e; /* green */
-      --color-rim: #eab308; /* amber */
-
-      /* Workflow colors */
-      --wf-1: #38bdf8;
-      --wf-2: #a855f7;
-      --wf-3: #fb923c;
-      --wf-4: #22c55e;
-      --wf-5: #6366f1;
-      --wf-6: #f97316;
-      --wf-7: #10b981;
-      --wf-8: #eab308;
+      --blue: #4A90E2;   /* AGREE */
+      --yellow: #F8E81C; /* CHANGE */
+      --red: #D0021B;    /* RECOVER */
+      --green: #7ED321;  /* OPERATE */
+      --orange: #F5A623; /* IMPROVE / RISK */
+      --bg: #0b1020;
+      --bg-soft: #151a2b;
+      --text: #f5f5f7;
+      --muted: #a3a7b7;
+      --accent: #ff7a45;
+      --card-radius: 18px;
     }
 
     * {
@@ -49,1126 +27,494 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #111827, #020617 58%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #2b3560 0, #050814 55%, #02030a 100%);
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
     a {
-      color: inherit;
+      color: var(--accent);
       text-decoration: none;
     }
 
-    main {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 4rem;
+    a:hover {
+      text-decoration: underline;
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5,6,12,0.95), rgba(5,6,12,0.4));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
+      gap: 20px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 10px;
     }
 
     .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #fde68a, #ea580c 55%, #7c2d12);
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9),
-        0 16px 40px rgba(0, 0, 0, 0.85);
-      position: relative;
-      overflow: hidden;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: conic-gradient(from 200deg,
+        var(--blue),
+        var(--yellow),
+        var(--green),
+        var(--orange),
+        var(--red),
+        var(--blue)
+      );
+      box-shadow: 0 0 18px rgba(255,255,255,0.25);
     }
 
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 9px;
-      border-radius: inherit;
-      border: 1px solid rgba(15, 23, 42, 0.8);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-      background: radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.3), transparent 50%);
-    }
-
-    .brand-text-title {
-      font-weight: 650;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      font-size: 0.92rem;
-    }
-
-    .brand-text-sub {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    nav {
+    .brand-text {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      font-size: 0.82rem;
+      flex-direction: column;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span:last-child {
+      font-size: 11px;
+      font-weight: 400;
       color: var(--muted);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
     }
 
     nav a {
-      padding: 0.4rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: background var(--transition-fast), color var(--transition-fast),
-        border-color var(--transition-fast), transform var(--transition-fast);
-      cursor: pointer;
+      color: var(--muted);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
     }
 
     nav a:hover {
-      color: #fef3c7;
-      border-color: rgba(248, 250, 252, 0.2);
-      background: rgba(15, 23, 42, 0.85);
-      transform: translateY(-1px);
+      color: #ffffff;
+      border-bottom-color: var(--accent);
     }
 
-    .layout-grid {
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* HERO */
+
+    #hero {
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 1.5rem;
-      align-items: stretch;
-      margin-bottom: 2rem;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+      padding: 40px 0 30px;
     }
 
     @media (max-width: 900px) {
-      .layout-grid {
+      #hero {
         grid-template-columns: minmax(0, 1fr);
       }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      main {
-        padding-inline: 1rem;
-      }
     }
 
-    section {
-      margin-bottom: 2rem;
+    .hero-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 12px;
     }
 
-    .card {
-      background: radial-gradient(circle at top left, #111827, #020617 80%);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 1.4rem 1.4rem;
-      position: relative;
-      overflow: hidden;
+    .hero-title {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.1;
+      margin: 0 0 12px;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(248, 250, 252, 0.04), transparent 55%);
-      opacity: 0.8;
-      pointer-events: none;
+    .hero-highlight {
+      background: linear-gradient(120deg, var(--blue), var(--yellow), var(--green));
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
-    .card-inner {
-      position: relative;
-      z-index: 1;
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 32rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 11px;
+    }
+
+    .hero-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(8,10,20,0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #32d296;
+      box-shadow: 0 0 8px #32d296;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ffba45);
+      color: #000;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .btn-ghost {
+      background: rgba(10,12,24,0.9);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .hero-footnote {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-panel {
+      border-radius: var(--card-radius);
+      background: radial-gradient(circle at top left,
+       rgba(255,255,255,0.08),
+       rgba(9,12,26,0.98));
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+      font-size: 12px;
+    }
+
+    .hero-panel h3 {
+      margin-top: 0;
+      font-size: 14px;
+    }
+
+    .mini-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0;
+    }
+
+    .mini-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(8,10,22,0.9);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
       border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #fed7aa;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(248, 250, 252, 0.1);
-      margin-bottom: 0.65rem;
+      background: rgba(4,7,20,0.95);
+      border: 1px solid rgba(255,255,255,0.12);
     }
 
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.3);
+    .pill span.block {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
     }
 
-    h1 {
-      font-size: clamp(1.9rem, 3vw, 2.4rem);
-      line-height: 1.15;
-      margin: 0 0 0.4rem;
-      letter-spacing: -0.03em;
+    .pill .ctm { background: var(--blue); }
+    .pill .chm { background: var(--yellow); }
+    .pill .inc { background: var(--red); }
+    .pill .ops { background: var(--green); }
+    .pill .rim { background: var(--orange); }
+
+    /* SECTIONS */
+
+    section {
+      margin-top: 40px;
+      padding: 30px 20px;
+      border-radius: var(--card-radius);
+      background: rgba(9,12,26,0.9);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    h1 span.highlight {
-      background: linear-gradient(110deg, #fed7aa, #fb923c, #f97316);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    section h2 {
+      margin-top: 0;
+      font-size: 22px;
+      margin-bottom: 12px;
     }
 
-    .subtitle {
-      font-size: 0.96rem;
-      color: var(--muted);
-      max-width: 32rem;
-      margin-bottom: 1rem;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 0.55rem 1.05rem;
-      font-size: 0.86rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: background var(--transition-fast), transform var(--transition-fast),
-        box-shadow var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at top left, #fbbf24, #f97316);
-      color: #111827;
-      font-weight: 600;
-      box-shadow: 0 10px 30px rgba(248, 150, 31, 0.6);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(251, 191, 36, 0.5);
-    }
-
-    .btn-secondary {
-      background: rgba(15, 23, 42, 0.85);
-      border-color: rgba(148, 163, 184, 0.8);
+    section p {
+      font-size: 14px;
       color: var(--muted);
     }
 
-    .btn-secondary:hover {
-      background: rgba(15, 23, 42, 0.9);
-      border-color: #e5e7eb;
-      color: #e5e7eb;
-      transform: translateY(-1px);
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
     }
 
-    .hero-meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
+    @media (max-width: 900px) {
+      section {
+        padding: 24px 16px;
+      }
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
-    .hero-meta span.badge {
-      padding: 0.18rem 0.55rem;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .side-card-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .audience-list {
+    .checklist {
       list-style: none;
       padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.65rem;
-      font-size: 0.86rem;
+      margin: 10px 0 0;
+      font-size: 14px;
     }
 
-    .audience-item {
-      padding: 0.55rem 0.7rem;
-      border-radius: 0.9rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(30, 64, 175, 0.6);
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .audience-item-title {
-      font-weight: 550;
-      font-size: 0.88rem;
-      margin-bottom: 0.18rem;
-    }
-
-    .audience-item-text {
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .section-title {
-      font-size: 1.05rem;
-      margin: 0 0 0.4rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .section-heading-main {
-      font-size: 1.25rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .section-lead {
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 44rem;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-      gap: 1.3rem;
-      margin-top: 0.9rem;
-    }
-
-    @media (max-width: 900px) {
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .chapter-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 0.75rem;
-      margin-top: 0.9rem;
-      font-size: 0.86rem;
-    }
-
-    .chapter-card {
-      padding: 0.7rem 0.8rem;
-      border-radius: 1rem;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      box-shadow: var(--shadow-subtle);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .chapter-card:hover {
-      border-color: rgba(249, 115, 22, 0.9);
-    }
-
-    .chapter-id {
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-bottom: 0.1rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .chapter-title {
-      font-size: 0.9rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .chapter-summary {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-
-    .chapter-bullets {
-      list-style: disc;
-      padding-left: 1.1rem;
-      margin: 0;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .chapter-bullets li + li {
-      margin-top: 0.12rem;
-    }
-
-    /* Process & Workflow section */
-
-    .process-train {
-      margin-top: 0.8rem;
-      padding: 0.85rem 0.9rem 1rem;
-      border-radius: 1.1rem;
-      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), transparent 55%),
-        rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-    }
-
-    .process-train-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      margin-bottom: 0.45rem;
-    }
-
-    .train-cars {
+    .checklist li {
+      margin-bottom: 6px;
       display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 0.55rem;
-      padding-bottom: 0.5rem;
+      gap: 8px;
     }
 
-    .train-car {
-      flex: 1 1 120px;
-      min-width: 130px;
-      padding: 0.5rem 0.55rem 0.6rem;
-      border-radius: 0.9rem;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 0.78rem;
-      cursor: pointer;
-      position: relative;
-      transition: border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        transform var(--transition-fast),
-        background var(--transition-fast);
+    .checklist li::before {
+      content: "✓";
+      color: #32d296;
+      font-weight: bold;
+      margin-top: 1px;
     }
 
-    .train-car:hover {
-      transform: translateY(-1px);
+    .pill-row-soft {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 11px;
     }
 
-    .train-car-step {
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.2rem;
-      opacity: 0.85;
-    }
-
-    .train-car-code {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 0.1rem;
-    }
-
-    .train-car-name {
-      font-weight: 550;
-      margin-bottom: 0.15rem;
-    }
-
-    .train-car-short {
-      color: var(--muted);
-    }
-
-    /* Process-specific colors */
-
-    .train-car.process-CTM .train-car-step,
-    .train-car.process-CTM .train-car-code {
-      color: var(--color-ctm);
-    }
-
-    .train-car.process-CHM .train-car-step,
-    .train-car.process-CHM .train-car-code {
-      color: var(--color-chm);
-    }
-
-    .train-car.process-INC .train-car-step,
-    .train-car.process-INC .train-car-code {
-      color: var(--color-inc);
-    }
-
-    .train-car.process-OPS .train-car-step,
-    .train-car.process-OPS .train-car-code {
-      color: var(--color-ops);
-    }
-
-    .train-car.process-RIM .train-car-step,
-    .train-car.process-RIM .train-car-code {
-      color: var(--color-rim);
-    }
-
-    .train-car.process-CTM.active {
-      border-color: var(--color-ctm);
-      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.55);
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.96));
-    }
-
-    .train-car.process-CHM.active {
-      border-color: var(--color-chm);
-      box-shadow: 0 14px 30px rgba(168, 85, 247, 0.55);
-      background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.12), rgba(15, 23, 42, 0.96));
-    }
-
-    .train-car.process-INC.active {
-      border-color: var(--color-inc);
-      box-shadow: 0 14px 30px rgba(251, 146, 60, 0.55);
-      background: radial-gradient(circle at top left, rgba(251, 146, 60, 0.12), rgba(15, 23, 42, 0.96));
-    }
-
-    .train-car.process-OPS.active {
-      border-color: var(--color-ops);
-      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.55);
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 0.96));
-    }
-
-    .train-car.process-RIM.active {
-      border-color: var(--color-rim);
-      box-shadow: 0 14px 30px rgba(234, 179, 8, 0.55);
-      background: radial-gradient(circle at top left, rgba(234, 179, 8, 0.12), rgba(15, 23, 42, 0.96));
-    }
-
-    .train-track {
-      height: 3px;
-      margin-top: 0.45rem;
+    .pill-soft {
+      padding: 4px 9px;
       border-radius: 999px;
-      background: linear-gradient(
-        90deg,
-        var(--color-ctm),
-        var(--color-chm),
-        var(--color-inc),
-        var(--color-ops),
-        var(--color-rim)
-      );
-      opacity: 0.95;
-    }
-
-    .process-detail {
-      margin-top: 0.8rem;
-      font-size: 0.8rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
       color: var(--muted);
     }
 
-    .process-detail-title {
-      font-size: 0.88rem;
-      color: #e5e7eb;
-      margin-bottom: 0.2rem;
-    }
-
-    .process-detail-examples {
-      list-style: decimal;
-      padding-left: 1.15rem;
-      margin: 0.3rem 0 0;
-    }
-
-    .process-detail-examples li + li {
-      margin-top: 0.1rem;
-    }
-
-    .workflow-grid {
-      margin-top: 0.8rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.7rem;
-      font-size: 0.8rem;
-    }
-
-    .workflow-card {
-      padding: 0.65rem 0.7rem 0.7rem;
-      border-radius: 1rem;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-      transition: border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        transform var(--transition-fast),
-        background var(--transition-fast);
-    }
-
-    .workflow-card:hover {
-      box-shadow: var(--shadow-subtle);
-      transform: translateY(-1px);
-    }
-
-    .workflow-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      color: #020617;
-      background: #fefce8;
-    }
-
-    .workflow-id {
-      font-size: 0.7rem;
+    .section-tag {
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       color: var(--muted);
-      margin-bottom: 0.12rem;
+      margin-bottom: 6px;
     }
 
-    .workflow-name {
-      font-size: 0.9rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .workflow-short {
-      color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .workflow-meta {
-      font-size: 0.72rem;
+    .note {
+      font-style: italic;
+      font-size: 12px;
       color: var(--muted);
     }
 
-    .workflow-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-      margin-right: 0.4rem;
+    .image-block {
+      text-align: center;
+      margin: 20px 0;
     }
 
-    .workflow-meta-tag {
-      padding: 0.15rem 0.4rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 0.7rem;
-      margin-right: 0.2rem;
-    }
-
-    .workflow-examples {
-      margin: 0.3rem 0 0;
-      padding-left: 1rem;
-      list-style: decimal;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .workflow-examples li + li {
-      margin-top: 0.1rem;
-    }
-
-    /* Workflow-specific colors */
-
-    .workflow-card.wf-1 {
-      border-left: 3px solid var(--wf-1);
-    }
-    .workflow-card.wf-1 .workflow-pill {
-      background: var(--wf-1);
-    }
-
-    .workflow-card.wf-2 {
-      border-left: 3px solid var(--wf-2);
-    }
-    .workflow-card.wf-2 .workflow-pill {
-      background: var(--wf-2);
-    }
-
-    .workflow-card.wf-3 {
-      border-left: 3px solid var(--wf-3);
-    }
-    .workflow-card.wf-3 .workflow-pill {
-      background: var(--wf-3);
-    }
-
-    .workflow-card.wf-4 {
-      border-left: 3px solid var(--wf-4);
-    }
-    .workflow-card.wf-4 .workflow-pill {
-      background: var(--wf-4);
-    }
-
-    .workflow-card.wf-5 {
-      border-left: 3px solid var(--wf-5);
-    }
-    .workflow-card.wf-5 .workflow-pill {
-      background: var(--wf-5);
-    }
-
-    .workflow-card.wf-6 {
-      border-left: 3px solid var(--wf-6);
-    }
-    .workflow-card.wf-6 .workflow-pill {
-      background: var(--wf-6);
-    }
-
-    .workflow-card.wf-7 {
-      border-left: 3px solid var(--wf-7);
-    }
-    .workflow-card.wf-7 .workflow-pill {
-      background: var(--wf-7);
-    }
-
-    .workflow-card.wf-8 {
-      border-left: 3px solid var(--wf-8);
-    }
-    .workflow-card.wf-8 .workflow-pill {
-      background: var(--wf-8);
-    }
-
-    .practical-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 1.2rem;
-      margin-top: 0.8rem;
-    }
-
-    @media (max-width: 900px) {
-      .practical-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .faq-list {
-      margin-top: 0.8rem;
-      display: grid;
-      gap: 0.6rem;
-      font-size: 0.84rem;
-    }
-
-    .faq-item {
-      padding: 0.55rem 0.7rem;
-      border-radius: 0.9rem;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-    }
-
-    .faq-q {
-      font-weight: 550;
-      margin-bottom: 0.15rem;
-    }
-
-    .faq-a {
-      color: var(--muted);
-      font-size: 0.8rem;
+    .image-block img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.55);
     }
 
     footer {
-      max-width: 1120px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 1.25rem 2.5rem;
-      font-size: 0.75rem;
+      padding: 30px 20px 50px;
+      font-size: 12px;
       color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <main>
-    <header>
+  <header>
+    <div class="nav-inner">
       <div class="brand">
         <div class="brand-mark"></div>
-        <div>
-          <div class="brand-text-title">USM ART COACH</div>
-          <div class="brand-text-sub">Unified Service Management in practice</div>
+        <div class="brand-text">
+          <span>usmART coach</span>
+          <span>Unified Service Management in practice</span>
         </div>
       </div>
       <nav>
-        <a href="#hero">Overview</a>
-        <a href="#process-model">Processes & Workflows</a>
-        <a href="#chapters">Book Summary</a>
-        <a href="#practical">Practical Guide</a>
-        <a href="#faq">FAQ</a>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">USM in a nutshell</a></li>
+          <li><a href="#processes">Processes & Workflows</a></li>
+          <li><a href="#engagements">How we work</a></li>
+          <li><a href="#contact">Connect</a></li>
+        </ul>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <!-- HERO + AUDIENCES -->
-    <section id="hero" class="layout-grid">
-      <div class="card">
-        <div class="card-inner">
-          <div class="pill">
-            <span class="pill-dot"></span>
-            <span>Unified Service Management</span>
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <div>
+        <div class="hero-kicker">From frameworks to one simple method</div>
+        <h1 class="hero-title">
+          Make service management
+          <span class="hero-highlight">simple, visual, and human</span>
+        </h1>
+        <p class="hero-subtitle">
+          usmART coach helps you translate the Unified Service Management (USM) method
+          into daily practice – across IT, facilities, HR, and more. One architecture,
+          one language, many teams.
+        </p>
+
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            <span>Real-life coaching &amp; implementation</span>
           </div>
-          <h1>
-            <span class="highlight">USM</span> for real-life service organizations
-          </h1>
-          <p class="subtitle" id="hero-subtitle">
-            <!-- filled by JS -->
-          </p>
-          <div class="cta-row">
-            <a href="#process-model" class="btn btn-primary" id="hero-cta-primary">
-              Explore USM in Practice
-            </a>
-            <a href="#practical" class="btn btn-secondary" id="hero-cta-secondary">
-              Open Practical Guide
-            </a>
+          <div class="hero-badge">
+            USM + ITIL, COBIT, ISO – aligned, not competing
           </div>
-          <div class="hero-meta">
-            <span class="badge">5 processes · 8 workflows · 1 method</span>
-            <span>Works for IT, HR, facilities, and more.</span>
-          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Schedule a conversation
+          </button>
+          <button class="btn btn-ghost" onclick="document.getElementById('processes').scrollIntoView({behavior:'smooth'})">
+            See the USM engine
+          </button>
+        </div>
+
+        <div class="hero-footnote">
+          30+ years of international experience in service &amp; operations – now distilled into one practical method.
         </div>
       </div>
 
-      <aside class="card">
-        <div class="card-inner">
-          <div class="side-card-title">Who is this for?</div>
-          <ul class="audience-list" id="audience-list">
-            <!-- filled by JS -->
+      <div class="hero-panel">
+        <h3>The USM engine in one glance</h3>
+        <p>
+          Every service organization, no matter the domain, can be managed with
+          <strong>5 processes</strong> and <strong>8 workflows</strong>.
+        </p>
+
+        <div class="pill-row">
+          <div class="pill"><span class="block ctm"></span>AGREE (CTM)</div>
+          <div class="pill"><span class="block chm"></span>CHANGE (CHM)</div>
+          <div class="pill"><span class="block inc"></span>RECOVER (INC)</div>
+          <div class="pill"><span class="block ops"></span>OPERATE (OPS)</div>
+          <div class="pill"><span class="block rim"></span>IMPROVE (RIM)</div>
+        </div>
+
+        <div class="mini-tag-row">
+          <div class="mini-tag">Domain separation &amp; governance</div>
+          <div class="mini-tag">Standardized workflows</div>
+          <div class="mini-tag">Tool-independent architecture</div>
+        </div>
+
+        <p class="note">
+          We don’t start with tools or org charts. We start with the universal management
+          system that can support all of them.
+        </p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-tag">USM in a nutshell</div>
+      <h2>What is USM – and why does it feel different?</h2>
+      <div class="two-column">
+        <div>
+          <p>
+            Unified Service Management (USM) is an <strong>enterprise service management architecture</strong>.
+            It gives you one simple way to design, run, and improve services – whether you manage
+            applications, buildings, HR, or a shared service center.
+          </p>
+          <ul class="checklist">
+            <li>Replaces dozens of overlapping “best practices” with one coherent method</li>
+            <li>Works with ITIL, COBIT, ISO, Lean, Agile, DevOps – it doesn’t fight them</li>
+            <li>Uses a small, visual language (5 processes, 8 workflows) that everyone can learn</li>
+            <li>Supports governance, sourcing, and shared service centers out of the box</li>
           </ul>
         </div>
-      </aside>
-    </section>
-
-    <!-- PROCESS MODEL – TRAIN + WORKFLOWS -->
-    <section id="process-model">
-      <div class="card">
-        <div class="card-inner">
-          <div class="section-title">USM Process & Workflow Model</div>
-          <div class="section-heading-main">One process train, eight standard journeys</div>
-          <p class="section-lead" id="process-intro">
-            <!-- filled by JS -->
+        <div>
+          <p>
+            As your coach, I help you:
           </p>
-
-          <div class="grid-2">
-            <!-- LEFT: TRAIN / PROCESSES -->
-            <div>
-              <div class="process-train">
-                <div class="process-train-label">The USM process train</div>
-                <div class="train-cars" id="train-cars">
-                  <!-- filled by JS -->
-                </div>
-                <div class="train-track"></div>
-                <div class="process-detail" id="process-detail">
-                  <!-- filled by JS -->
-                </div>
-              </div>
-            </div>
-
-            <!-- RIGHT: WORKFLOW GRID -->
-            <div>
-              <div class="process-train-label">The 8 USM workflows</div>
-              <p class="section-lead" id="workflows-intro" style="font-size:0.82rem;">
-                <!-- filled by JS -->
-              </p>
-              <div class="workflow-grid" id="workflow-grid">
-                <!-- filled by JS -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHAPTER SUMMARIES -->
-    <section id="chapters">
-      <div class="card">
-        <div class="card-inner">
-          <div class="section-title">Book Summary</div>
-          <div class="section-heading-main">USM chapters at a glance</div>
-          <p class="section-lead">
-            Each chapter of the USM book builds one piece of the method – from principles and architecture to organization, tools, and deployment. Here is the whole story in one view.
-          </p>
-          <div class="chapter-list" id="chapter-list">
-            <!-- filled by JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRACTICAL GUIDE + FAQ -->
-    <section id="practical">
-      <div class="card">
-        <div class="card-inner">
-          <div class="section-title">Practical Guide</div>
-          <div class="section-heading-main" id="practical-title">
-            <!-- filled by JS -->
-          </div>
-          <p class="section-lead" id="practical-intro">
-            <!-- filled by JS -->
-          </p>
-          <div class="practical-grid">
-            <div>
-              <ol id="practical-steps" style="margin:0;padding-left:1rem;font-size:0.84rem;">
-                <!-- filled by JS -->
-              </ol>
-            </div>
-            <div>
-              <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">
-                Use the expanded Practical Guide when you are ready to go deeper with your team.
-              </p>
-              <a href="USM_Practical_Guide_Expanded.docx" class="btn btn-primary" download>
-                <span id="practical-download-label">Download Practical Guide</span>
-              </a>
-              <div style="margin-top:0.75rem;font-size:0.78rem;color:var(--muted);">
-                Tip: start small. Pick one service, map the five processes and eight workflows, and run a short improvement sprint. Then repeat.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="card">
-        <div class="card-inner">
-          <div class="section-title">FAQ</div>
-          <div class="section-heading-main">Common questions about USM</div>
-          <div class="faq-list" id="faq-list">
-            <!-- filled by JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <span>USM ART Coach · Unified Service Management in practice</span>
-    <span>Powered by GitHub Pages</span>
-  </footer>
-
-  <script>
-    async function initUSMPage() {
-      try {
-        const response = await fetch("usm-content.json", { cache: "no-store" });
-        if (!response.ok) {
-          console.error("Failed to load usm-content.json", response.status);
-          return;
-        }
-        const content = await response.json();
-
-        // HERO
-        if (content.hero) {
-          document.getElementById("hero-subtitle").textContent =
-            content.hero.subtitle || "";
-          const primary = document.getElementById("hero-cta-primary");
-          const secondary = document.getElementById("hero-cta-secondary");
-          if (primary && content.hero.ctaPrimary) {
-            primary.textContent = content.hero.ctaPrimary;
-          }
-          if (secondary && content.hero.ctaSecondary) {
-            secondary.textContent = content.hero.ctaSecondary;
-          }
-        }
-
-        // AUDIENCES
-        const audienceList = document.getElementById("audience-list");
-        if (content.intro && Array.isArray(content.intro.audiences) && audienceList) {
-          content.intro.audiences.forEach((aud) => {
-            const li = document.createElement("li");
-            li.className = "audience-item";
-            li.innerHTML = `
-              <div class="audience-item-title">${aud.title}</div>
-              <div class="audience-item-text">${aud.text}</div>
-            `;
-            audienceList.appendChild(li);
-          });
-        }
-
-        // PROCESS MODEL
-        if (content.processModel) {
-          const pm = content.processModel;
-
-          const processIntroEl = document.getElementById("process-intro");
-          if (processIntroEl && pm.intro) {
-            processIntroEl.textContent = pm.intro;
-          }
-
-          const workflowsIntroEl = document.getElementById("workflows-intro");
-          if (workflowsIntroEl && pm.workflowsIntro) {
-            workflowsIntroEl.textContent = pm.workflowsIntro;
-          }
-
-          // Processes -> train cars
-          const trainCarsEl = document.getElementById("train-cars");
-          const processDetailEl = document.getElementById("process-detail");
-          let activeProcessIndex = 0;
-
-          function renderProcessDetail(index) {
-            if (!pm.processes || !pm.processes[index]) return;
-            const p = pm.processes[index];
-            processDetailEl.innerHTML = `
-              <div class="process-detail-title">
-                ${p.code} – ${p.name}
-              </div>
-              <div>${p.purpose || ""}</div>
-              ${
-                p.examples && p.examples.length
-                  ? `<ul class="process-detail-examples">
-                       ${p.examples.map((e) => `<li>${e}</li>`).join("")}
-                     </ul>`
-                  : ""
-              }
-            `;
-          }
-
-          if (pm.processes && trainCarsEl) {
-            pm.processes.forEach((p, index) => {
-              const car = document.createElement("button");
-              car.type = "button";
-              car.className =
-                "train-car" + (index === 0 ? " active" : "");
-              const code = (p.code || "").toUpperCase();
-              if (code) {
-                car.classList.add("process-" + code);
-              }
-              const stepNumber = index + 1;
-              car.innerHTML = `
-                <div class="train-car-step">Step ${stepNumber}</div>
-                <div class="train-car-code">${p.code}</div>
-                <div class="train-car-name">${p.name}</div>
-                <div class="train-car-short">${p.short || ""}</div>
-              `;
-              car.addEventListener("click", () => {
-                activeProcessIndex = index;
-                document
-                  .querySelectorAll(".train-car")
-                  .forEach((el) => el.classList.remove("active"));
-                car.classList.add("active");
-                renderProcessDetail(index);
-              });
-              trainCarsEl.appendChild(car);
-            });
-            renderProcessDetail(activeProcessIndex);
-          }
-
-          // Workflows
-          const workflowGridEl = document.getElementById("workflow-grid");
-          if (workflowGridEl && Array.isArray(pm.workflows)) {
-            pm.workflows.forEach((wf) => {
-              const card = document.createElement("div");
-              card.className = "workflow-card";
-              if (wf.id) {
-                card.classList.add("wf-" + wf.id);
-              }
-              const processes =
-                Array.isArray(wf.mainProcesses) && wf.mainProcesses.length
-                  ? wf.mainProcesses.map((p) => `<span class="workflow-meta-tag">${p}</span>`).join("")
-                  : "";
-              card.innerHTML = `
-                <div class="workflow-pill">${wf.id || ""}</div>
-                <div class="workflow-id">Workflow ${wf.id}</div>
-                <div class="workflow-name">${wf.name}</div>
-                <div class="workflow-short">${wf.short || ""}</div>
-                <div class="workflow-meta">
-                  ${
-                    wf.typicalStart
-                      ? `<span><strong>Starts:</strong> ${wf.typicalStart}</span>`
-                      : ""
-                  }
-                </div>
-                ${
-                  processes
-                    ? `<div style="margin-top:0.25rem;font-size:0.72rem;color:var(--muted);">
-                         <strong>Key processes:</strong> ${processes}
-                       </div>`
-                    : ""
-                }
-                ${
-                  wf.examples && wf.examples.length
-                    ? `<ul class="workflow-examples">
-                         ${wf.examples.map((e) => `<li>${e}</li>`).join("")}
-                       </ul>`
-                    : ""
-                }
-              `;
-              workflowGridEl.appendChild(card);
-            });
-          }
-        }
-
-        // CHAPTERS
-        const chapterList = document.getElementById("chapter-list");
-        if (chapterList && Array.isArray(content.chapters)) {
-          content.chapters.forEach((ch) => {
-            const card = document.createElement("article");
-            card.className = "chapter-card";
-            card.innerHTML = `
-              <div class="chapter-id">Chapter ${ch.id}</div>
-              <div class="chapter-title">${ch.title}</div>
-              <div class="chapter-summary">${ch.summary}</div>
-              ${
-                ch.keyPoints && ch.keyPoints.length
-                  ? `<ul class="chapter-bullets">
-                       ${ch.keyPoints.map((p) => `<li>${p}</li>`).join("")}
-                     </ul>`
-                  : ""
-              }
-            `;
-            chapterList.appendChild(card);
-          });
-        }
-
-        // PRACTICAL GUIDE
-        if (content.practicalGuide) {
-          const pg = content.practicalGuide;
-          const titleEl = document.getElementById("practical-title");
-          const introEl = document.getElementById("practical-intro");
-          const stepsEl = document.getElementById("practical-steps");
-          const dlLabelEl = document.getElementById("practical-download-label");
-
-          if (titleEl) titleEl.textContent = pg.title || "USM Practical Guide";
-          if (introEl) introEl.textContent = pg.intro || "";
-          if (dlLabelEl && pg.downloadLabel)
-            dlLabelEl.textContent = pg.downloadLabel;
-
-          if (stepsEl && Array.isArray(pg.sections)) {
-            pg.sections.forEach((section) => {
-              const li = document.createElement("li");
-              li.style.marginBottom = "0.55rem";
-              li.innerHTML = `
-                <strong>${section.title}</strong>
-                ${
-                  section.items && section.items.length
-                    ? `<ul style="margin:0.25rem 0 0.1rem 0.7rem;padding:0;font-size:0.78rem;color:var(--muted);">
-                         ${section.items.map((it) => `<li>${it}</li>`).join("")}
-                       </ul>`
-                    : ""
-                }
-              `;
-              stepsEl.appendChild(li);
-            });
-          }
-        }
-
-        // FAQ
-        const faqList = document.getElementById("faq-list");
-        if (faqList && Array.isArray(content.faq)) {
-          content.faq.forEach((item) => {
-            const div = document.createElement("div");
-            div.className = "faq-item";
-            div.innerHTML = `
-              <div class="faq-q">${item.q}</div>
-              <div class="faq-a">${item.a}</div>
-            `;
-            faqList.appendChild(div);
-          });
-        }
-      } catch (err) {
-        console.error("Error initializing page:", err);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", initUSMPage);
-  </script>
-</body>
-</html>
+          <ul class="checklist">
+            <li>Translate the book and theory into your real-world environment</li>
+            <li>Align leaders, teams, and tools around a single management system</li>
+            <li>Build routines that survive reorganizations, new tools, and new frameworks</li>
+          </ul>
+          <div class="pill-row-soft">
+            <div class="pill-soft">Architecture &amp; governance</div>
+            <div class="pill-soft">OCM &amp; change enablement</div>
+            <div class="pill-soft">Process &amp; workflow design</div>
+            <div class="pill-soft">Tool selection &amp; configuration
