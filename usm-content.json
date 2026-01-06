@@ -2,102 +2,50 @@
   "siteTitle": "Aurora Red Technology – USM",
   "home": {
     "title": "Unified Service Management (USM)",
-    "lead": "A universal method to bring simplicity, control, and customer focus to any service organization.",
+    "lead": "A universal method to bring simplicity and control to any service organization.",
     "introParagraphs": [
-      "USM gives you one coherent management system for all your services – IT, facilities, HR, manufacturing, and more.",
-      "On this site you’ll find: executive overviews, practical guides, and chapter-by-chapter summaries of the USM method."
+      "USM provides one simple management system for all services – IT, facilities, HR, and more.",
+      "This site captures what USM is, why it matters, and how to start using it."
     ]
   },
   "chapters": [
     {
-      "id": "chapter-1",
-      "title": "Chapter 1 – Why USM?",
-      "shortSummary": "Explains why service organizations need a unified management method and introduces USM as an architectural answer.",
-      "keyPoints": [
-        "Service organizations all share similar management problems, regardless of their domain.",
-        "Frameworks like ITIL, COBIT, Agile, etc., are helpful but fragmented.",
-        "USM provides a simple, generic management system that can host all these frameworks."
-      ]
-    },
-    {
-      "id": "chapter-2",
-      "title": "Chapter 2 – Principles of USM",
-      "shortSummary": "Outlines the core principles that shape the USM method and its architecture.",
-      "keyPoints": [
-        "Structure systems by segmenting them and managing their relations.",
-        "Standardize where possible; vary only where necessary.",
-        "The customer determines the quality of the service.",
-        "Big changes are realized in small steps."
-      ]
-    },
-    {
-      "id": "chapter-3",
-      "title": "Chapter 3 – Services and Value",
-      "shortSummary": "Defines services, customers, users, facilities, and value creation in a co-creation perspective.",
-      "keyPoints": [
-        "A service is support for someone’s activities.",
-        "Value is co-created: the provider, customer, and users all play a role.",
-        "Distinguishes use, specify, and realize domains in a service system."
-      ]
-    },
-
-    {
       "id": "chapter-7",
       "title": "Chapter 7 – The Service Organization",
-      "shortSummary": "Shows how to structure a service organization: governance, domain separation, matrix organization, teams, and service desk.",
+      "shortSummary": "How to structure a service organization: governance, domain separation, matrix organization, teams, and the service desk.",
       "keyPoints": [
         "Mission, vision, core values, strategy, goals, and policy set direction.",
-        "Governance creates the environment; management operates within it.",
-        "Planning & control works on strategic, tactical, and operational levels.",
-        "Domain separation splits specifying from realizing to improve control.",
-        "Process-based and workflow-based working separate design from execution.",
-        "Standardization is a core assurance technique.",
-        "RACI and clear profiles align people with processes.",
-        "Service desk acts as SPOC; self-service and standardization shift work left.",
-        "Beware of drama triangles and shadow services."
+        "Governance creates the environment; management runs the day-to-day.",
+        "Strategic, tactical, and operational levels are linked through planning & control.",
+        "Domain separation: specifying vs realizing to improve control and assurance.",
+        "Standardization and process/workflow-based working increase predictability.",
+        "RACI and clear profiles connect people to processes.",
+        "Service desk as SPOC; self-service and standardization shift work left.",
+        "Watch out for drama triangles and shadow services."
       ]
     },
     {
       "id": "chapter-8",
       "title": "Chapter 8 – Technology Resources",
-      "shortSummary": "Describes tools and templates that support USM, including the SDC tool and MIR.",
+      "shortSummary": "What tools and templates a service organization needs, including the SDC tool and MIR.",
       "keyPoints": [
-        "Resources include coordination tools, automation tools, and non-automated templates.",
-        "Service Delivery Coordination (SDC) tool manages workflows and calls.",
-        "Managed Infrastructure Register (MIR) stores all managed components and their relations.",
-        "ERP vs Best-of-Breed tooling strategies: vendor lock-in vs modular flexibility.",
-        "Templates (forms, reports, RACI, catalogs, plans) are also key resources."
+        "Tools support coordination (workflows + MIR) and execution (task-specific tools).",
+        "Service Delivery Coordination (SDC) tool manages calls and workflows.",
+        "Managed Infrastructure Register (MIR) stores all managed components and relationships.",
+        "ERP strategy (all-in-one) vs Best-of-Breed (modular, API-connected)."
       ]
     },
     {
       "id": "chapter-9",
       "title": "Chapter 9 – Deploying USM",
-      "shortSummary": "Explains how to introduce USM in practice using sprints, change management, and related techniques.",
+      "shortSummary": "How to introduce USM in practice using improvement sprints and change management.",
       "keyPoints": [
         "USM can be deployed top-down, bottom-up, or both.",
-        "Formal deployment uses phases: intake, planning, set-up, improvement sprints, routine phase.",
-        "Internal project manager + optional USM coach + tool expert form the core project structure.",
-        "Organizational change management is crucial: attitude, behaviour, culture.",
-        "USM plays well with Agile, DevOps, Lean, Design Thinking, and other improvement techniques.",
-        "Shared service centers benefit from standardizing routines, tools, and structures first.",
-        "USM provides the management system that many standards (ISO, COBIT, etc.) expect."
+        "Use phases: intake, planning, set-up, improvement sprints, routine phase.",
+        "Internal project manager + optional USM coach + tool expert lead the work.",
+        "Organizational change management is crucial: attitude, behavior, culture.",
+        "USM works well with Agile, DevOps, Lean, and Design Thinking."
       ]
-    }
-  ],
-  "guides": [
-    {
-      "id": "exec-overview",
-      "title": "USM Executive Overview",
-      "type": "slide-deck",
-      "description": "A concise slide deck for leadership that explains USM, why it matters, and how an organization can benefit.",
-      "downloadUrl": "downloads/USM_Executive_Overview_Expanded.pptx"
-    },
-    {
-      "id": "practical-guide",
-      "title": "USM Practical Guide",
-      "type": "document",
-      "description": "A more detailed, example-based companion for managers and practitioners implementing USM.",
-      "downloadUrl": "downloads/USM_Practical_Guide_Expanded.docx"
     }
   ]
 }
