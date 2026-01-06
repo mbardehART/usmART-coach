@@ -336,6 +336,37 @@
     .wf-recover { background: var(--inc); }
     .wf-improve { background: var(--rim); }
 
+    /* Image gallery for diagrams */
+
+    .image-gallery {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .image-gallery.two-cols {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .image-gallery figure {
+      margin: 0;
+    }
+
+    .image-gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      display: block;
+    }
+
+    .image-caption {
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
     /* Coach */
 
     #coach-chat {
@@ -551,6 +582,21 @@
       </p>
 
       <div id="process-tracks" class="process-tracks"></div>
+
+      <div class="card" style="margin-top:0.9rem;">
+        <h3 style="margin:0 0 0.3rem;font-size:0.95rem;">Official process & workflow overview</h3>
+        <p class="muted">
+          Color-coded USM process model, matching the diagrams from the book. This gives an
+          “at a glance” view of how Agree, Change, Operate, Recover and Improve fit together.
+        </p>
+        <div class="image-gallery">
+          <figure>
+            <!-- note the encoded spaces in the file name -->
+            <img src="assets/images/usm/USM%20workflows%20.png" alt="USM process and workflow overview" />
+            <div class="image-caption">USM process model with color-coded processes and workflows.</div>
+          </figure>
+        </div>
+      </div>
     </section>
 
     <!-- WORKFLOWS -->
@@ -577,6 +623,71 @@
       </div>
 
       <div id="workflow-grid" class="workflow-grid"></div>
+
+      <div class="card" style="margin-top:0.9rem;">
+        <h3 style="margin:0 0 0.3rem;font-size:0.95rem;">Workflow decision tree & subway maps</h3>
+        <p class="muted">
+          These diagrams show the same 8 workflows visually, using the official USM colors and numbering.
+          The decision tree helps operators choose the right workflow; the subway maps make the
+          end-to-end flow easy to recognize.
+        </p>
+
+        <div class="image-gallery two-cols">
+          <figure>
+            <img src="assets/images/usm/USM%20Workflow%20decision%20tree.png"
+                 alt="USM workflow decision tree overview" />
+            <div class="image-caption">USM workflow decision tree – overview.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%20decision%20tree%20detail.png"
+                 alt="USM workflow decision tree detail" />
+            <div class="image-caption">USM workflow decision tree – detailed view.</div>
+          </figure>
+        </div>
+
+        <div class="image-gallery two-cols" style="margin-top:1rem;">
+          <figure>
+            <img src="assets/images/usm/USM%20Workflow%201%20subway%20map.png"
+                 alt="USM Workflow 1 subway map" />
+            <div class="image-caption">Workflow 1 – wish to implemented service.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%202%20subway%20map.png"
+                 alt="USM Workflow 2 subway map" />
+            <div class="image-caption">Workflow 2 – change via service request.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%203%20subway%20map.png"
+                 alt="USM Workflow 3 subway map" />
+            <div class="image-caption">Workflow 3 – incident leading to change.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%204%20subway%20map.png"
+                 alt="USM Workflow 4 subway map" />
+            <div class="image-caption">Workflow 4 – incident handled operationally.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%205%20subway%20map.png"
+                 alt="USM Workflow 5 subway map" />
+            <div class="image-caption">Workflow 5 – pure service request.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%206%20subway%20map.png"
+                 alt="USM Workflow 6 subway map" />
+            <div class="image-caption">Workflow 6 – risk leading to new/changed service.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%207%20subway%20map.png"
+                 alt="USM Workflow 7 subway map" />
+            <div class="image-caption">Workflow 7 – risk leading directly to change.</div>
+          </figure>
+          <figure>
+            <img src="assets/images/usm/USM%20workflow%208%20subway%20map.png"
+                 alt="USM Workflow 8 subway map" />
+            <div class="image-caption">Workflow 8 – risk handled operationally.</div>
+          </figure>
+        </div>
+      </div>
     </section>
 
     <!-- COACH -->
@@ -692,9 +803,59 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
+    function setHashForSection(id) {
+      // Map internal section IDs to public hashes (for deep links)
+      let hash = "#home";
+      if (id === "home") hash = "#home";
+      else if (id === "explore") hash = "#processes";
+      else if (id === "workflows") hash = "#workflows";
+      else if (id === "coach") hash = "#coach";
+      else if (id === "issues") hash = "#issues";
+      else if (id === "feedback") hash = "#feedback";
+      if (location.hash !== hash) {
+        location.hash = hash;
+      }
+    }
+
     navLinks.forEach((btn) => {
-      btn.addEventListener("click", () => showSection(btn.dataset.section));
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.section;
+        setHashForSection(id);
+        showSection(id);
+      });
     });
+
+    function handleHashChange() {
+      const hash = (window.location.hash || "#home").replace("#", "");
+      switch (hash.toLowerCase()) {
+        case "":
+        case "home":
+          showSection("home");
+          break;
+        case "processes":
+          showSection("explore");
+          break;
+        case "workflows":
+          showSection("workflows");
+          break;
+        case "coach":
+          showSection("coach");
+          break;
+        case "issues":
+        case "solve":
+          showSection("issues");
+          break;
+        case "feedback":
+          showSection("feedback");
+          break;
+        default:
+          // unknown hash – keep current view or fall back to home
+          showSection("home");
+          break;
+      }
+    }
+
+    window.addEventListener("hashchange", handleHashChange);
 
     /* ---------- PROCESS TRACKS ---------- */
     const processTracks = [
@@ -1287,6 +1448,9 @@
     renderWorkflows();
     renderChallenges();
     renderDomains();
+
+    // Show correct section on first load based on hash (e.g. #processes, #workflows)
+    handleHashChange();
   </script>
 </body>
 </html>
