@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aurora Red Technology – USM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 0; line-height: 1.5; }
+    header { background: #111827; color: #f9fafb; padding: 1.5rem; }
+    header h1 { margin: 0 0 0.25rem 0; font-size: 1.6rem; }
+    header p { margin: 0; opacity: 0.8; }
+    main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem 3rem; }
+    section { margin-bottom: 2rem; }
+    h2 { border-bottom: 1px solid #e5e7eb; padding-bottom: 0.25rem; }
+    .chapter { border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem; }
+    .chapter h3 { margin: 0 0 0.25rem 0; cursor: pointer; }
+    .chapter p { margin: 0.25rem 0; }
+    .chapter-details { display: none; margin-top: 0.5rem; }
+    .chapter-details ul { margin: 0.25rem 0 0.25rem 1.25rem; }
+    .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 999px; background: #eef2ff; color: #3730a3; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .guide-list { list-style: none; padding: 0; margin: 0; }
+    .guide-list li { border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .guide-list strong { display: block; margin-bottom: 0.25rem; }
+    a.button { display: inline-block; margin-top: 0.25rem; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #4b5563; text-decoration: none; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="site-title">Aurora Red Technology – USM</h1>
+    <p id="site-tagline">Unified Service Management knowledge hub</p>
+  </header>
+
+  <main>
+    <section id="home-section">
+      <!-- Filled by JS -->
+    </section>
+
+    <section id="chapters-section">
+      <h2>USM Chapters – Summaries</h2>
+      <div id="chapters-container"></div>
+    </section>
+
+    <section id="guides-section">
+      <h2>Guides & Downloads</h2>
+      <ul id="guides-list" class="guide-list"></ul>
+    </section>
+  </main>
+
+  <script>
+    async function loadUSMContent() {
+      try {
+        const res = await fetch('usm-content.json');
+        const data = await res.json();
+
+        // Header
+        document.getElementById('site-title').textContent = data.siteTitle || 'Aurora Red Technology – USM';
+
+        // Home section
+        const home = data.home || {};
+        const homeSection = document.getElementById('home-section');
+        const title = document.createElement('h2');
+        title.textContent = home.title || 'Unified Service Management (USM)';
+        homeSection.appendChild(title);
+
+        if (home.lead) {
+          const lead = document.createElement('p');
+          lead.style.fontWeight = '500';
+          lead.textContent = home.lead;
+          homeSection.appendChild(lead);
+        }
+
+        (home.introParagraphs || []).forEach(pText => {
+          const p = document.createElement('p');
+          p.textContent = pText;
+          homeSection.appendChild(p);
+        });
+
+        // Chapters
+        const chaptersContainer = document.getElementById('chapters-container');
+        (data.chapters || []).forEach(ch => {
+          const wrapper = document.createElement('article');
+          wrapper.className = 'chapter';
+
+          const heading = document.createElement('h3');
+          heading.textContent = ch.title;
+          wrapper.appendChild(heading);
+
+          if (ch.shortSummary) {
+            const summary = document.createElement('p');
+            summary.textContent = ch.shortSummary;
+            wrapper.appendChild(summary);
+          }
+
+          const details = document.createElement('div');
+          details.className = 'chapter-details';
+
+          if (Array.isArray(ch.keyPoints) && ch.keyPoints.length > 0) {
+            const badge = document.createElement('span');
+            badge.className = 'badge';
+            badge.textContent = 'Key Points';
+            details.appendChild(badge);
+
+            const ul = document.createElement('ul');
+            ch.keyPoints.forEach(point => {
+              const li = document.createElement('li');
+              li.textContent = point;
+              ul.appendChild(li);
+            });
+            details.appendChild(ul);
+          }
+
+          wrapper.appendChild(details);
+
+          heading.addEventListener('click', () => {
+            const isVisible = details.style.display === 'block';
+            details.style.display = isVisible ? 'none' : 'block';
+          });
+
+          chaptersContainer.appendChild(wrapper);
+        });
+
+        // Guides
+        const guidesList = document.getElementById('guides-list');
+        (data.guides || []).forEach(g => {
+          const li = document.createElement('li');
+
+          const title = document.createElement('strong');
+          title.textContent = g.title;
+          li.appendChild(title);
+
+          if (g.type) {
+            const typeSpan = document.createElement('span');
+            typeSpan.className = 'badge';
+            typeSpan.textContent = g.type;
+            li.appendChild(typeSpan);
+          }
+
+          if (g.description) {
+            const desc = document.createElement('p');
+            desc.textContent = g.description;
+            li.appendChild(desc);
+          }
+
+          if (g.downloadUrl) {
+            const link = document.createElement('a');
+            link.href = g.downloadUrl;
+            link.className = 'button';
+            link.textContent = 'Download';
+            li.appendChild(link);
+          }
+
+          guidesList.appendChild(li);
+        });
+
+      } catch (err) {
+        console.error('Error loading USM content:', err);
+      }
+    }
+
+    loadUSMContent();
+  </script>
+</body>
+</html>
