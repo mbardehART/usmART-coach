@@ -1,179 +1,103 @@
 {
-  "foundationConcepts": [
+  "siteTitle": "Aurora Red Technology – USM",
+  "home": {
+    "title": "Unified Service Management (USM)",
+    "lead": "A universal method to bring simplicity, control, and customer focus to any service organization.",
+    "introParagraphs": [
+      "USM gives you one coherent management system for all your services – IT, facilities, HR, manufacturing, and more.",
+      "On this site you’ll find: executive overviews, practical guides, and chapter-by-chapter summaries of the USM method."
+    ]
+  },
+  "chapters": [
     {
-      "id": "FOUNDATION_WHAT",
-      "title": "What is USM?",
-      "summary": "USM is a unified management system for any service organization, replacing scattered frameworks with one operating model.",
-      "type": "foundation",
-      "detail": {
-        "summary": "USM (Unified Service Management) provides a single way to design, deliver, and improve services across your organization.",
-        "whyItMatters": [
-          "Reduces complexity by providing one model instead of many frameworks.",
-          "Supports cross-department collaboration and shared language.",
-          "Helps leadership steer services based on a clear, consistent structure."
-        ]
-      }
+      "id": "chapter-1",
+      "title": "Chapter 1 – Why USM?",
+      "shortSummary": "Explains why service organizations need a unified management method and introduces USM as an architectural answer.",
+      "keyPoints": [
+        "Service organizations all share similar management problems, regardless of their domain.",
+        "Frameworks like ITIL, COBIT, Agile, etc., are helpful but fragmented.",
+        "USM provides a simple, generic management system that can host all these frameworks."
+      ]
     },
     {
-      "id": "FOUNDATION_WHY",
-      "title": "Why unified?",
-      "summary": "Different departments often use different models. USM unifies them into one way of working.",
-      "type": "foundation",
-      "detail": {
-        "summary": "A unified model avoids duplicated structures and conflicting practices between IT, HR, Facilities, and other domains.",
-        "whyItMatters": [
-          "Eliminates fragmentation in how services are managed.",
-          "Makes it easier to implement governance and improvement organization-wide.",
-          "Supports better control, quality, and customer experience."
-        ]
-      }
+      "id": "chapter-2",
+      "title": "Chapter 2 – Principles of USM",
+      "shortSummary": "Outlines the core principles that shape the USM method and its architecture.",
+      "keyPoints": [
+        "Structure systems by segmenting them and managing their relations.",
+        "Standardize where possible; vary only where necessary.",
+        "The customer determines the quality of the service.",
+        "Big changes are realized in small steps."
+      ]
     },
     {
-      "id": "FOUNDATION_PRINCIPLES",
-      "title": "Principles, not practices",
-      "summary": "USM is built on a small set of principles that stay stable while practices and tools may change.",
-      "type": "foundation",
-      "detail": {
-        "summary": "USM provides structure and coordination; teams choose the practices and tools that fit their context.",
-        "whyItMatters": [
-          "Prevents over-engineering of processes.",
-          "Focuses on reusable patterns instead of one-off solutions.",
-          "Supports scaling from one department to the whole enterprise."
-        ]
-      }
-    }
-  ],
+      "id": "chapter-3",
+      "title": "Chapter 3 – Services and Value",
+      "shortSummary": "Defines services, customers, users, facilities, and value creation in a co-creation perspective.",
+      "keyPoints": [
+        "A service is support for someone’s activities.",
+        "Value is co-created: the provider, customer, and users all play a role.",
+        "Distinguishes use, specify, and realize domains in a service system."
+      ]
+    },
 
-  "processes": [
     {
-      "id": "PROC_AGREE",
-      "name": "Agree Process",
-      "oneLine": "We make and maintain clear agreements about services.",
-      "purpose": "This process creates and maintains clear agreements about services — what they are, who they’re for, how they perform, and who is responsible for what.",
-      "keyResponsibilities": [
-        "Define services and their intended outcomes.",
-        "Agree on service levels, responsibilities, and constraints.",
-        "Maintain agreements as context and needs change."
-      ],
-      "supportsControl": [
-        "Gives leadership a consistent basis for steering all services.",
-        "Prevents misunderstandings about what a service should deliver."
+      "id": "chapter-7",
+      "title": "Chapter 7 – The Service Organization",
+      "shortSummary": "Shows how to structure a service organization: governance, domain separation, matrix organization, teams, and service desk.",
+      "keyPoints": [
+        "Mission, vision, core values, strategy, goals, and policy set direction.",
+        "Governance creates the environment; management operates within it.",
+        "Planning & control works on strategic, tactical, and operational levels.",
+        "Domain separation splits specifying from realizing to improve control.",
+        "Process-based and workflow-based working separate design from execution.",
+        "Standardization is a core assurance technique.",
+        "RACI and clear profiles align people with processes.",
+        "Service desk acts as SPOC; self-service and standardization shift work left.",
+        "Beware of drama triangles and shadow services."
       ]
     },
     {
-      "id": "PROC_CHANGE",
-      "name": "Change Process",
-      "oneLine": "We modify services in a controlled way.",
-      "purpose": "This process ensures that modifications to services and service systems happen in a deliberate and controlled way, rather than as accidental drift.",
-      "keyResponsibilities": [
-        "Assess proposed changes and their impact.",
-        "Decide what will change and when.",
-        "Coordinate implementation and verify outcomes."
-      ],
-      "supportsControl": [
-        "Avoids uncontrolled change that undermines stability.",
-        "Links change decisions to structural impact and objectives."
+      "id": "chapter-8",
+      "title": "Chapter 8 – Technology Resources",
+      "shortSummary": "Describes tools and templates that support USM, including the SDC tool and MIR.",
+      "keyPoints": [
+        "Resources include coordination tools, automation tools, and non-automated templates.",
+        "Service Delivery Coordination (SDC) tool manages workflows and calls.",
+        "Managed Infrastructure Register (MIR) stores all managed components and their relations.",
+        "ERP vs Best-of-Breed tooling strategies: vendor lock-in vs modular flexibility.",
+        "Templates (forms, reports, RACI, catalogs, plans) are also key resources."
       ]
     },
     {
-      "id": "PROC_OPERATE",
-      "name": "Operate Process",
-      "oneLine": "We run day-to-day service use as agreed.",
-      "purpose": "This process ensures that day-to-day use of services runs as agreed, supporting customers and users consistently.",
-      "keyResponsibilities": [
-        "Execute routine service activities.",
-        "Monitor service performance in use.",
-        "Support users in their daily work with services."
-      ],
-      "supportsControl": [
-        "Provides real-world visibility into how services are running.",
-        "Creates consistent operating patterns across teams."
-      ]
-    },
-    {
-      "id": "PROC_RECOVER",
-      "name": "Recover Process",
-      "oneLine": "We restore service when performance drops or fails.",
-      "purpose": "This process coordinates the restoration of service when performance drops or fails, so disruptions are handled calmly and predictably.",
-      "keyResponsibilities": [
-        "Recognize and prioritize disruptions.",
-        "Coordinate restoration activities and communication.",
-        "Capture learning from events and feed it into improvement."
-      ],
-      "supportsControl": [
-        "Reduces impact and uncertainty during disruptions.",
-        "Connects incident handling with structural learning."
-      ]
-    },
-    {
-      "id": "PROC_IMPROVE",
-      "name": "Improve Process",
-      "oneLine": "We learn from risks and results to strengthen the system.",
-      "purpose": "This process ensures systematic learning and structural strengthening of the service organization over time.",
-      "keyResponsibilities": [
-        "Analyze risks, patterns, and performance results.",
-        "Identify structural weaknesses and opportunities.",
-        "Initiate and track improvement initiatives."
-      ],
-      "supportsControl": [
-        "Shifts the focus from firefighting to foresight.",
-        "Makes improvement intentional and sustainable."
+      "id": "chapter-9",
+      "title": "Chapter 9 – Deploying USM",
+      "shortSummary": "Explains how to introduce USM in practice using sprints, change management, and related techniques.",
+      "keyPoints": [
+        "USM can be deployed top-down, bottom-up, or both.",
+        "Formal deployment uses phases: intake, planning, set-up, improvement sprints, routine phase.",
+        "Internal project manager + optional USM coach + tool expert form the core project structure.",
+        "Organizational change management is crucial: attitude, behaviour, culture.",
+        "USM plays well with Agile, DevOps, Lean, Design Thinking, and other improvement techniques.",
+        "Shared service centers benefit from standardizing routines, tools, and structures first.",
+        "USM provides the management system that many standards (ISO, COBIT, etc.) expect."
       ]
     }
   ],
-
-  "workflows": [
+  "guides": [
     {
-      "id": "WF_REQUEST",
-      "name": "Request Workflow",
-      "summary": "A consistent way for people to ask for services or support — without confusion or improvisation.",
-      "relatedProcesses": ["PROC_OPERATE", "PROC_AGREE"]
+      "id": "exec-overview",
+      "title": "USM Executive Overview",
+      "type": "slide-deck",
+      "description": "A concise slide deck for leadership that explains USM, why it matters, and how an organization can benefit.",
+      "downloadUrl": "downloads/USM_Executive_Overview_Expanded.pptx"
     },
     {
-      "id": "WF_INCIDENT",
-      "name": "Incident Workflow",
-      "summary": "A calm, structured way to restore agreed service when something goes wrong.",
-      "relatedProcesses": ["PROC_RECOVER", "PROC_OPERATE", "PROC_IMPROVE"]
-    },
-    {
-      "id": "WF_CHANGE",
-      "name": "Change Workflow",
-      "summary": "A controlled way to modify services or supporting systems, so improvement doesn’t create chaos.",
-      "relatedProcesses": ["PROC_CHANGE", "PROC_AGREE", "PROC_OPERATE"]
-    },
-    {
-      "id": "WF_PROBLEM",
-      "name": "Problem Workflow",
-      "summary": "A disciplined way to discover and remove structural causes of recurring issues.",
-      "relatedProcesses": ["PROC_IMPROVE", "PROC_CHANGE"]
-    },
-    {
-      "id": "WF_KNOWLEDGE",
-      "name": "Knowledge Workflow",
-      "summary": "A shared approach to creating and re-using reliable service knowledge across the organization.",
-      "relatedProcesses": ["PROC_OPERATE", "PROC_IMPROVE"]
-    },
-    {
-      "id": "WF_CONFIG",
-      "name": "Configuration / Asset Workflow",
-      "summary": "A way to keep trusted information about the services, resources, and relationships the organization depends on.",
-      "relatedProcesses": ["PROC_OPERATE", "PROC_CHANGE", "PROC_RECOVER"]
-    },
-    {
-      "id": "WF_IDENTITY",
-      "name": "Identity & Access Workflow",
-      "summary": "A consistent way to manage who can use which services — based on clear roles and agreements.",
-      "relatedProcesses": ["PROC_AGREE", "PROC_OPERATE"]
-    },
-    {
-      "id": "WF_CONTINUITY",
-      "name": "Continuity / Availability Workflow",
-      "summary": "A proactive way to protect service delivery when facing risk, disruption, or uncertainty.",
-      "relatedProcesses": ["PROC_RECOVER", "PROC_IMPROVE", "PROC_OPERATE"]
+      "id": "practical-guide",
+      "title": "USM Practical Guide",
+      "type": "document",
+      "description": "A more detailed, example-based companion for managers and practitioners implementing USM.",
+      "downloadUrl": "downloads/USM_Practical_Guide_Expanded.docx"
     }
-  ],
-
-  "issuePatterns": [],
-  "challengeOptions": [],
-  "domainOptions": []
+  ]
 }
