@@ -24,6 +24,23 @@
       --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.85);
       --shadow-subtle: 0 14px 40px rgba(15, 23, 42, 0.7);
       --transition-fast: 150ms ease-out;
+
+      /* Process colors */
+      --color-ctm: #38bdf8; /* sky */
+      --color-chm: #a855f7; /* purple */
+      --color-inc: #fb923c; /* orange */
+      --color-ops: #22c55e; /* green */
+      --color-rim: #eab308; /* amber */
+
+      /* Workflow colors */
+      --wf-1: #38bdf8;
+      --wf-2: #a855f7;
+      --wf-3: #fb923c;
+      --wf-4: #22c55e;
+      --wf-5: #6366f1;
+      --wf-6: #f97316;
+      --wf-7: #10b981;
+      --wf-8: #eab308;
     }
 
     * {
@@ -347,22 +364,6 @@
       }
     }
 
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.4rem;
-    }
-
-    .chip {
-      font-size: 0.76rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: var(--muted);
-    }
-
     .chapter-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -445,8 +446,8 @@
 
     .train-car {
       flex: 1 1 120px;
-      min-width: 120px;
-      padding: 0.5rem 0.55rem;
+      min-width: 130px;
+      padding: 0.5rem 0.55rem 0.6rem;
       border-radius: 0.9rem;
       background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(148, 163, 184, 0.7);
@@ -459,19 +460,23 @@
         background var(--transition-fast);
     }
 
-    .train-car.active {
-      border-color: rgba(249, 115, 22, 0.95);
-      background: rgba(30, 64, 175, 0.7);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    .train-car:hover {
       transform: translateY(-1px);
+    }
+
+    .train-car-step {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.2rem;
+      opacity: 0.85;
     }
 
     .train-car-code {
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: #fde68a;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.1rem;
     }
 
     .train-car-name {
@@ -483,12 +488,76 @@
       color: var(--muted);
     }
 
+    /* Process-specific colors */
+
+    .train-car.process-CTM .train-car-step,
+    .train-car.process-CTM .train-car-code {
+      color: var(--color-ctm);
+    }
+
+    .train-car.process-CHM .train-car-step,
+    .train-car.process-CHM .train-car-code {
+      color: var(--color-chm);
+    }
+
+    .train-car.process-INC .train-car-step,
+    .train-car.process-INC .train-car-code {
+      color: var(--color-inc);
+    }
+
+    .train-car.process-OPS .train-car-step,
+    .train-car.process-OPS .train-car-code {
+      color: var(--color-ops);
+    }
+
+    .train-car.process-RIM .train-car-step,
+    .train-car.process-RIM .train-car-code {
+      color: var(--color-rim);
+    }
+
+    .train-car.process-CTM.active {
+      border-color: var(--color-ctm);
+      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.55);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.96));
+    }
+
+    .train-car.process-CHM.active {
+      border-color: var(--color-chm);
+      box-shadow: 0 14px 30px rgba(168, 85, 247, 0.55);
+      background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.12), rgba(15, 23, 42, 0.96));
+    }
+
+    .train-car.process-INC.active {
+      border-color: var(--color-inc);
+      box-shadow: 0 14px 30px rgba(251, 146, 60, 0.55);
+      background: radial-gradient(circle at top left, rgba(251, 146, 60, 0.12), rgba(15, 23, 42, 0.96));
+    }
+
+    .train-car.process-OPS.active {
+      border-color: var(--color-ops);
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.55);
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 0.96));
+    }
+
+    .train-car.process-RIM.active {
+      border-color: var(--color-rim);
+      box-shadow: 0 14px 30px rgba(234, 179, 8, 0.55);
+      background: radial-gradient(circle at top left, rgba(234, 179, 8, 0.12), rgba(15, 23, 42, 0.96));
+    }
+
     .train-track {
       height: 3px;
       margin-top: 0.45rem;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(148, 163, 184, 0.7), rgba(249, 115, 22, 0.8));
-      opacity: 0.9;
+      background: linear-gradient(
+        90deg,
+        var(--color-ctm),
+        var(--color-chm),
+        var(--color-inc),
+        var(--color-ops),
+        var(--color-rim)
+      );
+      opacity: 0.95;
     }
 
     .process-detail {
@@ -504,8 +573,8 @@
     }
 
     .process-detail-examples {
-      list-style: disc;
-      padding-left: 1.1rem;
+      list-style: decimal;
+      padding-left: 1.15rem;
       margin: 0.3rem 0 0;
     }
 
@@ -522,7 +591,7 @@
     }
 
     .workflow-card {
-      padding: 0.65rem 0.7rem;
+      padding: 0.65rem 0.7rem 0.7rem;
       border-radius: 1rem;
       background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(148, 163, 184, 0.7);
@@ -536,9 +605,22 @@
     }
 
     .workflow-card:hover {
-      border-color: rgba(249, 115, 22, 0.95);
       box-shadow: var(--shadow-subtle);
       transform: translateY(-1px);
+    }
+
+    .workflow-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #020617;
+      background: #fefce8;
     }
 
     .workflow-id {
@@ -546,7 +628,7 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--muted);
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.12rem;
     }
 
     .workflow-name {
@@ -582,13 +664,71 @@
     .workflow-examples {
       margin: 0.3rem 0 0;
       padding-left: 1rem;
-      list-style: disc;
+      list-style: decimal;
       font-size: 0.75rem;
       color: var(--muted);
     }
 
     .workflow-examples li + li {
       margin-top: 0.1rem;
+    }
+
+    /* Workflow-specific colors */
+
+    .workflow-card.wf-1 {
+      border-left: 3px solid var(--wf-1);
+    }
+    .workflow-card.wf-1 .workflow-pill {
+      background: var(--wf-1);
+    }
+
+    .workflow-card.wf-2 {
+      border-left: 3px solid var(--wf-2);
+    }
+    .workflow-card.wf-2 .workflow-pill {
+      background: var(--wf-2);
+    }
+
+    .workflow-card.wf-3 {
+      border-left: 3px solid var(--wf-3);
+    }
+    .workflow-card.wf-3 .workflow-pill {
+      background: var(--wf-3);
+    }
+
+    .workflow-card.wf-4 {
+      border-left: 3px solid var(--wf-4);
+    }
+    .workflow-card.wf-4 .workflow-pill {
+      background: var(--wf-4);
+    }
+
+    .workflow-card.wf-5 {
+      border-left: 3px solid var(--wf-5);
+    }
+    .workflow-card.wf-5 .workflow-pill {
+      background: var(--wf-5);
+    }
+
+    .workflow-card.wf-6 {
+      border-left: 3px solid var(--wf-6);
+    }
+    .workflow-card.wf-6 .workflow-pill {
+      background: var(--wf-6);
+    }
+
+    .workflow-card.wf-7 {
+      border-left: 3px solid var(--wf-7);
+    }
+    .workflow-card.wf-7 .workflow-pill {
+      background: var(--wf-7);
+    }
+
+    .workflow-card.wf-8 {
+      border-left: 3px solid var(--wf-8);
+    }
+    .workflow-card.wf-8 .workflow-pill {
+      background: var(--wf-8);
     }
 
     .practical-grid {
@@ -887,8 +1027,13 @@
               car.type = "button";
               car.className =
                 "train-car" + (index === 0 ? " active" : "");
-              car.dataset.index = index;
+              const code = (p.code || "").toUpperCase();
+              if (code) {
+                car.classList.add("process-" + code);
+              }
+              const stepNumber = index + 1;
               car.innerHTML = `
+                <div class="train-car-step">Step ${stepNumber}</div>
                 <div class="train-car-code">${p.code}</div>
                 <div class="train-car-name">${p.name}</div>
                 <div class="train-car-short">${p.short || ""}</div>
@@ -912,11 +1057,15 @@
             pm.workflows.forEach((wf) => {
               const card = document.createElement("div");
               card.className = "workflow-card";
+              if (wf.id) {
+                card.classList.add("wf-" + wf.id);
+              }
               const processes =
                 Array.isArray(wf.mainProcesses) && wf.mainProcesses.length
                   ? wf.mainProcesses.map((p) => `<span class="workflow-meta-tag">${p}</span>`).join("")
                   : "";
               card.innerHTML = `
+                <div class="workflow-pill">${wf.id || ""}</div>
                 <div class="workflow-id">Workflow ${wf.id}</div>
                 <div class="workflow-name">${wf.name}</div>
                 <div class="workflow-short">${wf.short || ""}</div>
