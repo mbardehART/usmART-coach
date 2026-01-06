@@ -1,196 +1,858 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>USM ART Coach</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="USM ART Coach – Unified Service Management explained in practical language with examples, mindmaps, and a clear structure."
+  />
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #111827;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.6);
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.7);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: #f6f6f6;
+      padding: 0;
     }
 
-    /* NAV */
-    nav {
-      background: #222;
-      padding: 12px;
+    body {
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
     }
 
-    nav a {
-      color: #fff;
-      margin-right: 18px;
+    a {
+      color: inherit;
       text-decoration: none;
-      font-weight: 600;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* SECTIONS */
-    .section {
-      padding: 60px 20px;
-    }
-
-    .container {
-      max-width: 1100px;
+    main {
+      max-width: 1120px;
       margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    /* Top navigation */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(from 160deg, #f97316, #eab308, #22c55e, #38bdf8, #6366f1, #f97316);
+      padding: 2px;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
+    }
+
+    .brand-icon-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .brand-text h1 {
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #f9fafb;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .pill {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.22);
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 1.75rem;
+      align-items: stretch;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main {
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.7), rgba(15, 23, 42, 0.96));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(248, 250, 252, 0.03), transparent 60%),
+                  radial-gradient(circle at 90% 100%, rgba(56, 189, 248, 0.09), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-badge span {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+      color: #f9fafb;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #f97316, #eab308);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f97316, #eab308);
+      color: #0b1120;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 12px 30px rgba(249, 115, 22, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(249, 115, 22, 0.7);
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      padding: 0.7rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--muted);
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(249, 115, 22, 0.6);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-meta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .hero-meta-label {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.68rem;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .hero-meta-value {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    /* Mindmap / overview card */
+    .hero-aside {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.3rem 1.2rem 1.5rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-aside::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.03), transparent 55%),
+                  radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .aside-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .aside-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    .aside-chip {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mini-map {
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      padding: 0.75rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      position: relative;
+    }
+
+    .mini-node {
+      padding: 0.45rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      color: #e5e7eb;
+      line-height: 1.35;
+    }
+
+    .mini-node span {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    .aside-footer {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .aside-footer strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
     }
 
     .section-title {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e5e7eb;
     }
 
-    .section-lead {
-      font-size: 18px;
-      color: #444;
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 26rem;
     }
 
-    /* WORKFLOW GALLERY */
-    .workflow-hero {
-      width: 100%;
-      max-width: 1100px;
-      margin: 20px auto;
-      display: block;
-      border-radius: 10px;
+    .pill-small {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.7);
     }
 
-    .workflow-grid {
+    /* Chapter cards */
+    .chapters-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-top: 25px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
     }
 
-    .workflow-card {
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      text-align: center;
+    @media (max-width: 1000px) {
+      .chapters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
-    .workflow-card img {
-      width: 100%;
-      border-radius: 8px;
+    @media (max-width: 720px) {
+      .chapters-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
-    .note {
-      margin-top: 25px;
-      color: #555;
-      font-style: italic;
+    .chapter-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .chapter-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+      border-color: rgba(249, 115, 22, 0.6);
+      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.35), #020617);
+    }
+
+    .chapter-id {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .chapter-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    .chapter-tagline {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .chapter-summary {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .chapter-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.8);
+      font-size: 0.7rem;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .chapter-points {
+      margin-top: 0.4rem;
+      padding-left: 0.95rem;
+      list-style: disc;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .chapter-points li {
+      margin-bottom: 0.18rem;
+    }
+
+    .chapter-examples {
+      margin-top: 0.45rem;
+      border-top: 1px dashed rgba(55, 65, 81, 0.8);
+      padding-top: 0.45rem;
+      font-size: 0.76rem;
+      color: rgba(209, 213, 219, 0.9);
+    }
+
+    .chapter-examples strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Glossary */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .glossary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .glossary-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .glossary-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      padding: 0.7rem 0.8rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .glossary-term {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .glossary-def {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      padding-top: 1.2rem;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    /* Utility */
+    .hidden {
+      display: none !important;
     }
   </style>
 </head>
-
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#processes">USM Processes &amp; Workflows</a>
-    <a href="#engagements">Engagements</a>
-  </nav>
-
-  <!-- HOME -->
-  <section id="home" class="section">
-    <div class="container">
-      <h2 class="section-title">USM ART Coach</h2>
-      <p class="section-lead">
-        Helping organizations apply Unified Service Management (USM)
-        to build predictable, human-centered service delivery.
-      </p>
-      <p>
-        This site provides practical learning resources, guidance, and examples
-        to help leaders, coaches, and practitioners apply USM in real life —
-        across IT, HR, facilities, security, government, and enterprise services.
-      </p>
-    </div>
-  </section>
-
-  <!-- USM PROCESSES & WORKFLOWS -->
-  <section id="processes" class="section" style="background:#ffffff;">
-    <div class="container">
-      <h2 class="section-title">USM Workflows — The Service Delivery Engine</h2>
-      <p class="section-lead">
-        USM organizes all service delivery work into
-        <strong>five processes and eight workflows</strong>.
-        These workflows create a predictable way of working
-        that improves clarity, quality, and collaboration.
-      </p>
-
-      <img
-        src="assets/images/usm/USM workflows .png"
-        class="workflow-hero"
-        alt="USM Workflows Subway Map">
-
-      <hr>
-
-      <h3>Workflow Details</h3>
-
-      <div class="workflow-grid">
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM Workflow 1 subway map.png" alt="USM Workflow 1">
-          <h4>Workflow 1</h4>
+  <main>
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-icon">
+          <div class="brand-icon-inner">A</div>
         </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 2 subway map.png" alt="USM Workflow 2">
-          <h4>Workflow 2</h4>
+        <div class="brand-text">
+          <h1>USM ART Coach</h1>
+          <span>From architecting to real change</span>
         </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 3 subway map.png" alt="USM Workflow 3">
-          <h4>Workflow 3</h4>
-        </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 4 subway map.png" alt="USM Workflow 4">
-          <h4>Workflow 4</h4>
-        </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 5 subway map.png" alt="USM Workflow 5">
-          <h4>Workflow 5</h4>
-        </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 6 subway map.png" alt="USM Workflow 6">
-          <h4>Workflow 6</h4>
-        </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 7 subway map.png" alt="USM Workflow 7">
-          <h4>Workflow 7</h4>
-        </div>
-
-        <div class="workflow-card">
-          <img src="assets/images/usm/USM workflow 8 subway map.png" alt="USM Workflow 8">
-          <h4>Workflow 8</h4>
-        </div>
-
       </div>
+      <div class="top-links">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>USM method • Practical view</span>
+        </div>
+        <div class="pill">
+          <span>Built for: </span> <strong>Leaders • Coaches • Teams</strong>
+        </div>
+      </div>
+    </header>
 
-      <p class="note">
-        Color coding matches the official USM process model.
-      </p>
-    </div>
-  </section>
+    <!-- Hero -->
+    <section id="hero">
+      <div class="hero">
+        <div class="hero-main" id="hero-main">
+          <div class="hero-badge">
+            <span>New</span>
+            <span>USM in one management system</span>
+          </div>
+          <h2 class="hero-title">
+            Turn <span>USM</span> from a book into your daily way of working.
+          </h2>
+          <p class="hero-subtitle" id="hero-subtitle">
+            This site turns the Unified Service Management method into an executive overview and a practical guide, with examples that work for IT, Facilities, HR, public sector, and more.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToSection('chapters')">
+              Explore the chapters
+              <span>↓</span>
+            </button>
+            <button class="btn-ghost" onclick="scrollToSection('glossary')">
+              Key terms & acronyms
+            </button>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-group">
+              <div class="hero-meta-label">Method</div>
+              <div class="hero-meta-value">5 processes • 8 workflows</div>
+            </div>
+            <div class="hero-meta-group">
+              <div class="hero-meta-label">Use it for</div>
+              <div class="hero-meta-value">IT, FM, HR, Telecom, Public</div>
+            </div>
+            <div class="hero-meta-group">
+              <div class="hero-meta-label">Style</div>
+              <div class="hero-meta-value">Practical • Example-driven</div>
+            </div>
+          </div>
+        </div>
 
-  <!-- ENGAGEMENTS -->
-  <section id="engagements" class="section">
-    <div class="container">
-      <h2 class="section-title">Engagements</h2>
-      <p>
-        This section can include coaching services, training,
-        case studies, and collaboration opportunities.
-      </p>
-    </div>
-  </section>
+        <aside class="hero-aside">
+          <div class="aside-header">
+            <div class="aside-title">USM mindmap – at a glance</div>
+            <div class="aside-chip">Overview</div>
+          </div>
+          <div class="mini-map">
+            <div class="mini-node">
+              Foundation
+              <span>Principles & architecture</span>
+            </div>
+            <div class="mini-node">
+              System
+              <span>5 processes • 8 workflows</span>
+            </div>
+            <div class="mini-node">
+              People
+              <span>Roles, TAR, RACI</span>
+            </div>
+            <div class="mini-node">
+              Services
+              <span>Value & agreements</span>
+            </div>
+            <div class="mini-node">
+              Resources
+              <span>Tools & MIR</span>
+            </div>
+            <div class="mini-node">
+              Change
+              <span>Deployment & improvement</span>
+            </div>
+          </div>
+          <div class="aside-footer">
+            <span><strong>Tip:</strong> Start with the chapter that matches your current challenge.</span>
+            <span>⬤ Executive view & coach notes built-in</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
+    <!-- Chapters -->
+    <section id="chapters">
+      <div class="section-header">
+        <div>
+          <h3 class="section-title">USM chapters in one view</h3>
+          <p class="section-subtitle">
+            Each chapter card gives you: big idea, who it’s for, key points, and concrete examples you can reuse in your own stories.
+          </p>
+        </div>
+        <div class="pill-small">Source: USM book • summarized</div>
+      </div>
+      <div class="chapters-grid" id="chapters-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Glossary -->
+    <section id="glossary">
+      <div class="section-header">
+        <div>
+          <h3 class="section-title">Glossary & acronyms</h3>
+          <p class="section-subtitle">
+            A quick helper for executives, coaches, and teams when the conversation gets full of abbreviations and frameworks.
+          </p>
+        </div>
+        <div class="pill-small">Living glossary – extend as needed</div>
+      </div>
+      <div class="glossary-grid" id="glossary-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        © <span id="year"></span> USM ART Coach. Built as a practical companion for the USM method.
+      </div>
+      <div>
+        Content tailored for Aurora Red Technology LLC • You can extend the JSON to add local case studies and tools.
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    async function loadUSMContent() {
+      try {
+        const res = await fetch("usm-content.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load usm-content.json");
+        const data = await res.json();
+        renderHero(data.site);
+        renderChapters(data.chapters || []);
+        renderGlossary(data.glossary || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderHero(site) {
+      if (!site) return;
+      const subtitleEl = document.getElementById("hero-subtitle");
+      if (site.subtitle && site.tagline) {
+        subtitleEl.textContent = site.tagline;
+      }
+      const brandTitle = document.querySelector(".brand-text h1");
+      const brandSub = document.querySelector(".brand-text span");
+      if (site.title) brandTitle.textContent = site.title;
+      if (site.subtitle) brandSub.textContent = site.subtitle;
+    }
+
+    function renderChapters(chapters) {
+      const grid = document.getElementById("chapters-grid");
+      grid.innerHTML = "";
+
+      chapters.forEach((ch, index) => {
+        const card = document.createElement("article");
+        card.className = "chapter-card";
+        card.id = ch.id || ("chapter-" + (index + 1));
+
+        const id = document.createElement("div");
+        id.className = "chapter-id";
+        id.textContent = ch.id ? ch.id.toUpperCase() : "CH" + (index + 1);
+
+        const title = document.createElement("h4");
+        title.className = "chapter-title";
+        title.textContent = ch.title || "Untitled chapter";
+
+        const tagline = document.createElement("div");
+        tagline.className = "chapter-tagline";
+        tagline.textContent = ch.tagline || "";
+
+        const summary = document.createElement("p");
+        summary.className = "chapter-summary";
+        summary.textContent = ch.summary || "";
+
+        const meta = document.createElement("div");
+        meta.className = "chapter-meta";
+        if (ch.audience) {
+          const chip = document.createElement("span");
+          chip.className = "chip";
+          const dot = document.createElement("span");
+          dot.className = "chip-dot";
+          const text = document.createElement("span");
+          text.textContent = ch.audience;
+          chip.appendChild(dot);
+          chip.appendChild(text);
+          meta.appendChild(chip);
+        }
+
+        const ul = document.createElement("ul");
+        ul.className = "chapter-points";
+        (ch.keyPoints || []).slice(0, 4).forEach(point => {
+          const li = document.createElement("li");
+          li.textContent = point;
+          ul.appendChild(li);
+        });
+
+        const examples = document.createElement("div");
+        examples.className = "chapter-examples";
+        if (ch.examples && ch.examples.length > 0) {
+          const label = document.createElement("strong");
+          label.textContent = "Examples: ";
+          examples.appendChild(label);
+          const span = document.createElement("span");
+          span.textContent = " " + ch.examples.slice(0, 2).join(" ");
+          examples.appendChild(span);
+        } else {
+          examples.classList.add("hidden");
+        }
+
+        card.appendChild(id);
+        card.appendChild(title);
+        card.appendChild(tagline);
+        card.appendChild(summary);
+        card.appendChild(meta);
+        if (ul.childElementCount > 0) card.appendChild(ul);
+        card.appendChild(examples);
+
+        grid.appendChild(card);
+      });
+    }
+
+    function renderGlossary(items) {
+      const grid = document.getElementById("glossary-grid");
+      grid.innerHTML = "";
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "glossary-card";
+
+        const term = document.createElement("div");
+        term.className = "glossary-term";
+        term.textContent = item.term;
+
+        const def = document.createElement("div");
+        def.className = "glossary-def";
+        def.textContent = item.definition;
+
+        card.appendChild(term);
+        card.appendChild(def);
+        grid.appendChild(card);
+      });
+    }
+
+    loadUSMContent();
+  </script>
 </body>
 </html>
