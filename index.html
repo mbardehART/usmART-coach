@@ -2,412 +2,854 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Aurora Red Technology – Unified Service Management (USM)</title>
+  <title>USM ART Coach</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Aurora Red Technology – Practical, methodical guidance on Unified Service Management (USM) for modern service organizations."
+    content="USM ART Coach – Unified Service Management explained in practical language with examples, mindmaps, and a clear structure."
   />
   <style>
     :root {
-      --primary: #b22222;
-      --primary-soft: #fbeaea;
-      --text-main: #222;
-      --text-muted: #555;
-      --bg: #fafafa;
-      --card-bg: #ffffff;
-      --border: #dddddd;
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #111827;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.6);
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.7);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --transition-fast: 0.18s ease-out;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
     }
 
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 0;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--primary);
-      letter-spacing: 0.02em;
-    }
-
-    nav a {
-      margin-left: 1rem;
+    a {
+      color: inherit;
       text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    nav a:hover {
-      color: var(--primary);
     }
 
     main {
-      padding: 1.5rem 0 3rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
     }
 
-    #hero {
-      background: linear-gradient(
-        to right,
-        var(--primary-soft),
-        rgba(255, 255, 255, 0)
-      );
-      border-radius: 10px;
-      padding: 1.5rem 1.25rem;
+    /* Top navigation */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
       margin-bottom: 1.5rem;
     }
 
-    #hero h1 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.8rem;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    #hero p {
-      margin: 0.25rem 0;
-      color: var(--text-muted);
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(from 160deg, #f97316, #eab308, #22c55e, #38bdf8, #6366f1, #f97316);
+      padding: 2px;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
+    }
+
+    .brand-icon-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .brand-text h1 {
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #f9fafb;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
     .pill {
-      display: inline-block;
-      padding: 0.1rem 0.6rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 999px;
-      border: 1px solid var(--primary);
-      color: var(--primary);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.22);
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 1.75rem;
+      align-items: stretch;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main {
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.7), rgba(15, 23, 42, 0.96));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(248, 250, 252, 0.03), transparent 60%),
+                  radial-gradient(circle at 90% 100%, rgba(56, 189, 248, 0.09), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
       font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-badge span {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
       font-weight: 600;
-      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.06em;
     }
 
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+      color: #f9fafb;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #f97316, #eab308);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f97316, #eab308);
+      color: #0b1120;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 12px 30px rgba(249, 115, 22, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(249, 115, 22, 0.7);
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      padding: 0.7rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--muted);
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(249, 115, 22, 0.6);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-meta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .hero-meta-label {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.68rem;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .hero-meta-value {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    /* Mindmap / overview card */
+    .hero-aside {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.3rem 1.2rem 1.5rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-aside::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.03), transparent 55%),
+                  radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .aside-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .aside-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    .aside-chip {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mini-map {
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      padding: 0.75rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      position: relative;
+    }
+
+    .mini-node {
+      padding: 0.45rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      color: #e5e7eb;
+      line-height: 1.35;
+    }
+
+    .mini-node span {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    .aside-footer {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .aside-footer strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    /* Sections */
     section {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
-    h2 {
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-      font-size: 1.4rem;
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
     }
 
-    h3 {
-      margin: 0 0 0.35rem 0;
-      font-size: 1.05rem;
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e5e7eb;
     }
 
-    p {
-      margin: 0.25rem 0;
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 26rem;
     }
 
-    .muted {
-      color: var(--text-muted);
-      font-size: 0.95rem;
+    .pill-small {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    /* Chapter cards */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 1000px) {
+      .chapters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .chapters-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .chapter-card {
-      background: var(--card-bg);
+      background: var(--card);
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.85rem 0.9rem;
-      margin-bottom: 0.7rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
     }
 
-    .chapter-card ul {
-      margin: 0.4rem 0 0;
-      padding-left: 1.2rem;
+    .chapter-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+      border-color: rgba(249, 115, 22, 0.6);
+      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.35), #020617);
     }
 
-    .chapter-card li {
-      margin-bottom: 0.15rem;
+    .chapter-id {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(148, 163, 184, 0.9);
     }
 
-    #usm-home p.lead {
+    .chapter-title {
+      font-size: 0.98rem;
       font-weight: 600;
-      color: var(--text-main);
+      color: #f9fafb;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
-      gap: 1.75rem;
+    .chapter-tagline {
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      #hero {
-        padding: 1.25rem 1rem;
-      }
-
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
-      }
-
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      nav a {
-        margin: 0.15rem 0.75rem 0.15rem 0;
-      }
+    .chapter-summary {
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1rem 0 1.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      background: #ffffff;
+    .chapter-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
     }
 
-    .taglist {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .taglist span {
-      display: inline-block;
-      background: #f3f3f3;
-      padding: 0.15rem 0.55rem;
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 999px;
-      margin: 0.1rem 0.2rem 0 0;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.8);
+      font-size: 0.7rem;
     }
 
-    .small-note {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .chapter-points {
       margin-top: 0.4rem;
+      padding-left: 0.95rem;
+      list-style: disc;
+      font-size: 0.78rem;
+      color: var(--muted);
     }
 
-    .box {
-      background: var(--card-bg);
-      border-radius: 8px;
+    .chapter-points li {
+      margin-bottom: 0.18rem;
+    }
+
+    .chapter-examples {
+      margin-top: 0.45rem;
+      border-top: 1px dashed rgba(55, 65, 81, 0.8);
+      padding-top: 0.45rem;
+      font-size: 0.76rem;
+      color: rgba(209, 213, 219, 0.9);
+    }
+
+    .chapter-examples strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Glossary */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .glossary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .glossary-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .glossary-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border);
-      padding: 0.9rem 0.95rem;
-      margin-bottom: 0.8rem;
+      padding: 0.7rem 0.8rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
-    .box h3 {
-      margin-top: 0;
+    .glossary-term {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .glossary-def {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      padding-top: 1.2rem;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    /* Utility */
+    .hidden {
+      display: none !important;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <div class="logo">Aurora Red Technology</div>
-      <nav>
-        <a href="#hero">Home</a>
-        <a href="#usm-home">What is USM?</a>
-        <a href="#usm-chapters">Chapters</a>
-      </nav>
-    </div>
-  </header>
-
   <main>
-    <div class="container">
-      <section id="hero">
-        <div class="pill">Unified Service Management (USM)</div>
-        <h1 id="hero-title">Service excellence through simple, unified routines</h1>
-        <p>
-          A practical way to bring structure, control, and customer-focus into any
-          service organization.
-        </p>
-        <p class="muted">
-          IT • Facilities • HR • Telecom • Public sector – one management system,
-          many applications.
-        </p>
-      </section>
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-icon">
+          <div class="brand-icon-inner">A</div>
+        </div>
+        <div class="brand-text">
+          <h1>USM ART Coach</h1>
+          <span>From architecting to real change</span>
+        </div>
+      </div>
+      <div class="top-links">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>USM method • Practical view</span>
+        </div>
+        <div class="pill">
+          <span>Built for: </span> <strong>Leaders • Coaches • Teams</strong>
+        </div>
+      </div>
+    </header>
 
-      <div class="layout">
-        <section id="usm-home">
-          <!-- Filled dynamically from usm-content.json -->
-          <!-- Home title, lead, and intro paragraphs will appear here -->
-        </section>
-
-        <aside>
-          <div class="box">
-            <h3>How to use this site</h3>
-            <p class="muted">
-              This page distills the USM book into concise, practical building blocks.
-            </p>
-            <ul class="muted">
-              <li>Start with <strong>“What is USM?”</strong> on the left.</li>
-              <li>
-                Scan the <strong>chapter summaries</strong> to connect ideas
-                quickly.
-              </li>
-              <li>
-                Use this as a <strong>learning aid</strong> and reference when
-                applying USM in your organization.
-              </li>
-            </ul>
-            <p class="small-note">
-              Behind the scenes, all content lives in a simple JSON file
-              (<code>usm-content.json</code>), so we can grow and refine it over
-              time.
-            </p>
+    <!-- Hero -->
+    <section id="hero">
+      <div class="hero">
+        <div class="hero-main" id="hero-main">
+          <div class="hero-badge">
+            <span>New</span>
+            <span>USM in one management system</span>
           </div>
-
-          <div class="box">
-            <h3>Core USM themes</h3>
-            <div class="taglist">
-              <span>Service &amp; customer excellence</span>
-              <span>Governance &amp; control</span>
-              <span>Standardization</span>
-              <span>Workflows</span>
-              <span>Shared services</span>
-              <span>Agile &amp; DevOps</span>
+          <h2 class="hero-title">
+            Turn <span>USM</span> from a book into your daily way of working.
+          </h2>
+          <p class="hero-subtitle" id="hero-subtitle">
+            This site turns the Unified Service Management method into an executive overview and a practical guide, with examples that work for IT, Facilities, HR, public sector, and more.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToSection('chapters')">
+              Explore the chapters
+              <span>↓</span>
+            </button>
+            <button class="btn-ghost" onclick="scrollToSection('glossary')">
+              Key terms & acronyms
+            </button>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-group">
+              <div class="hero-meta-label">Method</div>
+              <div class="hero-meta-value">5 processes • 8 workflows</div>
             </div>
+            <div class="hero-meta-group">
+              <div class="hero-meta-label">Use it for</div>
+              <div class="hero-meta-value">IT, FM, HR, Telecom, Public</div>
+            </div>
+            <div class="hero-meta-group">
+              <div class="hero-meta-label">Style</div>
+              <div class="hero-meta-value">Practical • Example-driven</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <div class="aside-header">
+            <div class="aside-title">USM mindmap – at a glance</div>
+            <div class="aside-chip">Overview</div>
+          </div>
+          <div class="mini-map">
+            <div class="mini-node">
+              Foundation
+              <span>Principles & architecture</span>
+            </div>
+            <div class="mini-node">
+              System
+              <span>5 processes • 8 workflows</span>
+            </div>
+            <div class="mini-node">
+              People
+              <span>Roles, TAR, RACI</span>
+            </div>
+            <div class="mini-node">
+              Services
+              <span>Value & agreements</span>
+            </div>
+            <div class="mini-node">
+              Resources
+              <span>Tools & MIR</span>
+            </div>
+            <div class="mini-node">
+              Change
+              <span>Deployment & improvement</span>
+            </div>
+          </div>
+          <div class="aside-footer">
+            <span><strong>Tip:</strong> Start with the chapter that matches your current challenge.</span>
+            <span>⬤ Executive view & coach notes built-in</span>
           </div>
         </aside>
       </div>
+    </section>
 
-      <section id="usm-chapters">
-        <!-- Filled dynamically from usm-content.json -->
-      </section>
-    </div>
+    <!-- Chapters -->
+    <section id="chapters">
+      <div class="section-header">
+        <div>
+          <h3 class="section-title">USM chapters in one view</h3>
+          <p class="section-subtitle">
+            Each chapter card gives you: big idea, who it’s for, key points, and concrete examples you can reuse in your own stories.
+          </p>
+        </div>
+        <div class="pill-small">Source: USM book • summarized</div>
+      </div>
+      <div class="chapters-grid" id="chapters-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Glossary -->
+    <section id="glossary">
+      <div class="section-header">
+        <div>
+          <h3 class="section-title">Glossary & acronyms</h3>
+          <p class="section-subtitle">
+            A quick helper for executives, coaches, and teams when the conversation gets full of abbreviations and frameworks.
+          </p>
+        </div>
+        <div class="pill-small">Living glossary – extend as needed</div>
+      </div>
+      <div class="glossary-grid" id="glossary-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        © <span id="year"></span> USM ART Coach. Built as a practical companion for the USM method.
+      </div>
+      <div>
+        Content tailored for Aurora Red Technology LLC • You can extend the JSON to add local case studies and tools.
+      </div>
+    </footer>
   </main>
 
-  <footer>
-    <div class="container">
-      <div>Aurora Red Technology LLC &mdash; Enabling better services through structure, culture, and method.</div>
-      <div class="small-note">
-        Content powered by Unified Service Management (USM) and tailored for real-world service organizations.
-      </div>
-    </div>
-  </footer>
-
   <script>
-    async function loadUSMContent() {
-      const homeContainer = document.getElementById("usm-home");
-      const chaptersContainer = document.getElementById("usm-chapters");
-
-      // Basic placeholders in case something fails
-      homeContainer.innerHTML =
-        '<h2>Unified Service Management (USM)</h2><p class="muted">Loading content…</p>';
-      chaptersContainer.innerHTML =
-        '<h2>USM Chapters – Summaries</h2><p class="muted">Loading chapter summaries…</p>';
-
-      try {
-        const response = await fetch("usm-content.json");
-        if (!response.ok) {
-          throw new Error("HTTP " + response.status);
-        }
-        const data = await response.json();
-
-        // Update document title if available
-        if (data.siteTitle) {
-          document.title = data.siteTitle;
-        }
-
-        // ----- Home section -----
-        homeContainer.innerHTML = "";
-        const homeTitle = document.createElement("h2");
-        homeTitle.textContent =
-          (data.home && data.home.title) || "Unified Service Management (USM)";
-        homeContainer.appendChild(homeTitle);
-
-        if (data.home && data.home.lead) {
-          const pLead = document.createElement("p");
-          pLead.className = "lead";
-          pLead.textContent = data.home.lead;
-          homeContainer.appendChild(pLead);
-        }
-
-        if (data.home && Array.isArray(data.home.introParagraphs)) {
-          data.home.introParagraphs.forEach((text) => {
-            const p = document.createElement("p");
-            p.textContent = text;
-            homeContainer.appendChild(p);
-          });
-        }
-
-        // ----- Chapters section -----
-        chaptersContainer.innerHTML = "";
-        const chaptersTitle = document.createElement("h2");
-        chaptersTitle.textContent = "USM Chapters – Summaries";
-        chaptersContainer.appendChild(chaptersTitle);
-
-        if (Array.isArray(data.chapters) && data.chapters.length > 0) {
-          data.chapters.forEach((ch) => {
-            const card = document.createElement("div");
-            card.className = "chapter-card";
-
-            const h3 = document.createElement("h3");
-            h3.textContent = ch.title || "Chapter";
-            card.appendChild(h3);
-
-            if (ch.shortSummary) {
-              const p = document.createElement("p");
-              p.textContent = ch.shortSummary;
-              card.appendChild(p);
-            }
-
-            if (Array.isArray(ch.keyPoints) && ch.keyPoints.length > 0) {
-              const ul = document.createElement("ul");
-              ch.keyPoints.forEach((point) => {
-                const li = document.createElement("li");
-                li.textContent = point;
-                ul.appendChild(li);
-              });
-              card.appendChild(ul);
-            }
-
-            chaptersContainer.appendChild(card);
-          });
-        } else {
-          const p = document.createElement("p");
-          p.className = "muted";
-          p.textContent =
-            "No chapter summaries have been defined yet. They can be added via usm-content.json.";
-          chaptersContainer.appendChild(p);
-        }
-      } catch (err) {
-        console.error("Error loading usm-content.json:", err);
-        homeContainer.innerHTML =
-          "<h2>Unified Service Management (USM)</h2>" +
-          '<p class="muted">We could not load the content file (<code>usm-content.json</code>). Please check that it exists in the same folder as this page.</p>';
-
-        chaptersContainer.innerHTML =
-          "<h2>USM Chapters – Summaries</h2>" +
-          '<p class="muted">Chapter summaries are unavailable because the content file could not be loaded.</p>';
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    async function loadUSMContent() {
+      try {
+        const res = await fetch("usm-content.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load usm-content.json");
+        const data = await res.json();
+        renderHero(data.site);
+        renderChapters(data.chapters || []);
+        renderGlossary(data.glossary || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderHero(site) {
+      if (!site) return;
+      const subtitleEl = document.getElementById("hero-subtitle");
+      if (site.subtitle && site.tagline) {
+        subtitleEl.textContent = site.tagline;
+      }
+      const brandTitle = document.querySelector(".brand-text h1");
+      const brandSub = document.querySelector(".brand-text span");
+      if (site.title) brandTitle.textContent = site.title;
+      if (site.subtitle) brandSub.textContent = site.subtitle;
+    }
+
+    function renderChapters(chapters) {
+      const grid = document.getElementById("chapters-grid");
+      grid.innerHTML = "";
+
+      chapters.forEach((ch, index) => {
+        const card = document.createElement("article");
+        card.className = "chapter-card";
+        card.id = ch.id || ("chapter-" + (index + 1));
+
+        const id = document.createElement("div");
+        id.className = "chapter-id";
+        id.textContent = ch.id ? ch.id.toUpperCase() : "CH" + (index + 1);
+
+        const title = document.createElement("h4");
+        title.className = "chapter-title";
+        title.textContent = ch.title || "Untitled chapter";
+
+        const tagline = document.createElement("div");
+        tagline.className = "chapter-tagline";
+        tagline.textContent = ch.tagline || "";
+
+        const summary = document.createElement("p");
+        summary.className = "chapter-summary";
+        summary.textContent = ch.summary || "";
+
+        const meta = document.createElement("div");
+        meta.className = "chapter-meta";
+        if (ch.audience) {
+          const chip = document.createElement("span");
+          chip.className = "chip";
+          const dot = document.createElement("span");
+          dot.className = "chip-dot";
+          const text = document.createElement("span");
+          text.textContent = ch.audience;
+          chip.appendChild(dot);
+          chip.appendChild(text);
+          meta.appendChild(chip);
+        }
+
+        const ul = document.createElement("ul");
+        ul.className = "chapter-points";
+        (ch.keyPoints || []).slice(0, 4).forEach(point => {
+          const li = document.createElement("li");
+          li.textContent = point;
+          ul.appendChild(li);
+        });
+
+        const examples = document.createElement("div");
+        examples.className = "chapter-examples";
+        if (ch.examples && ch.examples.length > 0) {
+          const label = document.createElement("strong");
+          label.textContent = "Examples: ";
+          examples.appendChild(label);
+          const span = document.createElement("span");
+          span.textContent = " " + ch.examples.slice(0, 2).join(" ");
+          examples.appendChild(span);
+        } else {
+          examples.classList.add("hidden");
+        }
+
+        card.appendChild(id);
+        card.appendChild(title);
+        card.appendChild(tagline);
+        card.appendChild(summary);
+        card.appendChild(meta);
+        if (ul.childElementCount > 0) card.appendChild(ul);
+        card.appendChild(examples);
+
+        grid.appendChild(card);
+      });
+    }
+
+    function renderGlossary(items) {
+      const grid = document.getElementById("glossary-grid");
+      grid.innerHTML = "";
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "glossary-card";
+
+        const term = document.createElement("div");
+        term.className = "glossary-term";
+        term.textContent = item.term;
+
+        const def = document.createElement("div");
+        def.className = "glossary-def";
+        def.textContent = item.definition;
+
+        card.appendChild(term);
+        card.appendChild(def);
+        grid.appendChild(card);
+      });
     }
 
     loadUSMContent();
